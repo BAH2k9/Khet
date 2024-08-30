@@ -1,4 +1,5 @@
 ﻿using Khet.Wpf.Core;
+using Khet.Wpf.Models;
 
 namespace Khet.Wpf.ViewModels
 {
@@ -18,10 +19,13 @@ namespace Khet.Wpf.ViewModels
 
         public MainViewModel()
         {
-            squareViewModel1 = new SquareViewModel();
-            squareViewModel2 = new SquareViewModel();
-            squareViewModel3 = new SquareViewModel();
-            squareViewModel4 = new SquareViewModel();
+            
+            var sf = new SquareFactory();
+
+            squareViewModel1 = sf.myList[7][9];
+            squareViewModel2 = sf.myList[6][9];
+            squareViewModel3 = sf.myList[5][9];
+            squareViewModel4 = sf.myList[4][9];
         }
     }
 }

@@ -15,5 +15,13 @@
             <local:MainWindow/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type vm:VerticalBeamViewModel}">
+            <v:VerticalBeamView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:HorizontalBeamViewModel}">
+            <v:HorizontalBeamView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

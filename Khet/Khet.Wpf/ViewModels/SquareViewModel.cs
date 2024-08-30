@@ -15,22 +15,43 @@ namespace Khet.Wpf.ViewModels
         public SquareViewModel? downNeighbour {  get; set; }
         public SquareViewModel? leftNeighbour {  get; set; }
         public SquareViewModel? rightNeighbour {  get; set; }
+
         public SquareViewModel? nextSquare { get; set; }
         public Piece piece { get; set; }
 
-        private string _text = "";
-        public string text { get => _text; set => SetProperty(ref _text, value); }
+        private ViewModelBase _activeLaser;
+        public ViewModelBase activeLaser { get => _activeLaser; set => SetProperty(ref _activeLaser, value); }
 
         public SquareViewModel()
         {
-            piece = new Piece() { state = State.dl };
+            //piece = new Piece() { state = State.dl };
 
-            text = "hi";
+
+
         }
 
-        private void FireLaser(directionEnum direction)
+        public void SetLaser()
         {
-            nextSquare.FireLaser(direction);
+            if (rightNeighbour == null)
+            {
+                activeLaser = new VerticalBeamViewModel();
+            }
+
+            if (downNeighbour == null)
+            {
+                activeLaser = new HorizontalBeamViewModel();
+            }
         }
+
+        //public static SquareViewModel Make(SquareViewModel up, SquareViewModel down, SquareViewModel left, SquareViewModel right)
+        //{
+        //    return new SquareViewModel()
+        //    {
+        //        upNeighbour = up,
+        //        downNeighbour = down,
+        //        leftNeighbour = left,
+        //        rightNeighbour = right,
+        //    };
+        //}
     }
 }
