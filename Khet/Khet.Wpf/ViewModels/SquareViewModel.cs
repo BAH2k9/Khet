@@ -32,15 +32,25 @@ namespace Khet.Wpf.ViewModels
 
         public void SetLaser()
         {
-            if (rightNeighbour == null)
-            {
-                activeLaser = new VerticalBeamViewModel();
-            }
-
-            if (downNeighbour == null)
+            if (rightNeighbour == null || leftNeighbour == null)
             {
                 activeLaser = new HorizontalBeamViewModel();
+                return;
             }
+
+            if (downNeighbour == null || upNeighbour == null)
+            {
+                activeLaser = new HorizontalBeamViewModel();
+                return;
+                
+            }
+
+            activeLaser = new VerticalBeamViewModel();
+
+
+
+
+            
         }
 
         //public static SquareViewModel Make(SquareViewModel up, SquareViewModel down, SquareViewModel left, SquareViewModel right)

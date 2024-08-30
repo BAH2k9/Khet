@@ -14,19 +14,21 @@ namespace Khet.Wpf.Models
         private int _rows = 8;
         private int _cols = 10;
 
-        public List<List<SquareViewModel>> myList { get; set; } = new List<List<SquareViewModel>>() ;
-
-
+        private List<List<SquareViewModel>> myList { get; set; } = new List<List<SquareViewModel>>() ;
         private ObservableCollection<SquareViewModel> squareViewModels = new ObservableCollection<SquareViewModel>();
+
         public SquareFactory() 
         {
             CreateSquares();
 
             SetNeighbours();
 
-            var a = 1;
         }
 
+        public ObservableCollection<SquareViewModel> GetObservableCollection()
+        {
+            return this.squareViewModels;
+        }
 
         private void CreateSquares()
         {
@@ -66,7 +68,6 @@ namespace Khet.Wpf.Models
                         myList[i][j].downNeighbour = myList[i+1][j];
                     }
 
-
                     if(j==0)
                     {
                         myList[i][j].leftNeighbour = null;
@@ -85,10 +86,13 @@ namespace Khet.Wpf.Models
                         myList[i][j].rightNeighbour=myList[i][j+1];
                     }
 
+                    squareViewModels.Add(myList[i][j]);
                     myList[i][j].SetLaser();
 
                 }
             }
         }
+
+        
     }
 }
