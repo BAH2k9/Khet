@@ -1,0 +1,19 @@
+﻿<Application x:Class="Khet.Wpf.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Khet.Wpf"
+             xmlns:vm="clr-namespace:Khet.Wpf.ViewModels"
+             xmlns:v="clr-namespace:Khet.Wpf.Views">
+
+    <Application.Resources>
+
+        <DataTemplate DataType="{x:Type vm:SquareViewModel}">
+            <v:SquareView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:MainViewModel}">
+            <local:MainWindow/>
+        </DataTemplate>
+
+    </Application.Resources>
+</Application>
