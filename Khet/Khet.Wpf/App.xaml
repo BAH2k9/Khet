@@ -23,5 +23,9 @@
             <v:HorizontalBeamView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type vm:PieceViewModel}">
+            <v:PieceView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

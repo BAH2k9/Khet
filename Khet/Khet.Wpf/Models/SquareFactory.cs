@@ -87,7 +87,6 @@ namespace Khet.Wpf.Models
                     }
 
                     squareViewModels.Add(myList[i][j]);
-                    myList[i][j].SetLaser();
 
                 }
             }

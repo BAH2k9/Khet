@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Khet.Wpf.Enums
 {
-     enum directionEnum
+     public enum Direction
      {
         up = 0,
         down = 1,
