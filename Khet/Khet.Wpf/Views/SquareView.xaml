@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Khet.Wpf.Views"
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:Khet.Wpf.ViewModels"
-             d:DesignHeight="50" d:DesignWidth="50">
+             Height="100" Width="100">
     <Grid>
 
         <Grid>

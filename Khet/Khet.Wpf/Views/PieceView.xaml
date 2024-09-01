@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Khet.Wpf.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             Height="100" Width="100">
     <Grid>
-        <Line X1="0" Y1="0" X2="200" Y2="200" Stroke="Blue" StrokeThickness="10" />
+        <Line X1="{Binding x1}" Y1="{Binding y1}" X2="{Binding x2}" Y2="{Binding y2}" Stroke="Blue" StrokeThickness="10" />
     </Grid>
 </UserControl>
