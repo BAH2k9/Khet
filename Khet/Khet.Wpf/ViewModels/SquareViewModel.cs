@@ -28,25 +28,21 @@ namespace Khet.Wpf.ViewModels
 
         }
 
-        private void DisplayMyLaser(Direction inDirection)
+
+        public void FireLaser(Direction firingDirection)
         {
-           if(inDirection == Direction.down || inDirection == Direction.up)
+
+            var inDirection = getInDirection(firingDirection);
+
+            // Display this sqaures laser
+            activeLaser = new LaserBeamViewModel(inDirection);
+
+            Direction? outDirection = firingDirection;
+
+            if (activePiece != null)
             {
-                activeLaser = new VerticalBeamViewModel();
+               outDirection = activePiece?.ResolveLaserOutDirection(inDirection);
             }
-
-            if (inDirection == Direction.left || inDirection == Direction.right)
-            {
-                activeLaser = new HorizontalBeamViewModel();
-            }
-
-        }
-
-        public void FireLaser(Direction inDirection)
-        {
-            DisplayMyLaser(inDirection);
-
-           var outDirection = OutLaserDirection(inDirection);
 
             switch (outDirection)
             {
@@ -68,48 +64,22 @@ namespace Khet.Wpf.ViewModels
             }
         }
 
-        private Direction OutLaserDirection(Direction inDirection)
+        private Direction getInDirection(Direction firingDirection)
         {
-            // logic needs to go here to determine the laser direction based on the piece and its orientation
-            Direction outDirection = inDirection;
-
-            if (activePiece == null)
+            switch(firingDirection)
             {
-                return outDirection;
-            }
-            
-
-            switch(activePiece?.state)
-            {
-                case State.dl:
-                    if(inDirection == Direction.down)
-                    {
-                        outDirection = Direction.right;
-                        break;
-                    }
-
-                    if (inDirection == Direction.right)
-                    {
-                        outDirection = Direction.down;
-                        break;
-                    }
-
-                    if (inDirection == Direction.left)
-                    {
-                        outDirection = Direction.up;
-                        break;
-                    }
-
-                    if (inDirection == Direction.up)
-                    {
-                        outDirection = Direction.left;
-                        break;
-                    }
-
-                    break;
+                case Direction.down:
+                    return Direction.up;
+                case Direction.up:
+                    return Direction.down;
+                case Direction.left:
+                    return Direction.right;
+                case Direction.right:
+                    return Direction.left;
             }
 
-            return outDirection;
+            return firingDirection; // TODO: think of a better solution here i.e. throw illegal state error
+
         }
     }
 }

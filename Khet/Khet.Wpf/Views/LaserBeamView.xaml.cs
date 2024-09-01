@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Khet.Wpf.Views
 {
     /// <summary>
-    /// Interaction logic for HorizontalBeamView.xaml
+    /// Interaction logic for LaserBeamView.xaml
     /// </summary>
-    public partial class HorizontalBeamView : UserControl
+    public partial class LaserBeamView : UserControl
     {
-        public HorizontalBeamView()
+        public LaserBeamView()
         {
             InitializeComponent();
         }

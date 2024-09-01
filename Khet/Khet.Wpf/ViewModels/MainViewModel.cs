@@ -17,16 +17,22 @@ namespace Khet.Wpf.ViewModels
             squareViewModels = sf.GetObservableCollection();
 
 
-            squareViewModels[30].activePiece = new PieceViewModel() { state = State.dl };
-            squareViewModels[35].activePiece = new PieceViewModel() { state = State.dl };
+            squareViewModels[50].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
+            squareViewModels[55].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
+
+            squareViewModels[75].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
 
 
-            squareViewModels[49].activePiece = new PieceViewModel() { state = State.dl };
-            squareViewModels[45].activePiece = new PieceViewModel() { state = State.dl };
+
+            //squareViewModels[75].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
+
+
+            //squareViewModels[45].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
+            //squareViewModels[40].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
             
 
+          //  squareViewModels[0].FireLaser(Direction.down);
             squareViewModels[0].FireLaser(Direction.down);
-          //  squareViewModels[squareViewModels.Count-1].FireLaser(Direction.up);
 
         }
     }
