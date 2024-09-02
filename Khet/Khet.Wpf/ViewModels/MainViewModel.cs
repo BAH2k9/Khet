@@ -20,9 +20,9 @@ namespace Khet.Wpf.ViewModels
             // squareViewModels[50].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
             //squareViewModels[55].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
 
-
-             PyramidTest();
-            //DjedTest();
+           // DestroyPyramidTest(Pyramid.bl);
+            // PyramidTest();
+            DjedTest();
         }
 
         private void DjedTest()
@@ -55,6 +55,42 @@ namespace Khet.Wpf.ViewModels
 
             //  squareViewModels[0].FireLaser(Direction.down);
             squareViewModels[0].FireLaser(Direction.down);
+        }
+
+        private async void DestroyPyramidTest(Pyramid orientation)
+        {
+            // Set piece
+            squareViewModels[44].activePiece = new PyramidViewModel(orientation);
+
+            // Fire laser 
+            squareViewModels[4].FireLaser(Direction.down);
+            await Task.Delay(2000);
+            ClearLaser();
+            await Task.Delay(500);
+
+            squareViewModels[40].FireLaser(Direction.right);
+            await Task.Delay(2000);
+            ClearLaser();
+            await Task.Delay(500);
+
+            squareViewModels[74].FireLaser(Direction.up);
+            await Task.Delay(2000);
+            ClearLaser();
+            await Task.Delay(500);
+
+            squareViewModels[49].FireLaser(Direction.left);
+            await Task.Delay(2000);
+            ClearLaser();
+            await Task.Delay(500);
+
+        }
+
+        private void ClearLaser()
+        {
+            foreach (var square in squareViewModels)
+            {
+                square.Clear();
+            }
         }
     }
 }

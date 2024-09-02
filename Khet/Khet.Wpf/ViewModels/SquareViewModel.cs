@@ -83,5 +83,11 @@ namespace Khet.Wpf.ViewModels
             return firingDirection; // TODO: think of a better solution here i.e. throw illegal state error
 
         }
+
+        public void Clear()
+        {
+            activeLaser = null;
+            //activePiece = null;
+        }
     }
 }

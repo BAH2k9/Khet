@@ -63,7 +63,7 @@ namespace Khet.Wpf.ViewModels
                     {
                         return Direction.down;
                     }
-                    else if(inDirection == Direction.up)
+                    else if(inDirection == Direction.down)
                     {
                         return Direction.left;
                     }
