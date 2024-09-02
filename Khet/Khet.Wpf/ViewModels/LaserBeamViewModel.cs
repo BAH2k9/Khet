@@ -87,6 +87,7 @@ namespace Khet.Wpf.ViewModels
 
                 case Direction.down:
                     angle[0] = "180";
+                    angle[1] = "180";
 
                     if (pyramid.orientation == Pyramid.tl)
                     {
@@ -111,6 +112,7 @@ namespace Khet.Wpf.ViewModels
 
                 case Direction.left:
                     angle[0] = "270";
+                    angle[1] = "270";
 
                     if (pyramid.orientation == Pyramid.tl)
                     {
@@ -135,6 +137,7 @@ namespace Khet.Wpf.ViewModels
 
                 case Direction.right:
                     angle[0] = "90";
+                    angle[1] = "90";
 
                     if (pyramid.orientation == Pyramid.tl)
                     {

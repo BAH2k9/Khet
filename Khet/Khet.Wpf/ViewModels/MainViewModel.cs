@@ -20,10 +20,12 @@ namespace Khet.Wpf.ViewModels
             // squareViewModels[50].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
             //squareViewModels[55].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
 
-           // DestroyPyramidTest(Pyramid.bl);
-            // PyramidTest();
-            DjedTest();
+            TestAllPyramidOrientations();
+            //PyramidTest();
+            //DjedTest();
         }
+
+        
 
         private void DjedTest()
         {
@@ -57,34 +59,41 @@ namespace Khet.Wpf.ViewModels
             squareViewModels[0].FireLaser(Direction.down);
         }
 
-        private async void DestroyPyramidTest(Pyramid orientation)
+        private async Task orientationTest(Pyramid orientation)
         {
             // Set piece
             squareViewModels[44].activePiece = new PyramidViewModel(orientation);
 
+            await Task.Delay(1000);
+
             // Fire laser 
             squareViewModels[4].FireLaser(Direction.down);
-            await Task.Delay(2000);
+            await Task.Delay(1000);
             ClearLaser();
-            await Task.Delay(500);
+            await Task.Delay(300);
 
             squareViewModels[40].FireLaser(Direction.right);
-            await Task.Delay(2000);
+            await Task.Delay(1000);
             ClearLaser();
-            await Task.Delay(500);
+            await Task.Delay(300);
 
             squareViewModels[74].FireLaser(Direction.up);
-            await Task.Delay(2000);
+            await Task.Delay(1000);
             ClearLaser();
-            await Task.Delay(500);
+            await Task.Delay(300);
 
             squareViewModels[49].FireLaser(Direction.left);
-            await Task.Delay(2000);
+            await Task.Delay(1000);
             ClearLaser();
-            await Task.Delay(500);
 
         }
-
+        private async void TestAllPyramidOrientations()
+        {
+            await orientationTest(Pyramid.tr);
+            await orientationTest(Pyramid.tl);
+            await orientationTest(Pyramid.br);
+            await orientationTest(Pyramid.bl);
+        }
         private void ClearLaser()
         {
             foreach (var square in squareViewModels)

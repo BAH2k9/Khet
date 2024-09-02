@@ -36,47 +36,57 @@ namespace Khet.Wpf.ViewModels
         public Direction ResolveLaserDirection(Direction inDirection)
         {
 
-            switch (this.orientation)
-            {
-                case Djed.dl:
-                    if (inDirection == Direction.down)
-                    {
-                        return Direction.left;
-                    }
-                    else if (inDirection == Direction.right)
-                    {
-                        return Direction.up;
-                    }
-                    else if (inDirection == Direction.left)
-                    {
-                        return Direction.down;
-                    }
-                    else // (inDirection == Direction.up)
-                    {
-                        return Direction.right;
-                    }
+            var input = Tuple.Create(inDirection, this.orientation);
+            var outDirection = Mappings.DjedDirection[input];
 
-                case Djed.dr:
-                    if (inDirection == Direction.down)
-                    {
-                        return Direction.right;
-                    }
-                    else if (inDirection == Direction.right)
-                    {
-                        return Direction.down;
-                    }
-                    else if (inDirection == Direction.left)
-                    {
-                        return Direction.up;
-                    }
-                    else // (inDirection == Direction.up)
-                    {
-                        return Direction.left;
-                    }                                
-            }
-
-            return Direction.kill;
+            return outDirection;
 
         }
     }
 }
+
+
+
+
+
+
+
+// Used to live in ResolveLaserDirection but has been replaced with a mapping
+//switch (this.orientation)
+//{
+//    case Djed.dl:
+//        if (inDirection == Direction.down)
+//        {
+//            return Direction.left;
+//        }
+//        else if (inDirection == Direction.right)
+//        {
+//            return Direction.up;
+//        }
+//        else if (inDirection == Direction.left)
+//        {
+//            return Direction.down;
+//        }
+//        else // (inDirection == Direction.up)
+//        {
+//            return Direction.right;
+//        }
+
+//    case Djed.dr:
+//        if (inDirection == Direction.down)
+//        {
+//            return Direction.right;
+//        }
+//        else if (inDirection == Direction.right)
+//        {
+//            return Direction.down;
+//        }
+//        else if (inDirection == Direction.left)
+//        {
+//            return Direction.up;
+//        }
+//        else // (inDirection == Direction.up)
+//        {
+//            return Direction.left;
+//        }                                
+//}

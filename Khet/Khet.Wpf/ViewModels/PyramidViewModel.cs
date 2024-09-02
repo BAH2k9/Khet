@@ -45,54 +45,58 @@ namespace Khet.Wpf.ViewModels
 
         public Direction ResolveLaserDirection(Direction inDirection)
         {
-            switch (this.orientation)
-            {
-                case Pyramid.tl:
-                    if (inDirection == Direction.right)
-                    {
-                        return Direction.down;
-                    }
-                    else if(inDirection == Direction.down)
-                    {
-                        return Direction.right;
-                    }
-                    break;
 
-                case Pyramid.tr:
-                    if (inDirection == Direction.left)
-                    {
-                        return Direction.down;
-                    }
-                    else if(inDirection == Direction.down)
-                    {
-                        return Direction.left;
-                    }
-                    break;
+            var input = Tuple.Create(inDirection, this.orientation);
+            var outDirection = Mappings.PyramidDirection[input];
+            return outDirection;
+            //switch (this.orientation)
+            //{
+            //    case Pyramid.tl:
+            //        if (inDirection == Direction.right)
+            //        {
+            //            return Direction.down;
+            //        }
+            //        else if(inDirection == Direction.down)
+            //        {
+            //            return Direction.right;
+            //        }
+            //        break;
 
-                case Pyramid.bl:
-                    if (inDirection == Direction.right)
-                    {
-                        return Direction.down;
-                    }
-                    else if (inDirection == Direction.up)
-                    {
-                        return Direction.right;
-                    }
-                    break;
+            //    case Pyramid.tr:
+            //        if (inDirection == Direction.left)
+            //        {
+            //            return Direction.down;
+            //        }
+            //        else if(inDirection == Direction.down)
+            //        {
+            //            return Direction.left;
+            //        }
+            //        break;
 
-                case Pyramid.br:
-                    if (inDirection == Direction.left)
-                    {
-                        return Direction.up;
-                    }
-                    else if (inDirection == Direction.up)
-                    {
-                        return Direction.left;
-                    }
-                    break;
-            }
+            //    case Pyramid.bl:
+            //        if (inDirection == Direction.right)
+            //        {
+            //            return Direction.down;
+            //        }
+            //        else if (inDirection == Direction.up)
+            //        {
+            //            return Direction.right;
+            //        }
+            //        break;
 
-            return Direction.kill;
+            //    case Pyramid.br:
+            //        if (inDirection == Direction.left)
+            //        {
+            //            return Direction.up;
+            //        }
+            //        else if (inDirection == Direction.up)
+            //        {
+            //            return Direction.left;
+            //        }
+            //        break;
+            //}
+
+            //return Direction.kill;
         }
     }
 }
