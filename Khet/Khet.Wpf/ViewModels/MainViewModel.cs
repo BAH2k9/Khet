@@ -20,12 +20,17 @@ namespace Khet.Wpf.ViewModels
            // squareViewModels[50].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
            //squareViewModels[55].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
 
-            squareViewModels[50].activePiece = new PieceViewModel(OrientationDjed.dl);
-            squareViewModels[55].activePiece = new PieceViewModel(OrientationDjed.dr);
+            squareViewModels[70].activePiece = new PieceViewModel(OrientationDjed.dl);
+            squareViewModels[71].activePiece = new PieceViewModel(OrientationDjed.dr);
+
+            squareViewModels[01].activePiece = new PieceViewModel(OrientationDjed.dr);
+            squareViewModels[02].activePiece = new PieceViewModel(OrientationDjed.dl);
+
+            squareViewModels[72].activePiece = new PieceViewModel(OrientationDjed.dl);
 
 
 
-          //  squareViewModels[0].FireLaser(Direction.down);
+            //  squareViewModels[0].FireLaser(Direction.down);
             squareViewModels[0].FireLaser(Direction.down);
 
         }

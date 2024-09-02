@@ -7,6 +7,8 @@
              mc:Ignorable="d" 
              Height="100" Width="100">
     <Grid>
-        <Rectangle Fill="Red" Height="{Binding height}" Width="{Binding width}"/>
+        <Rectangle Fill="Red" Height="{Binding height[0]}" Width="{Binding width[0]}" HorizontalAlignment="{Binding horizontalAlignment[0]}" VerticalAlignment="{Binding verticalAlignment[0]}"/>
+        <Rectangle Fill="Red" Height="{Binding height[1]}" Width="{Binding width[1]}" HorizontalAlignment="{Binding horizontalAlignment[1]}" VerticalAlignment="{Binding verticalAlignment[1]}"/>
+        
     </Grid>
 </UserControl>

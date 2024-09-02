@@ -35,7 +35,7 @@ namespace Khet.Wpf.ViewModels
             var inDirection = getInDirection(firingDirection);
 
             // Display this sqaures laser
-            activeLaser = new LaserBeamViewModel(inDirection);
+            activeLaser = new LaserBeamViewModel(inDirection, activePiece);
 
             Direction? outDirection = firingDirection;
 
