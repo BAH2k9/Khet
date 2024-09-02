@@ -52,7 +52,7 @@ namespace Khet.Wpf.ViewModels
                     {
                         return Direction.down;
                     }
-                    else if(inDirection == Direction.up)
+                    else if(inDirection == Direction.down)
                     {
                         return Direction.right;
                     }
@@ -64,6 +64,28 @@ namespace Khet.Wpf.ViewModels
                         return Direction.down;
                     }
                     else if(inDirection == Direction.up)
+                    {
+                        return Direction.left;
+                    }
+                    break;
+
+                case Pyramid.bl:
+                    if (inDirection == Direction.right)
+                    {
+                        return Direction.down;
+                    }
+                    else if (inDirection == Direction.up)
+                    {
+                        return Direction.right;
+                    }
+                    break;
+
+                case Pyramid.br:
+                    if (inDirection == Direction.left)
+                    {
+                        return Direction.up;
+                    }
+                    else if (inDirection == Direction.up)
                     {
                         return Direction.left;
                     }

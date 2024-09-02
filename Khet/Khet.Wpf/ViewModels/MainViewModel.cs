@@ -21,8 +21,8 @@ namespace Khet.Wpf.ViewModels
             //squareViewModels[55].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
 
 
-            // PyramidTest();
-            DjedTest();
+             PyramidTest();
+            //DjedTest();
         }
 
         private void DjedTest()

@@ -15,19 +15,6 @@ namespace Khet.Wpf.ViewModels
 
         private Direction _direction;       
 
-        // Bindable properties
-        //private List<string> _height;
-        //public List<string> height { get => _height; set => SetProperty(ref _height, value); }
-       
-        //private List<string >_width;
-        //public List<string> width { get => _width; set => SetProperty(ref _width, value); }
-
-        //private List<string> _horizontalAlignment;
-        //public List<string> horizontalAlignment { get => _horizontalAlignment; set => SetProperty(ref _horizontalAlignment, value); }
-
-        //private List<string> _verticalAlignment;
-        //public List<string> verticalAlignment { get => _verticalAlignment; set => SetProperty(ref _verticalAlignment, value); }
-
         private List<string> _angle = new List<string> { "0", "0" };
         public List<string> angle { get => _angle; set => SetProperty(ref _angle, value); }
 
@@ -71,6 +58,108 @@ namespace Khet.Wpf.ViewModels
         }
 
         private void DisplayLaser(PyramidViewModel pyramid)
+        {
+            switch (_direction)
+            {
+                case Direction.up:
+                    angle[0] = "0";
+
+                    if (pyramid.orientation == Pyramid.tl)
+                    {
+                        Kill();
+                    }
+
+                    if (pyramid.orientation == Pyramid.tr)
+                    {
+                        Kill();
+                    }
+
+                    if (pyramid.orientation == Pyramid.bl)
+                    {
+                        angle[1] = "90";
+                    }
+
+                    if (pyramid.orientation == Pyramid.br)
+                    {
+                        angle[1] = "270";
+                    }
+                    break;
+
+                case Direction.down:
+                    angle[0] = "180";
+
+                    if (pyramid.orientation == Pyramid.tl)
+                    {
+                        angle[1] = "90";
+                    }
+
+                    if (pyramid.orientation == Pyramid.tr)
+                    {
+                        angle[1] = "270";
+                    }
+
+                    if (pyramid.orientation == Pyramid.bl)
+                    {
+                        Kill();
+                    }
+
+                    if (pyramid.orientation == Pyramid.br)
+                    {
+                        Kill();
+                    }
+                    break;
+
+                case Direction.left:
+                    angle[0] = "270";
+
+                    if (pyramid.orientation == Pyramid.tl)
+                    {
+                        Kill();
+                    }
+
+                    if (pyramid.orientation == Pyramid.tr)
+                    {
+                        angle[1] = "180";
+                    }
+
+                    if (pyramid.orientation == Pyramid.bl)
+                    {
+                        Kill();
+                    }
+
+                    if (pyramid.orientation == Pyramid.br)
+                    {
+                        angle[1] = "0";
+                    }
+                    break;
+
+                case Direction.right:
+                    angle[0] = "90";
+
+                    if (pyramid.orientation == Pyramid.tl)
+                    {
+                        angle[1] = "180";
+                    }
+
+                    if (pyramid.orientation == Pyramid.tr)
+                    {
+                        Kill();
+                    }
+
+                    if (pyramid.orientation == Pyramid.bl)
+                    {
+                        angle[1] = "0";
+                    }
+
+                    if (pyramid.orientation == Pyramid.br)
+                    {
+                        Kill();
+                    }
+                    break;
+            }
+        }
+
+        private void Kill()
         {
             
         }
