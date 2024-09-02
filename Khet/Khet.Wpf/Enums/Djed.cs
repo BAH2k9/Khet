@@ -1,6 +1,6 @@
 ﻿namespace Khet.Wpf.Enums
 {
-    public enum OrientationDjed
+    public enum Djed
     {
         dl = 0,
         dr = 1

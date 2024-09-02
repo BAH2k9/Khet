@@ -1,65 +1,44 @@
 ﻿using Khet.Wpf.Core;
 using Khet.Wpf.Enums;
-using System;
-using System.Collections.Generic;
-using System.DirectoryServices;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Khet.Wpf.Interfaces;
 
 namespace Khet.Wpf.ViewModels
 {
-    public class PieceViewModel : ViewModelBase
+    public class DjedViewModel : ViewModelBase,  IPiece
     {
-        public OrientationDjed orientation {  get; set; }
+        public Djed orientation {  get; set; }
 
-        private string _x1;
-        public string x1 { get => _x1; set => SetProperty(ref _x1, value); }
-
-        private string _x2;
-        public string x2 { get => _x2; set => SetProperty(ref _x2, value); }
-
-        private string _y1;
-        public string y1 { get => _y1; set => SetProperty(ref _y1, value); }
-
-        private string _y2;
-        public string y2 { get => _y2; set => SetProperty(ref _y2, value); }
+        private string _rotationAngle = "0";
+        public string rotationAngle { get => _rotationAngle; set => SetProperty(ref _rotationAngle, value); }
 
 
-        public PieceViewModel(OrientationDjed orientation)
+        public DjedViewModel(Djed orientation)
         {
 
             this.orientation = orientation;
-            SetDisplay();
+            Display();
         }
 
-        private void SetDisplay()
+        private void Display()
         {
-            if (this.orientation == OrientationDjed.dl)
+            if (this.orientation == Djed.dl)
             {
-                x1 = "0";
-                x2 = "100";
-                y1 = "0";
-                y2 = "100";
-
+                rotationAngle = "0";
             }
             else
             {
-                x1 = "0";
-                x2 = "100";
-                y1 = "100";
-                y2 = "0";
+                rotationAngle = "90";
             }
 
 
         }
 
-        public Direction ResolveLaserOutDirection(Direction inDirection)
+        public Direction ResolveLaserDirection(Direction inDirection)
         {
 
             switch (this.orientation)
             {
-                case OrientationDjed.dl:
+                case Djed.dl:
                     if (inDirection == Direction.down)
                     {
                         return Direction.left;
@@ -77,7 +56,7 @@ namespace Khet.Wpf.ViewModels
                         return Direction.right;
                     }
 
-                case OrientationDjed.dr:
+                case Djed.dr:
                     if (inDirection == Direction.down)
                     {
                         return Direction.right;

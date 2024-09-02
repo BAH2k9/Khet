@@ -17,22 +17,44 @@ namespace Khet.Wpf.ViewModels
             squareViewModels = sf.GetObservableCollection();
 
 
-           // squareViewModels[50].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
-           //squareViewModels[55].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
+            // squareViewModels[50].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
+            //squareViewModels[55].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
 
-            squareViewModels[70].activePiece = new PieceViewModel(OrientationDjed.dl);
-            squareViewModels[71].activePiece = new PieceViewModel(OrientationDjed.dr);
 
-            squareViewModels[01].activePiece = new PieceViewModel(OrientationDjed.dr);
-            squareViewModels[02].activePiece = new PieceViewModel(OrientationDjed.dl);
+            // PyramidTest();
+            DjedTest();
+        }
 
-            squareViewModels[72].activePiece = new PieceViewModel(OrientationDjed.dl);
+        private void DjedTest()
+        {
+            squareViewModels[70].activePiece = new DjedViewModel(Djed.dl);
+            squareViewModels[71].activePiece = new DjedViewModel(Djed.dr);
+
+            squareViewModels[01].activePiece = new DjedViewModel(Djed.dr);
+            squareViewModels[02].activePiece = new DjedViewModel(Djed.dl);
+
+
+            squareViewModels[72].activePiece = new DjedViewModel(Djed.dl);
 
 
 
             //  squareViewModels[0].FireLaser(Direction.down);
             squareViewModels[0].FireLaser(Direction.down);
+        }
 
+        private void PyramidTest()
+        {
+
+            squareViewModels[70].activePiece = new PyramidViewModel(Pyramid.bl);
+            squareViewModels[71].activePiece = new PyramidViewModel(Pyramid.br);
+
+            squareViewModels[01].activePiece = new PyramidViewModel(Pyramid.tl);
+            squareViewModels[02].activePiece = new PyramidViewModel(Pyramid.tr);         
+
+            squareViewModels[72].activePiece = new PyramidViewModel(Pyramid.bl);
+
+            //  squareViewModels[0].FireLaser(Direction.down);
+            squareViewModels[0].FireLaser(Direction.down);
         }
     }
 }

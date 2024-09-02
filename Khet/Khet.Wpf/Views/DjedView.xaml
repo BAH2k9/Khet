@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Khet.Wpf.Views.PieceView"
+﻿<UserControl x:Class="Khet.Wpf.Views.DjedView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,6 +7,11 @@
              mc:Ignorable="d" 
              Height="100" Width="100">
     <Grid>
-        <Line X1="{Binding x1}" Y1="{Binding y1}" X2="{Binding x2}" Y2="{Binding y2}" Stroke="Blue" StrokeThickness="10" />
+        <!--<Line X1="{Binding x1}" Y1="{Binding y1}" X2="{Binding x2}" Y2="{Binding y2}" Stroke="Blue" StrokeThickness="10" />-->
+        <Line X1="100" Y1="100" X2="0" Y2="0" Stroke="Blue" StrokeThickness="10" >
+            <Line.RenderTransform>
+                <RotateTransform Angle="{Binding rotationAngle}" CenterX="50" CenterY="50"/>
+            </Line.RenderTransform>
+        </Line>
     </Grid>
 </UserControl>

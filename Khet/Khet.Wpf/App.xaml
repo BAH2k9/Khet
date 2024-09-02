@@ -19,8 +19,12 @@
             <v:LaserBeamView/>
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type vm:PieceViewModel}">
-            <v:PieceView/>
+        <DataTemplate DataType="{x:Type vm:DjedViewModel}">
+            <v:DjedView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:PyramidViewModel}">
+            <v:PyramidView/>
         </DataTemplate>
 
     </Application.Resources>

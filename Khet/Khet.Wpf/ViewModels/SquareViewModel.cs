@@ -1,5 +1,6 @@
 ﻿using Khet.Wpf.Core;
 using Khet.Wpf.Enums;
+using Khet.Wpf.Interfaces;
 using Khet.Wpf.Models;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ namespace Khet.Wpf.ViewModels
         public SquareViewModel? leftNeighbour {  get; set; }
         public SquareViewModel? rightNeighbour {  get; set; }
 
-        private PieceViewModel _activePiece;
-        public PieceViewModel activePiece { get => _activePiece; set => SetProperty(ref _activePiece, value); }
+        private IPiece _activePiece;
+        public IPiece activePiece { get => _activePiece; set => SetProperty(ref _activePiece, value); }
 
         private ViewModelBase _activeLaser;
         public ViewModelBase activeLaser { get => _activeLaser; set => SetProperty(ref _activeLaser, value); }
@@ -33,15 +34,16 @@ namespace Khet.Wpf.ViewModels
         {
 
             var inDirection = getInDirection(firingDirection);
+            Direction? outDirection = firingDirection;
 
             // Display this sqaures laser
             activeLaser = new LaserBeamViewModel(inDirection, activePiece);
 
-            Direction? outDirection = firingDirection;
+            
 
             if (activePiece != null)
             {
-               outDirection = activePiece?.ResolveLaserOutDirection(inDirection);
+               outDirection = activePiece?.ResolveLaserDirection(inDirection);
             }
 
             switch (outDirection)

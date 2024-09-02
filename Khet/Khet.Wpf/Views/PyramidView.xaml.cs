@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Khet.Wpf.Views
 {
     /// <summary>
-    /// Interaction logic for PieceView.xaml
+    /// Interaction logic for PyramidView.xaml
     /// </summary>
-    public partial class PieceView : UserControl
+    public partial class PyramidView : UserControl
     {
-        public PieceView()
+        public PyramidView()
         {
             InitializeComponent();
         }
