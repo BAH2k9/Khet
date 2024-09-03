@@ -42,6 +42,11 @@ namespace Khet.Wpf.ViewModels
             return outDirection;
 
         }
+
+        public void ClearDisplay()
+        {
+            
+        }
     }
 }
 

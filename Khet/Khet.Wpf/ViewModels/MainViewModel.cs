@@ -17,9 +17,6 @@ namespace Khet.Wpf.ViewModels
             squareViewModels = sf.GetObservableCollection();
 
 
-            // squareViewModels[50].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
-            //squareViewModels[55].activePiece = new PieceViewModel() { orientation = OrientationDjed.dl };
-
             TestAllPyramidOrientations();
             //PyramidTest();
             //DjedTest();
@@ -70,16 +67,19 @@ namespace Khet.Wpf.ViewModels
             squareViewModels[4].FireLaser(Direction.down);
             await Task.Delay(1000);
             ClearLaser();
+            squareViewModels[44].activePiece = new PyramidViewModel(orientation);
             await Task.Delay(300);
 
             squareViewModels[40].FireLaser(Direction.right);
             await Task.Delay(1000);
             ClearLaser();
+            squareViewModels[44].activePiece = new PyramidViewModel(orientation);
             await Task.Delay(300);
 
             squareViewModels[74].FireLaser(Direction.up);
             await Task.Delay(1000);
             ClearLaser();
+            squareViewModels[44].activePiece = new PyramidViewModel(orientation);
             await Task.Delay(300);
 
             squareViewModels[49].FireLaser(Direction.left);

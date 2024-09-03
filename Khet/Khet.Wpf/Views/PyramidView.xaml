@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100">
     <Grid>
-        <Polygon Points="0,0 100,0 0,100" Stroke="Black" Fill="DarkBlue" StrokeThickness="2" >
+        <Polygon Points="{Binding points}" Stroke="Black" Fill="DarkBlue" StrokeThickness="2" >
             
             <Polygon.RenderTransform>
                 <RotateTransform Angle="{Binding rotationAngle}" CenterX="50" CenterY="50" />

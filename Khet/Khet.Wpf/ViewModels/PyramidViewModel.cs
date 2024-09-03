@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Windows;
 
 namespace Khet.Wpf.ViewModels
 {
@@ -15,6 +16,9 @@ namespace Khet.Wpf.ViewModels
 
         private string _rotationAngle = "0";
         public string rotationAngle { get => _rotationAngle; set => SetProperty(ref _rotationAngle, value); }
+
+        private PointCollection _points ;
+        public PointCollection points { get => _points; set => SetProperty(ref _points, value); }
 
         public Pyramid orientation { get; set; }
 
@@ -26,6 +30,15 @@ namespace Khet.Wpf.ViewModels
 
         private void SetDisplay()
         {
+            // Set coordinates of piece
+            points = new PointCollection
+            {
+                new Point(0,0),
+                new Point(100,0),
+                new Point(0,100),
+            };
+
+            // Set orientation of piece
             switch(this.orientation)
             {
                 case Pyramid.tl:
@@ -49,54 +62,12 @@ namespace Khet.Wpf.ViewModels
             var input = Tuple.Create(inDirection, this.orientation);
             var outDirection = Mappings.PyramidDirection[input];
             return outDirection;
-            //switch (this.orientation)
-            //{
-            //    case Pyramid.tl:
-            //        if (inDirection == Direction.right)
-            //        {
-            //            return Direction.down;
-            //        }
-            //        else if(inDirection == Direction.down)
-            //        {
-            //            return Direction.right;
-            //        }
-            //        break;
+           
+        }
 
-            //    case Pyramid.tr:
-            //        if (inDirection == Direction.left)
-            //        {
-            //            return Direction.down;
-            //        }
-            //        else if(inDirection == Direction.down)
-            //        {
-            //            return Direction.left;
-            //        }
-            //        break;
-
-            //    case Pyramid.bl:
-            //        if (inDirection == Direction.right)
-            //        {
-            //            return Direction.down;
-            //        }
-            //        else if (inDirection == Direction.up)
-            //        {
-            //            return Direction.right;
-            //        }
-            //        break;
-
-            //    case Pyramid.br:
-            //        if (inDirection == Direction.left)
-            //        {
-            //            return Direction.up;
-            //        }
-            //        else if (inDirection == Direction.up)
-            //        {
-            //            return Direction.left;
-            //        }
-            //        break;
-            //}
-
-            //return Direction.kill;
+        public void ClearDisplay()
+        {
+            points.Clear();
         }
     }
 }

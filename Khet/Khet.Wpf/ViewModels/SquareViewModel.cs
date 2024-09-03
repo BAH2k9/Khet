@@ -44,7 +44,10 @@ namespace Khet.Wpf.ViewModels
             if (activePiece != null)
             {
                outDirection = activePiece?.ResolveLaserDirection(inDirection);
+                
             }
+
+
 
             switch (outDirection)
             {
@@ -62,6 +65,10 @@ namespace Khet.Wpf.ViewModels
 
                 case Direction.right:
                     rightNeighbour?.FireLaser(Direction.right);
+                    break;
+                case Direction.kill:
+                    activePiece?.ClearDisplay();
+                    activePiece = null;
                     break;
             }
         }
