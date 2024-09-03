@@ -7,7 +7,6 @@ namespace Khet.Wpf.Interfaces
     {
         Direction ResolveLaserDirection(Direction direction);
 
-        void ClearDisplay();
 
     }
 }

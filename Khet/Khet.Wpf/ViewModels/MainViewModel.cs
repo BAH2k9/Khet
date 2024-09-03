@@ -2,6 +2,7 @@
 using Khet.Wpf.Enums;
 using Khet.Wpf.Models;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Khet.Wpf.ViewModels
 {
@@ -9,20 +10,34 @@ namespace Khet.Wpf.ViewModels
     {
         public ObservableCollection<SquareViewModel> squareViewModels {get; set;}
 
+        public ICommand Player1FireCommand { get; }
+        public ICommand Player2FireCommand { get; }
+
         public MainViewModel()
         {
             
             var sf = new SquareFactory();
 
+            Player1FireCommand = new RelayCommand(ExecuteLeftClick);
+            Player2FireCommand = new RelayCommand(ExecuteRightClick);
+
             squareViewModels = sf.GetObservableCollection();
 
 
-            TestAllPyramidOrientations();
-            //PyramidTest();
+           // TestAllPyramidOrientations();
+            PyramidTest();
             //DjedTest();
         }
 
-        
+        private void ExecuteLeftClick(object obj)
+        {
+            squareViewModels[0].FireLaser(Direction.down);
+        }
+        private void ExecuteRightClick(object obj)
+        {
+            squareViewModels[79].FireLaser(Direction.up);
+        }
+
 
         private void DjedTest()
         {
@@ -51,9 +66,10 @@ namespace Khet.Wpf.ViewModels
             squareViewModels[02].activePiece = new PyramidViewModel(Pyramid.tr);         
 
             squareViewModels[72].activePiece = new PyramidViewModel(Pyramid.bl);
+            squareViewModels[76].activePiece = new PyramidViewModel(Pyramid.bl);
 
             //  squareViewModels[0].FireLaser(Direction.down);
-            squareViewModels[0].FireLaser(Direction.down);
+           // squareViewModels[0].FireLaser(Direction.down);
         }
 
         private async Task orientationTest(Pyramid orientation)
@@ -89,6 +105,7 @@ namespace Khet.Wpf.ViewModels
         }
         private async void TestAllPyramidOrientations()
         {
+            await Task.Delay(1000);
             await orientationTest(Pyramid.tr);
             await orientationTest(Pyramid.tl);
             await orientationTest(Pyramid.br);

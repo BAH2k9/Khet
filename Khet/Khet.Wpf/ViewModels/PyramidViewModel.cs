@@ -17,9 +17,6 @@ namespace Khet.Wpf.ViewModels
         private string _rotationAngle = "0";
         public string rotationAngle { get => _rotationAngle; set => SetProperty(ref _rotationAngle, value); }
 
-        private PointCollection _points ;
-        public PointCollection points { get => _points; set => SetProperty(ref _points, value); }
-
         public Pyramid orientation { get; set; }
 
         public PyramidViewModel(Pyramid orientation)
@@ -30,14 +27,6 @@ namespace Khet.Wpf.ViewModels
 
         private void SetDisplay()
         {
-            // Set coordinates of piece
-            points = new PointCollection
-            {
-                new Point(0,0),
-                new Point(100,0),
-                new Point(0,100),
-            };
-
             // Set orientation of piece
             switch(this.orientation)
             {
@@ -63,11 +52,6 @@ namespace Khet.Wpf.ViewModels
             var outDirection = Mappings.PyramidDirection[input];
             return outDirection;
            
-        }
-
-        public void ClearDisplay()
-        {
-            points.Clear();
         }
     }
 }

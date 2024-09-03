@@ -67,7 +67,6 @@ namespace Khet.Wpf.ViewModels
                     rightNeighbour?.FireLaser(Direction.right);
                     break;
                 case Direction.kill:
-                    activePiece?.ClearDisplay();
                     activePiece = null;
                     break;
             }
