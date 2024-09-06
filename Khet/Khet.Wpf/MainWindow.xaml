@@ -6,132 +6,34 @@
         xmlns:local="clr-namespace:Khet.Wpf"
         xmlns:viewmodels="clr-namespace:Khet.Wpf.ViewModels" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000">
+        Title="MainWindow" Height="1025" Width="1260">
     <!--d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"-->
 
 
-    <Window.InputBindings>
+    <!--<Window.InputBindings>
         <MouseBinding Gesture="LeftClick" Command="{Binding Player1FireCommand}" />
         <MouseBinding Gesture="RightClick" Command="{Binding Player2FireCommand}" />
-    </Window.InputBindings>
-
+    </Window.InputBindings>-->
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="8*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-
-        <ContentControl Grid.Row="0" Grid.Column="0" Content="{Binding squareViewModels[0]}"/>
-        <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding squareViewModels[1]}"/>
-        <ContentControl Grid.Row="0" Grid.Column="2" Content="{Binding squareViewModels[2]}"/>
-        <ContentControl Grid.Row="0" Grid.Column="3" Content="{Binding squareViewModels[3]}"/>
-        <ContentControl Grid.Row="0" Grid.Column="4" Content="{Binding squareViewModels[4]}"/>
-        <ContentControl Grid.Row="0" Grid.Column="5" Content="{Binding squareViewModels[5]}"/>
-        <ContentControl Grid.Row="0" Grid.Column="6" Content="{Binding squareViewModels[6]}"/>
-        <ContentControl Grid.Row="0" Grid.Column="7" Content="{Binding squareViewModels[7]}"/>
-        <ContentControl Grid.Row="0" Grid.Column="8" Content="{Binding squareViewModels[8]}"/>
-        <ContentControl Grid.Row="0" Grid.Column="9" Content="{Binding squareViewModels[9]}"/>
-
-        <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding squareViewModels[10]}"/>
-        <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding squareViewModels[11]}"/>
-        <ContentControl Grid.Row="1" Grid.Column="2" Content="{Binding squareViewModels[12]}"/>
-        <ContentControl Grid.Row="1" Grid.Column="3" Content="{Binding squareViewModels[13]}"/>
-        <ContentControl Grid.Row="1" Grid.Column="4" Content="{Binding squareViewModels[14]}"/>
-        <ContentControl Grid.Row="1" Grid.Column="5" Content="{Binding squareViewModels[15]}"/>
-        <ContentControl Grid.Row="1" Grid.Column="6" Content="{Binding squareViewModels[16]}"/>
-        <ContentControl Grid.Row="1" Grid.Column="7" Content="{Binding squareViewModels[17]}"/>
-        <ContentControl Grid.Row="1" Grid.Column="8" Content="{Binding squareViewModels[18]}"/>
-        <ContentControl Grid.Row="1" Grid.Column="9" Content="{Binding squareViewModels[19]}"/>
-
-        <ContentControl Grid.Row="2" Grid.Column="0" Content="{Binding squareViewModels[20]}"/>
-        <ContentControl Grid.Row="2" Grid.Column="1" Content="{Binding squareViewModels[21]}"/>
-        <ContentControl Grid.Row="2" Grid.Column="2" Content="{Binding squareViewModels[22]}"/>
-        <ContentControl Grid.Row="2" Grid.Column="3" Content="{Binding squareViewModels[23]}"/>
-        <ContentControl Grid.Row="2" Grid.Column="4" Content="{Binding squareViewModels[24]}"/>
-        <ContentControl Grid.Row="2" Grid.Column="5" Content="{Binding squareViewModels[25]}"/>
-        <ContentControl Grid.Row="2" Grid.Column="6" Content="{Binding squareViewModels[26]}"/>
-        <ContentControl Grid.Row="2" Grid.Column="7" Content="{Binding squareViewModels[27]}"/>
-        <ContentControl Grid.Row="2" Grid.Column="8" Content="{Binding squareViewModels[28]}"/>
-        <ContentControl Grid.Row="2" Grid.Column="9" Content="{Binding squareViewModels[29]}"/>
-
-        <ContentControl Grid.Row="3" Grid.Column="0" Content="{Binding squareViewModels[30]}"/>
-        <ContentControl Grid.Row="3" Grid.Column="1" Content="{Binding squareViewModels[31]}"/>
-        <ContentControl Grid.Row="3" Grid.Column="2" Content="{Binding squareViewModels[32]}"/>
-        <ContentControl Grid.Row="3" Grid.Column="3" Content="{Binding squareViewModels[33]}"/>
-        <ContentControl Grid.Row="3" Grid.Column="4" Content="{Binding squareViewModels[34]}"/>
-        <ContentControl Grid.Row="3" Grid.Column="5" Content="{Binding squareViewModels[35]}"/>
-        <ContentControl Grid.Row="3" Grid.Column="6" Content="{Binding squareViewModels[36]}"/>
-        <ContentControl Grid.Row="3" Grid.Column="7" Content="{Binding squareViewModels[37]}"/>
-        <ContentControl Grid.Row="3" Grid.Column="8" Content="{Binding squareViewModels[38]}"/>
-        <ContentControl Grid.Row="3" Grid.Column="9" Content="{Binding squareViewModels[39]}"/>
-
-        <ContentControl Grid.Row="4" Grid.Column="0" Content="{Binding squareViewModels[40]}"/>
-        <ContentControl Grid.Row="4" Grid.Column="1" Content="{Binding squareViewModels[41]}"/>
-        <ContentControl Grid.Row="4" Grid.Column="2" Content="{Binding squareViewModels[42]}"/>
-        <ContentControl Grid.Row="4" Grid.Column="3" Content="{Binding squareViewModels[43]}"/>
-        <ContentControl Grid.Row="4" Grid.Column="4" Content="{Binding squareViewModels[44]}"/>
-        <ContentControl Grid.Row="4" Grid.Column="5" Content="{Binding squareViewModels[45]}"/>
-        <ContentControl Grid.Row="4" Grid.Column="6" Content="{Binding squareViewModels[46]}"/>
-        <ContentControl Grid.Row="4" Grid.Column="7" Content="{Binding squareViewModels[47]}"/>
-        <ContentControl Grid.Row="4" Grid.Column="8" Content="{Binding squareViewModels[48]}"/>
-        <ContentControl Grid.Row="4" Grid.Column="9" Content="{Binding squareViewModels[49]}"/>
-
-        <ContentControl Grid.Row="5" Grid.Column="0" Content="{Binding squareViewModels[50]}"/>
-        <ContentControl Grid.Row="5" Grid.Column="1" Content="{Binding squareViewModels[51]}"/>
-        <ContentControl Grid.Row="5" Grid.Column="2" Content="{Binding squareViewModels[52]}"/>
-        <ContentControl Grid.Row="5" Grid.Column="3" Content="{Binding squareViewModels[53]}"/>
-        <ContentControl Grid.Row="5" Grid.Column="4" Content="{Binding squareViewModels[54]}"/>
-        <ContentControl Grid.Row="5" Grid.Column="5" Content="{Binding squareViewModels[55]}"/>
-        <ContentControl Grid.Row="5" Grid.Column="6" Content="{Binding squareViewModels[56]}"/>
-        <ContentControl Grid.Row="5" Grid.Column="7" Content="{Binding squareViewModels[57]}"/>
-        <ContentControl Grid.Row="5" Grid.Column="8" Content="{Binding squareViewModels[58]}"/>
-        <ContentControl Grid.Row="5" Grid.Column="9" Content="{Binding squareViewModels[59]}"/>
-
-        <ContentControl Grid.Row="6" Grid.Column="0" Content="{Binding squareViewModels[60]}"/>
-        <ContentControl Grid.Row="6" Grid.Column="1" Content="{Binding squareViewModels[61]}"/>
-        <ContentControl Grid.Row="6" Grid.Column="2" Content="{Binding squareViewModels[62]}"/>
-        <ContentControl Grid.Row="6" Grid.Column="3" Content="{Binding squareViewModels[63]}"/>
-        <ContentControl Grid.Row="6" Grid.Column="4" Content="{Binding squareViewModels[64]}"/>
-        <ContentControl Grid.Row="6" Grid.Column="5" Content="{Binding squareViewModels[65]}"/>
-        <ContentControl Grid.Row="6" Grid.Column="6" Content="{Binding squareViewModels[66]}"/>
-        <ContentControl Grid.Row="6" Grid.Column="7" Content="{Binding squareViewModels[67]}"/>
-        <ContentControl Grid.Row="6" Grid.Column="8" Content="{Binding squareViewModels[68]}"/>
-        <ContentControl Grid.Row="6" Grid.Column="9" Content="{Binding squareViewModels[69]}"/>
-
-        <ContentControl Grid.Row="7" Grid.Column="0" Content="{Binding squareViewModels[70]}"/>
-        <ContentControl Grid.Row="7" Grid.Column="1" Content="{Binding squareViewModels[71]}"/>
-        <ContentControl Grid.Row="7" Grid.Column="2" Content="{Binding squareViewModels[72]}"/>
-        <ContentControl Grid.Row="7" Grid.Column="3" Content="{Binding squareViewModels[73]}"/>
-        <ContentControl Grid.Row="7" Grid.Column="4" Content="{Binding squareViewModels[74]}"/>
-        <ContentControl Grid.Row="7" Grid.Column="5" Content="{Binding squareViewModels[75]}"/>
-        <ContentControl Grid.Row="7" Grid.Column="6" Content="{Binding squareViewModels[76]}"/>
-        <ContentControl Grid.Row="7" Grid.Column="7" Content="{Binding squareViewModels[77]}"/>
-        <ContentControl Grid.Row="7" Grid.Column="8" Content="{Binding squareViewModels[78]}"/>
-        <ContentControl Grid.Row="7" Grid.Column="9" Content="{Binding squareViewModels[79]}"/>
-
-
-
+        <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding boardViewModel}"/>
 
     </Grid>
+
+    
+
+
+
 </Window>

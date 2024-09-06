@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:Khet.Wpf.ViewModels"
              Height="100" Width="100">
-    <Grid>
+    <Grid Background="Transparent">
 
         <Grid>
             <ContentControl Content="{Binding activeLaser}"/>
