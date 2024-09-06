@@ -21,7 +21,7 @@ namespace Khet.Wpf.Models
         {
             CreateSquares();
 
-            SetNeighbours();
+            //SetNeighbours();
 
         }
 
@@ -43,54 +43,54 @@ namespace Khet.Wpf.Models
             }
         }
 
-        private void SetNeighbours()
-        {
-            for (int i = 0; i < _rows ; i++)
-            {
-                for (int j = 0; j < _cols ; j++)
-                {
+        //private void SetNeighbours()
+        //{
+        //    for (int i = 0; i < _rows ; i++)
+        //    {
+        //        for (int j = 0; j < _cols ; j++)
+        //        {
 
-                    if(i ==0)
-                    {
-                        myList[i][j].upNeighbour=null;
-                    }
-                    else
-                    {
-                        myList[i][j].upNeighbour = myList[i-1][j];
-                    }
+        //            if(i ==0)
+        //            {
+        //                myList[i][j].upNeighbour=null;
+        //            }
+        //            else
+        //            {
+        //                myList[i][j].upNeighbour = myList[i-1][j];
+        //            }
 
-                    if(i == _rows-1)
-                    {
-                        myList[i][j].downNeighbour=null;
-                    }
-                    else
-                    {
-                        myList[i][j].downNeighbour = myList[i+1][j];
-                    }
+        //            if(i == _rows-1)
+        //            {
+        //                myList[i][j].downNeighbour=null;
+        //            }
+        //            else
+        //            {
+        //                myList[i][j].downNeighbour = myList[i+1][j];
+        //            }
 
-                    if(j==0)
-                    {
-                        myList[i][j].leftNeighbour = null;
-                    }
-                    else
-                    {
-                        myList[i][j].leftNeighbour = myList[i][j-1];
-                    }
+        //            if(j==0)
+        //            {
+        //                myList[i][j].leftNeighbour = null;
+        //            }
+        //            else
+        //            {
+        //                myList[i][j].leftNeighbour = myList[i][j-1];
+        //            }
 
-                    if(j == _cols-1)
-                    {
-                        myList[i][j].rightNeighbour = null;
-                    }
-                    else
-                    {
-                        myList[i][j].rightNeighbour=myList[i][j+1];
-                    }
+        //            if(j == _cols-1)
+        //            {
+        //                myList[i][j].rightNeighbour = null;
+        //            }
+        //            else
+        //            {
+        //                myList[i][j].rightNeighbour=myList[i][j+1];
+        //            }
 
-                    squareViewModels.Add(myList[i][j]);
+        //            squareViewModels.Add(myList[i][j]);
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
         
     }

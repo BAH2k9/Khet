@@ -27,5 +27,9 @@
             <v:PyramidView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type vm:BoardViewModel}">
+            <v:BoardView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>
