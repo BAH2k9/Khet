@@ -74,32 +74,34 @@ namespace Khet.Wpf.ViewModels
 
         private async Task orientationTest(Pyramid orientation)
         {
+            int longd = 2000;
+            int shortd = 600;
             // Set piece
             squareViewModels[44].activePiece = new PyramidViewModel(orientation);
 
-            await Task.Delay(1000);
+            await Task.Delay(longd);
 
             // Fire laser 
             squareViewModels[4].FireLaser(Direction.down);
-            await Task.Delay(1000);
+            await Task.Delay(longd);
             ClearLaser();
             squareViewModels[44].activePiece = new PyramidViewModel(orientation);
-            await Task.Delay(300);
+            await Task.Delay(shortd);
 
             squareViewModels[40].FireLaser(Direction.right);
-            await Task.Delay(1000);
+            await Task.Delay(longd);
             ClearLaser();
             squareViewModels[44].activePiece = new PyramidViewModel(orientation);
-            await Task.Delay(300);
+            await Task.Delay(shortd);
 
             squareViewModels[74].FireLaser(Direction.up);
-            await Task.Delay(1000);
+            await Task.Delay(longd);
             ClearLaser();
             squareViewModels[44].activePiece = new PyramidViewModel(orientation);
-            await Task.Delay(300);
+            await Task.Delay(shortd);
 
             squareViewModels[49].FireLaser(Direction.left);
-            await Task.Delay(1000);
+            await Task.Delay(longd);
             ClearLaser();
 
         }

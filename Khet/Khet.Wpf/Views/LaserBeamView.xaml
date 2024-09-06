@@ -11,15 +11,15 @@
         <Rectangle Fill="Red" Height="{Binding height[1]}" Width="{Binding width[1]}" HorizontalAlignment="{Binding horizontalAlignment[1]}" VerticalAlignment="{Binding verticalAlignment[1]}"/>-->
 
 
-        <Rectangle Fill="Red" Height="50" Width="10" VerticalAlignment="Top">
+        <Rectangle Fill="Red" Height="50" Width="5" VerticalAlignment="Top">
             <Rectangle.RenderTransform>
-                <RotateTransform Angle="{Binding angle[0]}" CenterX="5" CenterY="50"/>
+                <RotateTransform Angle="{Binding angle[0]}" CenterX="2.5" CenterY="50"/>
             </Rectangle.RenderTransform>
         </Rectangle>
         
-        <Rectangle Fill="Red" Height="50" Width="10" VerticalAlignment="Top">
+        <Rectangle Fill="Red" Height="50" Width="5" VerticalAlignment="Top">
             <Rectangle.RenderTransform>
-                <RotateTransform Angle="{Binding angle[1]}" CenterX="5" CenterY="50"/>
+                <RotateTransform Angle="{Binding angle[1]}" CenterX="2.5" CenterY="50"/>
             </Rectangle.RenderTransform>
         </Rectangle>
     </Grid>
