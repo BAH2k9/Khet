@@ -75,10 +75,15 @@ namespace Khet.Wpf.ViewModels
 
         }
 
-        public void Clear()
+        public void ClearLaser()
         {
             activeLaser = null;
-            //activePiece = null;
+
+        }
+
+        public void ClearPiece()
+        {
+            activePiece = null;
         }
     }
 }

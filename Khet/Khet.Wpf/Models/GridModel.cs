@@ -22,7 +22,7 @@ namespace Khet.Wpf.Models
                 }
             }
 
-            return SetBoardConfiguration(squareViewModels);
+            return squareViewModels;
         }
 
         public static GridModel SetBoardConfiguration(GridModel squareViewModels)
@@ -52,7 +52,30 @@ namespace Khet.Wpf.Models
             {
                 foreach (var square in row)
                 {
-                    square.Clear();
+                    square.ClearLaser();
+                }
+            }
+        }
+
+        public static void ClearPiece(GridModel squareViewModels)
+        {
+            foreach (var row in squareViewModels)
+            {
+                foreach (var square in row)
+                {
+                    square.ClearPiece();
+                }
+            }
+        }
+
+        public static void ClearGrid(GridModel squareViewModels)
+        {
+            foreach (var row in squareViewModels)
+            {
+                foreach (var square in row)
+                {
+                    square.ClearPiece();
+                    square.ClearLaser();
                 }
             }
         }

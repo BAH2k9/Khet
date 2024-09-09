@@ -16,19 +16,31 @@ namespace Khet.Wpf.ViewModels
     {
         public ICommand Player1FireCommand { get; }
         public ICommand Player2FireCommand { get; }
+        public ICommand PyramidTestCommand { get; }
+        public ICommand DjedTestCommand { get; }
+        public ICommand ClearGridCommand { get; }
+        public ICommand SetGridCommand { get; }
 
         public GridModel squareViewModels { get; set; } 
 
         public BoardViewModel()
         {
 
+            squareViewModels = GridModel.Create();
+            //GridModel.SetBoardConfiguration(squareViewModels);
+
             Player1FireCommand = new RelayCommand(FireLaserPlayer1);
             Player2FireCommand = new RelayCommand(FireLaserPlayer2);
+            PyramidTestCommand = new RelayCommandAsync(param => PyramidTest.AllOrientations(squareViewModels));
+            DjedTestCommand = new RelayCommandAsync(param => DjedTest.AllOrientations(squareViewModels));
+            ClearGridCommand = new RelayCommand(param => GridModel.ClearGrid(squareViewModels));
+            SetGridCommand = new RelayCommand(param => GridModel.SetBoardConfiguration(squareViewModels));
 
 
-            squareViewModels = GridModel.Create();
+            
 
-           // _ = PieceTest.AllOrientations(squareViewModels);
+            //_ = DjedTest.AllOrientations(squareViewModels);
+            //_ = PyramidTest.AllOrientations(squareViewModels);
 
 
         }
