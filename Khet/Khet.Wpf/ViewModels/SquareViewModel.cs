@@ -14,8 +14,8 @@ namespace Khet.Wpf.ViewModels
     public class SquareViewModel : ViewModelBase
     {
 
-        private IPiece _activePiece;
-        public IPiece activePiece { get => _activePiece; set => SetProperty(ref _activePiece, value); }
+        private IPiece? _activePiece;
+        public IPiece? activePiece { get => _activePiece; set => SetProperty(ref _activePiece, value); }
 
         private ViewModelBase _activeLaser;
         public ViewModelBase activeLaser { get => _activeLaser; set => SetProperty(ref _activeLaser, value); }
@@ -28,19 +28,37 @@ namespace Khet.Wpf.ViewModels
 
         public Direction FireLaser(Direction firingDirection)
         {
-
+            // Get in direction
             var inDirection = getInDirection(firingDirection);
-            Direction outDirection = firingDirection;
 
             // Display this sqaures laser
             activeLaser = new LaserBeamViewModel(inDirection, activePiece);
-          
 
-            return outDirection;
+            // Check for active piece
+            if (activePiece != null)
+            {
+                var outDirection = activePiece.ResolveLaserDirection(inDirection);
+
+                if (outDirection == Direction.kill)
+                {
+                    activePiece = null;
+                }
+
+                return outDirection;
+                
+            }
+
+            return firingDirection;
+        }
+
+        public void DisplayLaser()
+        {
+
         }
 
         private Direction getInDirection(Direction firingDirection)
         {
+            // Look into defining direction.flip 
             switch(firingDirection)
             {
                 case Direction.down:
