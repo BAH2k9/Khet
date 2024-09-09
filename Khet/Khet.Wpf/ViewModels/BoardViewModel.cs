@@ -1,5 +1,7 @@
 ﻿using Khet.Wpf.Core;
 using Khet.Wpf.Enums;
+using Khet.Wpf.Models;
+using Khet.Wpf.Tests;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,66 +14,62 @@ namespace Khet.Wpf.ViewModels
 {
     public class BoardViewModel
     {
-        private int _rows = 8;
-        private int _cols = 10;
-
         public ICommand Player1FireCommand { get; }
         public ICommand Player2FireCommand { get; }
 
-        public ObservableCollection<ObservableCollection<SquareViewModel>> squareViewModels { get; set; } = new ObservableCollection<ObservableCollection<SquareViewModel>>();
+        public GridModel squareViewModels { get; set; } 
 
         public BoardViewModel()
         {
 
-            Player1FireCommand = new RelayCommand(ExecuteLeftClick);
-            Player2FireCommand = new RelayCommand(ExecuteRightClick);
+            Player1FireCommand = new RelayCommand(FireLaserPlayer1);
+            Player2FireCommand = new RelayCommand(FireLaserPlayer2);
 
 
-            CreateSquares();
+            squareViewModels = GridModel.Create();
 
-            SetBoardConfiguration();
+           // _ = PieceTest.AllOrientations(squareViewModels);
 
-           // squareViewModels[0][0].FireLaser(Direction.down);
+
         }
 
-        private void SetBoardConfiguration()
-        {
 
-            squareViewModels[3][3].activePiece = new DjedViewModel(Djed.dl);
-            squareViewModels[5][5].activePiece = new PyramidViewModel(Pyramid.tl);
+
+        private void FireLaserPlayer1(object obj)
+        {           
+            FireLaser(squareViewModels, 0, 0, Direction.down);           
         }
 
-        private void CreateSquares()
+        private void FireLaserPlayer2(object obj)
         {
-            for (int i = 0; i < _rows; i++)
+            FireLaser(squareViewModels, 7, 9, Direction.up);
+        }
+
+        public static void FireLaser(GridModel squareViewModels, int i, int j, Direction direction)
+        {
+            GridModel.ClearLaser(squareViewModels);
+
+            while (GridModel.InBounds(i, j) && direction != Direction.kill)
             {
-                squareViewModels.Add(new ObservableCollection<SquareViewModel>());
-
-                for (int j = 0; j < _cols; j++)
+                switch (direction = squareViewModels[i][j].FireLaser(direction))
                 {
-                    squareViewModels[i].Add(new SquareViewModel());
+                    case Direction.up:
+                        i--;
+                        break;
+                    case Direction.down:
+                        i++;
+                        break;
+                    case Direction.left:
+                        j--;
+                        break;
+                    case Direction.right:
+                        j++;
+                        break;
 
+                    default: break;
                 }
             }
         }
-
-        private void resolveLeftLaser(int x, int y)
-        {
-            //while fileLaser != kill
-
-
-        }
-
-        public void ExecuteLeftClick(object obj)
-        {
-            squareViewModels[0][0].FireLaser(Direction.down);
-        }
-        public void ExecuteRightClick(object obj)
-        {
-            squareViewModels[7][9].FireLaser(Direction.up);
-        }
-
-
 
     }
 }
