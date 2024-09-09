@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace Khet.Wpf.Tests
 {
-    public static class PieceTest
+    public static class PyramidTest
     {
 
         public static async Task AllOrientations(GridModel squareViewModels)
@@ -54,6 +54,8 @@ namespace Khet.Wpf.Tests
             GridModel.ClearLaser(squareViewModels);
 
         }
+
+
 
         
     }
