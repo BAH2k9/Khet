@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Khet.Wpf.Views"
              mc:Ignorable="d" 
-             xmlns:vm="clr-namespace:Khet.Wpf.ViewModels"
-             Height="100" Width="100">
+             xmlns:vm="clr-namespace:Khet.Wpf.ViewModels" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             d:DesignHeight="100" d:DesignWidth="100"
+             Height="auto" Width="auto">
     <Grid Background="Transparent">
 
         <Grid>
@@ -18,8 +20,8 @@
         </Grid>
 
         <Grid>
-            <Rectangle Stroke="Black" StrokeThickness="2" Width="100" Height="100"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Rectangle Stroke="{Binding selectColor}" StrokeThickness="2"
+                   HorizontalAlignment="stretch" VerticalAlignment="stretch" />
         </Grid>
 
     </Grid>
