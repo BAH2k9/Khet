@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace Khet.Wpf.ViewModels
 {
@@ -20,11 +23,21 @@ namespace Khet.Wpf.ViewModels
         private ViewModelBase _activeLaser;
         public ViewModelBase activeLaser { get => _activeLaser; set => SetProperty(ref _activeLaser, value); }
 
+        private Brush _selectColor;
+        public Brush selectColor { get => _selectColor; set => SetProperty(ref _selectColor, value); }
+        public RelayCommand<DragEventArgs> StartDragCommand { get; }
+
         public SquareViewModel()
         {
+            StartDragCommand = new RelayCommand<DragEventArgs>(StartDrag);
 
+            selectColor = Brushes.Black;
         }
 
+        private void StartDrag(DragEventArgs e)
+        {
+            DragDrop.DoDragDrop(Application.Current.MainWindow, this, DragDropEffects.Move);
+        }
 
         public Direction FireLaser(Direction firingDirection)
         {
@@ -51,9 +64,17 @@ namespace Khet.Wpf.ViewModels
             return firingDirection;
         }
 
-        public void DisplayLaser()
+        public void Select(bool selected)
         {
-
+            if (selected)
+            {
+                selectColor = Brushes.LawnGreen;
+            }
+            else
+            {
+                selectColor = Brushes.Black;
+            }
+            
         }
 
         private Direction getInDirection(Direction firingDirection)

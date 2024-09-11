@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:Khet.Wpf.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -38,8 +39,34 @@
         </Grid.ColumnDefinitions>
 
 
-        <ContentControl Grid.Row="0" Grid.Column="0" Content="{Binding squareViewModels[0][0]}"/>
-        <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding squareViewModels[0][1]}"/>
+        <ContentControl Grid.Row="0" Grid.Column="0" Content="{Binding squareViewModels[0][0]}" AllowDrop="True">
+            <i:Interaction.Triggers>
+                
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding SelectClick}" CommandParameter="{Binding squareViewModels[0][0]}"/>
+                </i:EventTrigger>
+
+                <i:EventTrigger EventName="MouseMove">
+                    <i:InvokeCommandAction Command="{Binding HoverCommand}" CommandParameter="{Binding squareViewModels[0][0]}"/>
+                </i:EventTrigger>
+                
+            </i:Interaction.Triggers>
+        </ContentControl>
+
+
+        <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding squareViewModels[0][1]}" AllowDrop="True">
+            <i:Interaction.Triggers>
+
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding SelectClick}" CommandParameter="{Binding squareViewModels[0][1]}"/>
+                </i:EventTrigger>
+
+                <i:EventTrigger EventName="MouseMove">
+                    <i:InvokeCommandAction Command="{Binding HoverCommand}" CommandParameter="{Binding squareViewModels[0][1]}"/>
+                </i:EventTrigger>
+
+            </i:Interaction.Triggers>
+        </ContentControl>
         <ContentControl Grid.Row="0" Grid.Column="2" Content="{Binding squareViewModels[0][2]}"/>
         <ContentControl Grid.Row="0" Grid.Column="3" Content="{Binding squareViewModels[0][3]}"/>
         <ContentControl Grid.Row="0" Grid.Column="4" Content="{Binding squareViewModels[0][4]}"/>
