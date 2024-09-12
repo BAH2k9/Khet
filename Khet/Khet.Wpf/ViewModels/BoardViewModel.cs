@@ -73,39 +73,15 @@ namespace Khet.Wpf.ViewModels
                 squareViewModel.Select(true);
             }
 
-            if(this.SelectedSquare != squareViewModel)
+            if(this.SelectedSquare != squareViewModel )
             {
                 this.HoverSquare.activePiece = this.SelectedSquare.activePiece;
                 this.SelectedSquare.activePiece = null;
                 this.SelectedSquare.Select(false);
-            }
-
-            
+            }           
 
         }
 
-        //private void StartDrag(SquareViewModel e)
-        //{
-        //    DragDrop.DoDragDrop(Application.Current.MainWindow, this, DragDropEffects.Move);
-        //}
-
-        //private void Drop(SquareViewModel e)
-        //{
-        //    if (e != null)
-        //    {
-        //        //if (e.Data.GetDataPresent(typeof(SquareViewModel)))
-        //        //{
-        //        //    var draggedSquare = e.Data.GetData(typeof(SquareViewModel)) as SquareViewModel;
-
-        //        //    //if (draggedSquare != null)
-        //        //    //{
-        //        //    //    this.Piece = draggedSquare.Piece?.Clone(); // Clone the piece
-        //        //    //    draggedSquare.Piece = null; // Clear the original piece
-        //        //    //}
-        //        //}
-        //    }
-            
-        //}
 
         private void FireLaserPlayer1(object obj)
         {           
