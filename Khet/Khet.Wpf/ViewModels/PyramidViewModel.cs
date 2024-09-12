@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
+using System.Numerics;
 
 namespace Khet.Wpf.ViewModels
 {
@@ -17,10 +18,16 @@ namespace Khet.Wpf.ViewModels
         private string _rotationAngle = "0";
         public string rotationAngle { get => _rotationAngle; set => SetProperty(ref _rotationAngle, value); }
 
+        public int player { get; set; }
+
+        private Brush _playerColor;
+        public Brush playerColor { get => _playerColor; set => SetProperty(ref _playerColor, value); }
+
         public Pyramid orientation { get; set; }
 
-        public PyramidViewModel(Pyramid orientation)
+        public PyramidViewModel(Pyramid orientation, int player = 1)
         {
+            this.player = player;
             this.orientation = orientation;
             SetDisplay();
         }
@@ -42,6 +49,15 @@ namespace Khet.Wpf.ViewModels
                 case Pyramid.br:
                     rotationAngle = "180";
                     break;
+            }
+
+            if (player == 1)
+            {
+                playerColor = Brushes.Silver;
+            }
+            else if (player == 2)
+            {
+                playerColor = Brushes.Red;
             }
         }
 

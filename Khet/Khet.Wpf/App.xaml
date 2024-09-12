@@ -31,5 +31,13 @@
             <v:BoardView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type vm:ObeliskViewModel}">
+            <v:ObeliskView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:PharaohViewModel}">
+            <v:PharaohView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

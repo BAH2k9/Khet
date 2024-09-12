@@ -16,8 +16,7 @@ namespace Khet.Wpf.ViewModels
 {
     public class BoardViewModel
     {
-        public ICommand Player1FireCommand { get; }
-        public ICommand Player2FireCommand { get; }
+
 
         //public ICommand StartDragCommand { get; }
         //public ICommand DropCommand { get; }
@@ -25,8 +24,11 @@ namespace Khet.Wpf.ViewModels
         public ICommand SelectClick { get; }
         public ICommand HoverCommand { get; }
 
-        public SquareViewModel SelectedSquare { get; set; }
+        public SquareViewModel SelectedSquare { get; set; } = new SquareViewModel() { Selected = false };
         public SquareViewModel HoverSquare { get; set; }
+
+        public bool squareSelected { get; set; } = false;
+
         public ICommand DropCommand { get; }
 
 
@@ -43,8 +45,7 @@ namespace Khet.Wpf.ViewModels
             squareViewModels = GridModel.Create();
             //GridModel.SetBoardConfiguration(squareViewModels);
 
-            // Player1FireCommand = new RelayCommand(FireLaserPlayer1);
-            // Player2FireCommand = new RelayCommand(FireLaserPlayer2);
+
             //StartDragCommand = new RelayCommand<SquareViewModel>(StartDrag);
             //DropCommand = new RelayCommand<SquareViewModel>(Drop);
 
@@ -67,59 +68,41 @@ namespace Khet.Wpf.ViewModels
 
         private void ExecuteSelectClick(SquareViewModel squareViewModel)
         {
-            if (squareViewModel.activePiece != null)
+            // TODO: Logic needs to be sorted out here
+            // Set the selected square on first pass
+            if (this.SelectedSquare?.activePiece == null)
             {
                 this.SelectedSquare = squareViewModel;
-                squareViewModel.Select(true);
             }
 
-            if(this.SelectedSquare != squareViewModel )
+            // Only allow selecting on squares with active piece
+            if (squareViewModel.activePiece != null)
             {
-                this.HoverSquare.activePiece = this.SelectedSquare.activePiece;
-                this.SelectedSquare.activePiece = null;
-                this.SelectedSquare.Select(false);
-            }           
-
-        }
-
-
-        private void FireLaserPlayer1(object obj)
-        {           
-            FireLaser(squareViewModels, 0, 0, Direction.down);           
-        }
-
-        private void FireLaserPlayer2(object obj)
-        {
-            FireLaser(squareViewModels, 7, 9, Direction.up);
-        }
-
-        
-
-        public static void FireLaser(GridModel squareViewModels, int i, int j, Direction direction)
-        {
-            GridModel.ClearLaser(squareViewModels);
-
-            while (GridModel.InBounds(i, j) && direction != Direction.kill)
-            {
-                switch (direction = squareViewModels[i][j].FireLaser(direction))
+                // Allow highlighting and unhighlighting of selected square
+                if (this.SelectedSquare.Selected)
                 {
-                    case Direction.up:
-                        i--;
-                        break;
-                    case Direction.down:
-                        i++;
-                        break;
-                    case Direction.left:
-                        j--;
-                        break;
-                    case Direction.right:
-                        j++;
-                        break;
-
-                    default: break;
+                    squareViewModel.Select(false);
+                    this.SelectedSquare = null;
+                }
+                else
+                {
+                    squareViewModel.Select(true);
                 }
             }
+
+
+            if (this.SelectedSquare != squareViewModel && this.SelectedSquare != null)
+            {
+                squareViewModel.activePiece = this.SelectedSquare.activePiece;
+                this.SelectedSquare.Select(false);
+                this.SelectedSquare.activePiece = null;
+            }
+
+
         }
+
+
+        
 
     }
 }

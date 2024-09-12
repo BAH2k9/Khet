@@ -26,7 +26,7 @@ namespace Khet.Wpf.Tests
             await Task.Delay(longd);
 
             // Fire laser 
-            BoardViewModel.FireLaser(squareViewModels, 0, 4, Direction.down);
+            MainViewModel.FireLaser(squareViewModels, 0, 4, Direction.down);
             await Task.Delay(longd);
             GridModel.ClearLaser(squareViewModels);
 
@@ -35,21 +35,21 @@ namespace Khet.Wpf.Tests
             await Task.Delay(shortd);
 
             // Fire Laser
-            BoardViewModel.FireLaser(squareViewModels, 4, 0, Direction.right);
+            MainViewModel.FireLaser(squareViewModels, 4, 0, Direction.right);
             await Task.Delay(longd);
             GridModel.ClearLaser(squareViewModels);
 
             squareViewModels[4][4].activePiece = new PyramidViewModel(orientation);
             await Task.Delay(shortd);
 
-            BoardViewModel.FireLaser(squareViewModels, 7, 4, Direction.up);
+            MainViewModel.FireLaser(squareViewModels, 7, 4, Direction.up);
             await Task.Delay(longd);
             GridModel.ClearLaser(squareViewModels);
 
             squareViewModels[4][4].activePiece = new PyramidViewModel(orientation);
             await Task.Delay(shortd);
 
-            BoardViewModel.FireLaser(squareViewModels, 4, 9, Direction.left);
+            MainViewModel.FireLaser(squareViewModels, 4, 9, Direction.left);
             await Task.Delay(longd);
             GridModel.ClearLaser(squareViewModels);
 
