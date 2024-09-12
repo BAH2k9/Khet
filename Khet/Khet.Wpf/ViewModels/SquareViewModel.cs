@@ -25,6 +25,8 @@ namespace Khet.Wpf.ViewModels
 
         private Brush _selectColor;
         public Brush selectColor { get => _selectColor; set => SetProperty(ref _selectColor, value); }
+
+        public bool Selected { get; set; }
         public RelayCommand<DragEventArgs> StartDragCommand { get; }
 
         public SquareViewModel()
@@ -68,10 +70,12 @@ namespace Khet.Wpf.ViewModels
         {
             if (selected)
             {
+                this.Selected = true;
                 selectColor = Brushes.LawnGreen;
             }
             else
             {
+                this.Selected = false;
                 selectColor = Brushes.Black;
             }
             
