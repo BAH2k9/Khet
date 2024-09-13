@@ -14,6 +14,7 @@ namespace Khet.Wpf.ViewModels
     {
         private Brush _playerColor;
         public Brush playerColor { get => _playerColor; set => SetProperty(ref _playerColor, value); }
+
         public PharaohViewModel(int player)
         {
             if (player == 1)

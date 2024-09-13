@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
 using System.Numerics;
+using System.Collections.ObjectModel;
 
 namespace Khet.Wpf.ViewModels
 {
@@ -18,6 +19,10 @@ namespace Khet.Wpf.ViewModels
         private string _rotationAngle = "0";
         public string rotationAngle { get => _rotationAngle; set => SetProperty(ref _rotationAngle, value); }
 
+        private List<double> _rotationPoint = [0, 0];
+        public List<double> rotationPoint { get => _rotationPoint; set => SetProperty(ref _rotationPoint, value); }
+
+
         public int player { get; set; }
 
         private Brush _playerColor;
@@ -25,31 +30,36 @@ namespace Khet.Wpf.ViewModels
 
         public Pyramid orientation { get; set; }
 
+        private double _controlWidth;
+        public double controlWidth
+        {
+            get { return _controlWidth; }
+            set { _controlWidth = value; SetOrientation(); }
+        }
+
+        private double _controlHeight { get; set; }
+        public double controlHeight
+        {
+            get { return _controlHeight; }
+            set { _controlHeight = value;  SetOrientation(); }
+        }
+
+        private PointCollection _points;
+        public PointCollection points { get => _points; set => SetProperty(ref _points, value); }
+
+
+
         public PyramidViewModel(Pyramid orientation, int player = 1)
         {
             this.player = player;
             this.orientation = orientation;
-            SetDisplay();
+
+            SetColor();
+            SetOrientation();
         }
 
-        private void SetDisplay()
+        private void SetColor()
         {
-            // Set orientation of piece
-            switch(this.orientation)
-            {
-                case Pyramid.tl:
-                    rotationAngle = "0"; 
-                    break;
-                case Pyramid.tr:
-                    rotationAngle = "90";
-                    break;
-                case Pyramid.bl:
-                    rotationAngle = "270";
-                    break;
-                case Pyramid.br:
-                    rotationAngle = "180";
-                    break;
-            }
 
             if (player == 1)
             {
@@ -58,8 +68,50 @@ namespace Khet.Wpf.ViewModels
             else if (player == 2)
             {
                 playerColor = Brushes.Red;
+            }          
+
+        }
+
+        private void SetOrientation()
+        {
+            switch (this.orientation)
+            {
+                case Pyramid.tl:
+                    points = new PointCollection
+                    {
+                        new Point(0,0),
+                        new Point(controlWidth, 0),
+                        new Point(0, controlHeight)
+                    };
+                    break;
+                case Pyramid.tr:
+                    points = new PointCollection
+                    {
+                         new Point(0, 0),
+                         new Point(controlWidth, 0),
+                         new Point(controlWidth, controlHeight)
+                    };
+                    break;
+                case Pyramid.bl:
+                    points = new PointCollection
+                    {
+                         new Point(0, 0),
+                         new Point(0, controlHeight),
+                         new Point(controlWidth, controlHeight)
+                    };
+                    break;
+                case Pyramid.br:
+
+                    points = new PointCollection
+                    {
+                         new Point(controlWidth, 0),
+                         new Point(0, controlHeight),
+                         new Point(controlWidth, controlHeight)
+                    };
+                    break;
             }
         }
+
 
         public Direction ResolveLaserDirection(Direction inDirection)
         {
