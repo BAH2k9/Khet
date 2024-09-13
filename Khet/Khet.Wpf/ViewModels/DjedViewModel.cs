@@ -1,6 +1,7 @@
 ﻿using Khet.Wpf.Core;
 using Khet.Wpf.Enums;
 using Khet.Wpf.Interfaces;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 
 namespace Khet.Wpf.ViewModels
@@ -10,30 +11,38 @@ namespace Khet.Wpf.ViewModels
         public Djed orientation {  get; set; }
         public int player { get; set; }
 
-        private string _rotationAngle = "0";
-        public string rotationAngle { get => _rotationAngle; set => SetProperty(ref _rotationAngle, value); }
-
         private Brush _playerColor;
         public Brush playerColor { get => _playerColor; set => SetProperty(ref _playerColor, value); }
+
+        private double _controlWidth;
+        public double controlWidth 
+        {
+            get { return _controlWidth; }
+            set { _controlWidth = value; Display(); }
+        }
+        private double _controlHeight { get; set; }
+        public double controlHeight
+        {
+            get { return _controlHeight; }
+            set { _controlHeight = value; Display(); }
+        }
+
+        public ObservableCollection<double> point1 { get; set; } = [0,0];
+        public ObservableCollection<double> point2 { get; set; } = [0,0];
+
+
 
         public DjedViewModel(Djed orientation, int player = 1)
         {
             this.player = player;
             this.orientation = orientation;
+
+            SetColor();
             Display();
         }
 
-        private void Display()
+        private void SetColor()
         {
-            if (this.orientation == Djed.dl)
-            {
-                rotationAngle = "0";
-            }
-            else
-            {
-                rotationAngle = "90";
-            }
-
             if (player == 1)
             {
                 playerColor = Brushes.Silver;
@@ -42,9 +51,28 @@ namespace Khet.Wpf.ViewModels
             {
                 playerColor = Brushes.Red;
             }
+        }
 
+        private void Display()
+        {
+            if (this.orientation == Djed.dl)
+            {
+                point1[0] = 0;
+                point1[1] = 0;
+                point2[0] = controlWidth;
+                point2[1] = controlHeight;
+            }
+            else
+            {
+                point1[0] = controlWidth;
+                point1[1] = 0;
+                point2[0] = 0;
+                point2[1] = controlHeight;
+            }          
 
         }
+
+        
 
         public Direction ResolveLaserDirection(Direction inDirection)
         {

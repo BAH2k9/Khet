@@ -4,14 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Khet.Wpf.Views"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100">
+
+    <i:Interaction.Triggers>
+
+        <i:EventTrigger EventName="Loaded">
+            <i:ChangePropertyAction TargetObject="{Binding}"
+                        PropertyName="controlWidth"
+                        Value="{Binding ActualWidth,    
+                                RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            <i:ChangePropertyAction TargetObject="{Binding}"
+                        PropertyName="controlHeight"
+                        Value="{Binding ActualHeight,
+                                RelativeSource={RelativeSource AncestorType=UserControl}}" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="SizeChanged">
+            <i:ChangePropertyAction TargetObject="{Binding DataContext, 
+                                                   RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            PropertyName="controlWidth"
+                            Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            <i:ChangePropertyAction TargetObject="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            PropertyName="controlHeight"
+                            Value="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid>
-        <Polygon Points="0,0 100,0 0,100" Stroke="Black" Fill="{Binding playerColor}" StrokeThickness="2" >
+        <Polygon Points="{Binding points}" 
+                 Stroke="Black" 
+                 Fill="{Binding playerColor}" 
+                 StrokeThickness="2" >
             
-            <Polygon.RenderTransform>
-                <RotateTransform Angle="{Binding rotationAngle}" CenterX="50" CenterY="50" />
-            </Polygon.RenderTransform>
+            <!--<Polygon.RenderTransform>
+                <RotateTransform Angle="{Binding rotationAngle}" 
+                                 CenterX="{Binding rotationPoint[0]}" 
+                                 CenterY="{Binding rotationPoint[1]}" />
+            </Polygon.RenderTransform>-->
                 
         </Polygon>
     </Grid>

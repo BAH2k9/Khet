@@ -43,6 +43,8 @@ namespace Khet.Wpf.ViewModels
         {
 
             squareViewModels = GridModel.Create();
+            squareViewModels[5][5].activePiece = new PyramidViewModel(Pyramid.tl);
+            squareViewModels[1][5].activePiece = new DjedViewModel(Djed.dl);
             //GridModel.SetBoardConfiguration(squareViewModels);
 
 

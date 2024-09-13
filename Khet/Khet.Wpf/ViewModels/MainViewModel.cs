@@ -43,9 +43,6 @@ namespace Khet.Wpf.ViewModels
             GridModel.ClearLaser(boardViewModel.squareViewModels);
         }
 
-
-
-
         public static void FireLaser(GridModel squareViewModels, int i, int j, Direction direction)
         {
             GridModel.ClearLaser(squareViewModels);

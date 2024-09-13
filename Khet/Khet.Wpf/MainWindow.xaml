@@ -28,7 +28,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding boardViewModel}" />
+        <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding boardViewModel}" >
+            <!--<ContentControl.RenderTransform>
+                <RotateTransform Angle="180" CenterX="504" CenterY="410"/>
+            </ContentControl.RenderTransform>-->
+        </ContentControl>
 
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0 0 0 0">
             <Button Content="Djed Test" Command="{Binding boardViewModel.DjedTestCommand}" Width="200" Margin="30 0 0 0"/>

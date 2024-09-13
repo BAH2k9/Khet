@@ -27,7 +27,7 @@ namespace Khet.Wpf.Models
 
         public static GridModel SetBoardConfiguration(GridModel squareViewModels)
         {
-
+            // Standard Configuration
             squareViewModels[3][0].activePiece = new PyramidViewModel(Pyramid.bl,1);
             squareViewModels[4][0].activePiece = new PyramidViewModel(Pyramid.tl, 1);
 
