@@ -26,6 +26,9 @@ namespace Khet.Wpf.ViewModels
         private Brush _selectColor;
         public Brush selectColor { get => _selectColor; set => SetProperty(ref _selectColor, value); }
 
+        private Brush _background;
+        public Brush Background { get => _background; set => SetProperty(ref _background, value); }
+
         public bool Selected { get; set; }
         public RelayCommand<DragEventArgs> StartDragCommand { get; }
 
@@ -34,6 +37,7 @@ namespace Khet.Wpf.ViewModels
             StartDragCommand = new RelayCommand<DragEventArgs>(StartDrag);
 
             selectColor = Brushes.Black;
+            Background = Brushes.Transparent;
         }
 
         private void StartDrag(DragEventArgs e)
@@ -109,6 +113,20 @@ namespace Khet.Wpf.ViewModels
         public void ClearPiece()
         {
             activePiece = null;
+        }
+
+        public void SetSquareColor(int player)
+        {
+            if (player == 1)
+            {
+                this.Background = Brushes.LightGray;
+            }
+            else if (player == 2)
+            {
+                this.Background = Brushes.IndianRed;
+
+            }
+
         }
     }
 }

@@ -16,56 +16,33 @@ namespace Khet.Wpf.ViewModels
 {
     public class BoardViewModel
     {
-
-
-        //public ICommand StartDragCommand { get; }
-        //public ICommand DropCommand { get; }
-
         public ICommand SelectClick { get; }
-        public ICommand HoverCommand { get; }
-
-        public SquareViewModel SelectedSquare { get; set; } = new SquareViewModel() { Selected = false };
-        public SquareViewModel HoverSquare { get; set; }
-
-        public bool squareSelected { get; set; } = false;
-
-        public ICommand DropCommand { get; }
-
-
         public ICommand PyramidTestCommand { get; }
         public ICommand DjedTestCommand { get; }
         public ICommand ClearGridCommand { get; }
         public ICommand SetGridCommand { get; }
-
+        public ICommand LeftKeyCommand { get; }
+        public ICommand RightKeyCommand { get; }
+        public SquareViewModel SelectedSquare { get; set; } = new SquareViewModel() { Selected = false };
         public GridModel squareViewModels { get; set; } 
+
 
         public BoardViewModel()
         {
-
-            squareViewModels = GridModel.Create();
-            squareViewModels[5][5].activePiece = new PyramidViewModel(Pyramid.tl);
-            squareViewModels[1][5].activePiece = new DjedViewModel(Djed.dl);
-            //GridModel.SetBoardConfiguration(squareViewModels);
-
-
-            //StartDragCommand = new RelayCommand<SquareViewModel>(StartDrag);
-            //DropCommand = new RelayCommand<SquareViewModel>(Drop);
-
             SelectClick = new RelayCommand<SquareViewModel>(ExecuteSelectClick);
-            HoverCommand = new RelayCommand<SquareViewModel>(Hover);
-
             PyramidTestCommand = new RelayCommandAsync(param => PyramidTest.AllOrientations(squareViewModels));
             DjedTestCommand = new RelayCommandAsync(param => DjedTest.AllOrientations(squareViewModels));
             ClearGridCommand = new RelayCommand<object>(param => GridModel.ClearGrid(squareViewModels));
             SetGridCommand = new RelayCommand<object>(param => GridModel.SetBoardConfiguration(squareViewModels));
+            RightKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Right));
+            LeftKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Left));
+
+            squareViewModels = GridModel.Create();
+
+            GridModel.SetBoardConfiguration(squareViewModels);
+            GridModel.SetSquareColor(squareViewModels);
 
 
-        }
-
-        private void Hover(SquareViewModel squareViewModel)
-        {
-           
-            this.HoverSquare = squareViewModel;
         }
 
         private void ExecuteSelectClick(SquareViewModel squareViewModel)
@@ -102,9 +79,12 @@ namespace Khet.Wpf.ViewModels
 
 
         }
+        private void RotatePiece(Rotate rotation)
+        {
+            this.SelectedSquare.activePiece?.RotatePiece(rotation);
+            
+        }
 
-
-        
 
     }
 }

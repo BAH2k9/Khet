@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Khet.Wpf.Enums
 {
-    public enum Pyramid
+    public enum Rotate
     {
-        tl = 0,
-        tr = 1,
-        br = 2,
-        bl = 3,
+        Left,
+        Right,
     }
 }

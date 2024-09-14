@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Khet.Wpf"
         xmlns:viewmodels="clr-namespace:Khet.Wpf.ViewModels" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="1025" Width="1260">
+        Title="MainWindow" Height="1025" Width="1260"
+        FocusManager.FocusedElement="{Binding ElementName=BoardView}">
     <!--d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"-->
 
 
@@ -28,7 +29,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding boardViewModel}" >
+        <ContentControl Grid.Row="1" Grid.Column="1"
+                        x:Name="BoardView"
+                        Content="{Binding boardViewModel}" >
             <!--<ContentControl.RenderTransform>
                 <RotateTransform Angle="180" CenterX="504" CenterY="410"/>
             </ContentControl.RenderTransform>-->

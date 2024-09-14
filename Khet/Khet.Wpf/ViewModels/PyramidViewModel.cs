@@ -10,25 +10,24 @@ using System.Windows.Media;
 using System.Windows;
 using System.Numerics;
 using System.Collections.ObjectModel;
+using Khet.Wpf.AbstractClasses;
 
 namespace Khet.Wpf.ViewModels
 {
-    public class PyramidViewModel : ViewModelBase, IPiece
+    public class PyramidViewModel :  Piece
     {
 
-        private string _rotationAngle = "0";
-        public string rotationAngle { get => _rotationAngle; set => SetProperty(ref _rotationAngle, value); }
-
-        private List<double> _rotationPoint = [0, 0];
-        public List<double> rotationPoint { get => _rotationPoint; set => SetProperty(ref _rotationPoint, value); }
-
-
-        public int player { get; set; }
-
-        private Brush _playerColor;
-        public Brush playerColor { get => _playerColor; set => SetProperty(ref _playerColor, value); }
-
-        public Pyramid orientation { get; set; }
+        public new Brush playerColor
+        {
+            get => base.playerColor;
+            set => SetProperty(ref base.playerColor, value);
+        }
+        private Pyramid _orientation;
+        public Pyramid orientation
+        {
+            get { return _orientation; }
+            set { _orientation = value; SetOrientation(); }
+        }
 
         private double _controlWidth;
         public double controlWidth
@@ -51,26 +50,12 @@ namespace Khet.Wpf.ViewModels
 
         public PyramidViewModel(Pyramid orientation, int player = 1)
         {
-            this.player = player;
             this.orientation = orientation;
 
-            SetColor();
+            SetColor(player);
             SetOrientation();
         }
 
-        private void SetColor()
-        {
-
-            if (player == 1)
-            {
-                playerColor = Brushes.Silver;
-            }
-            else if (player == 2)
-            {
-                playerColor = Brushes.Red;
-            }          
-
-        }
 
         private void SetOrientation()
         {
@@ -113,13 +98,45 @@ namespace Khet.Wpf.ViewModels
         }
 
 
-        public Direction ResolveLaserDirection(Direction inDirection)
+        public override Direction ResolveLaserDirection(Direction inDirection)
         {
 
             var input = Tuple.Create(inDirection, this.orientation);
             var outDirection = Mappings.PyramidDirection[input];
             return outDirection;
            
+        }
+
+        public override void RotatePiece(Rotate rotation)
+        {
+            var maxEnumValue = (Pyramid)Enum.GetValues(typeof(Pyramid)).Length-1;
+
+            switch (rotation)
+            {
+                case Rotate.Left:
+                    if(orientation == 0)
+                    {
+                        orientation = maxEnumValue;
+                    }
+                    else
+                    {
+                        orientation--;
+                    }
+                    
+                    break;
+                case Rotate.Right:
+                    if (orientation == maxEnumValue)
+                    {
+                        orientation = 0;
+                    }
+                    else
+                    {
+                        orientation++;
+                    }
+                    break;
+
+            }
+                      
         }
     }
 }
