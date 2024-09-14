@@ -9,7 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="100" d:DesignWidth="100"
              Height="auto" Width="auto">
-    <Grid Background="Transparent">
+    <Grid Background="{Binding Background}">
 
         <Grid>
             <ContentControl Content="{Binding activeLaser}"/>

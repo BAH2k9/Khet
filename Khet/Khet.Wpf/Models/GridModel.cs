@@ -65,6 +65,20 @@ namespace Khet.Wpf.Models
             return squareViewModels;
         }
 
+        public static void SetSquareColor(GridModel squareViewModels)
+        {
+
+            foreach(var row in squareViewModels)
+            {
+                row[0].SetSquareColor(1);
+                row[9].SetSquareColor(2);
+            }
+            squareViewModels[0][1].SetSquareColor(2);
+            squareViewModels[7][1].SetSquareColor(2);
+            squareViewModels[0][8].SetSquareColor(1);
+            squareViewModels[7][8].SetSquareColor(1);
+        }
+
         public static bool InBounds(int i, int j)
         {
             if(i >= 0 && j >= 0 && i< rows && j < cols )
