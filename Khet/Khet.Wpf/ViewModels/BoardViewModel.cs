@@ -1,5 +1,6 @@
 ﻿using Khet.Wpf.Core;
 using Khet.Wpf.Enums;
+using Khet.Wpf.Exceptions;
 using Khet.Wpf.Models;
 using Khet.Wpf.Tests;
 using System;
@@ -14,7 +15,7 @@ using System.Windows.Input;
 
 namespace Khet.Wpf.ViewModels
 {
-    public class BoardViewModel
+    public class BoardViewModel : ViewModelBase
     {
         public ICommand SelectClick { get; }
         public ICommand PyramidTestCommand { get; }
@@ -24,7 +25,19 @@ namespace Khet.Wpf.ViewModels
         public ICommand LeftKeyCommand { get; }
         public ICommand RightKeyCommand { get; }
         public SquareViewModel SelectedSquare { get; set; } = new SquareViewModel() { Selected = false };
-        public GridModel squareViewModels { get; set; } 
+        public GridModel squareViewModels { get; set; }
+
+        private string _warningMessage;
+
+        public string WarningMessage
+        {
+            get => _warningMessage;
+            set
+            {
+                _warningMessage = value;
+                OnPropertyChanged(nameof(WarningMessage));
+            }
+        }
 
 
         public BoardViewModel()
@@ -81,7 +94,15 @@ namespace Khet.Wpf.ViewModels
         }
         private void RotatePiece(Rotate rotation)
         {
-            this.SelectedSquare.activePiece?.RotatePiece(rotation);
+            try
+            {
+                this.SelectedSquare.activePiece?.RotatePiece(rotation);
+                WarningMessage = "";
+            }
+            catch(UserExceptions ex) 
+            {
+                WarningMessage = ex.Message;
+            }
             
         }
 

@@ -8,7 +8,7 @@ namespace Khet.Wpf.Interfaces
         Direction ResolveLaserDirection(Direction direction);
 
         public void RotatePiece(Rotate rotation);
-      
+
 
 
     }
