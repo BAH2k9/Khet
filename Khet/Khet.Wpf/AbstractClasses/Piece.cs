@@ -1,5 +1,6 @@
 ﻿using Khet.Wpf.Core;
 using Khet.Wpf.Enums;
+using Khet.Wpf.Exceptions;
 using Khet.Wpf.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Khet.Wpf.AbstractClasses
 
         virtual public void RotatePiece(Rotate rotation)
         {
-            throw new InvalidOperationException("Piece cannot be rotated!");
+            throw new PieceRotationException("Piece cannot be rotated!");
         }
 
         public void SetColor(int player)

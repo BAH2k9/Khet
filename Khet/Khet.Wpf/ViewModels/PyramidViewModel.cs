@@ -110,7 +110,7 @@ namespace Khet.Wpf.ViewModels
         public override void RotatePiece(Rotate rotation)
         {
             var maxEnumValue = (Pyramid)Enum.GetValues(typeof(Pyramid)).Length-1;
-
+    
             switch (rotation)
             {
                 case Rotate.Left:
