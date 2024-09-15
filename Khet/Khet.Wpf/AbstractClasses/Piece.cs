@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
@@ -17,7 +18,26 @@ namespace Khet.Wpf.AbstractClasses
     {
         protected Brush playerColor = Brushes.Silver;
 
-        virtual public void MovePiece(SquareViewModel previousSquare, SquareViewModel nextSquare)
+        virtual public void ValidatePieceCanBeMoved(SquareViewModel previousSquare, SquareViewModel nextSquare)
+        {
+            if (nextSquare.activePiece != null) throw new PieceMoveException("Piece cannot be moved there!");
+        }
+
+        public void ValidateSquareOneAway(SquareViewModel previousSquare, SquareViewModel nextSquare)
+        {
+            var x1 = previousSquare.positionX;
+            var x2 = nextSquare.positionX;
+            var y1 = previousSquare.positionY;
+            var y2 = nextSquare.positionY;
+
+            if (Math.Abs(x1 - x2) > 1 || Math.Abs(y1 - y2) > 1)
+            {
+                throw new PieceMoveException("Piece cannot be moved there!");
+            }
+
+        }
+
+        public void MovePiece(SquareViewModel previousSquare, SquareViewModel nextSquare)
         {
 
             var x1 = previousSquare.positionX;
@@ -25,17 +45,12 @@ namespace Khet.Wpf.AbstractClasses
             var y1 = previousSquare.positionY;
             var y2 = nextSquare.positionY;
 
-            if(nextSquare.activePiece != null)
-            {
-                throw new PieceMoveException("Piece cannot be moved there!");
+            ValidateSquareOneAway(previousSquare, nextSquare);
+            ValidatePieceCanBeMoved(previousSquare, nextSquare);
 
-            } else if (Math.Abs(x1 - x2) <= 1 && Math.Abs(y1 - y2) <= 1)
-            {
-                var temp = previousSquare.activePiece;
-                previousSquare.activePiece = null;
-                nextSquare.activePiece = temp;
-            }
-            else throw new PieceMoveException("Piece cannot be moved there!");
+            var temp = previousSquare.activePiece;
+            previousSquare.activePiece = nextSquare.activePiece;
+            nextSquare.activePiece = temp;
 
         }
 

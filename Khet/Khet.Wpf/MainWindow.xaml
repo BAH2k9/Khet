@@ -33,7 +33,7 @@
                         x:Name="BoardView"
                         Content="{Binding boardViewModel}" >
             <!--<ContentControl.RenderTransform>
-                <RotateTransform Angle="180" CenterX="504" CenterY="410"/>
+                <RotateTransform Angle="180" CenterX="400" CenterY="400"/>
             </ContentControl.RenderTransform>-->
         </ContentControl>
 
