@@ -11,6 +11,7 @@ using System.Windows;
 using System.Numerics;
 using System.Collections.ObjectModel;
 using Khet.Wpf.AbstractClasses;
+using Khet.Wpf.Models;
 
 namespace Khet.Wpf.ViewModels
 {

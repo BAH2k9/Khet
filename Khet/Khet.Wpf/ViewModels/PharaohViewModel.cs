@@ -2,6 +2,7 @@
 using Khet.Wpf.Core;
 using Khet.Wpf.Enums;
 using Khet.Wpf.Interfaces;
+using Khet.Wpf.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,9 +2,7 @@
 using Khet.Wpf.Core;
 using Khet.Wpf.Enums;
 using Khet.Wpf.Exceptions;
-using Khet.Wpf.Interfaces;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Khet.Wpf.ViewModels
@@ -99,33 +97,12 @@ namespace Khet.Wpf.ViewModels
 
         public override void ValidatePieceCanBeMoved(SquareViewModel previousSquare, SquareViewModel nextSquare)
         {
-            //if(nextSquare.activePiece == null)
-            //{
-            //    return;
-            //}
-            //else if((Type)previousSquare.activePiece == typeof(DjedViewModel) && 
-            //    ((Type)nextSquare.activePiece == typeof(PyramidViewModel) || (Type)nextSquare.activePiece == typeof(ObeliskViewModel)))
-            //{
-            //    var temp = previousSquare.activePiece;
-            //    previousSquare.activePiece = nextSquare.activePiece;
-            //    nextSquare.activePiece = temp;
-            //}
-            //else if(nextSquare.activePiece != null) throw new PieceMoveException("Piece cannot be moved there!");
-
             if (previousSquare.activePiece != null && nextSquare.activePiece != null)
             {
-                if(nextSquare.activePiece is PyramidViewModel || nextSquare.activePiece is ObeliskViewModel)
-                {
-                    
-                }
-                else
-                {
-                    throw new PieceMoveException("Piece cannot be moved there!");
-                }
+                if(!(nextSquare.activePiece is PyramidViewModel || nextSquare.activePiece is ObeliskViewModel))
+                 throw new PieceMoveException("Piece cannot be moved there!");
             }
-
         }
-
     }
 }
 

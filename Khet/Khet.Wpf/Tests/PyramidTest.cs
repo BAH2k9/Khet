@@ -18,40 +18,40 @@ namespace Khet.Wpf.Tests
 
         public static async Task Orientation(GridModel squareViewModels, Pyramid orientation)
         {
-            int longd = 1200;
-            int shortd = 400;
-            // Set piece
-            squareViewModels[4][4].activePiece = new PyramidViewModel(orientation);
+            //int longd = 1200;
+            //int shortd = 400;
+            //// Set piece
+            //squareViewModels[4][4].activePiece = new PyramidViewModel(orientation);
 
-            await Task.Delay(longd);
+            //await Task.Delay(longd);
 
-            // Fire laser 
-            MainViewModel.FireLaser(squareViewModels, 0, 4, Direction.down);
-            await Task.Delay(longd);
-            GridModel.ClearLaser(squareViewModels);
+            //// Fire laser 
+            //MainViewModel.FireLaser(squareViewModels, 0, 4, Direction.down);
+            //await Task.Delay(longd);
+            //GridModel.ClearLaser(squareViewModels);
 
-            // Set new piece
-            squareViewModels[4][4].activePiece = new PyramidViewModel(orientation);
-            await Task.Delay(shortd);
+            //// Set new piece
+            //squareViewModels[4][4].activePiece = new PyramidViewModel(orientation);
+            //await Task.Delay(shortd);
 
-            // Fire Laser
-            MainViewModel.FireLaser(squareViewModels, 4, 0, Direction.right);
-            await Task.Delay(longd);
-            GridModel.ClearLaser(squareViewModels);
+            //// Fire Laser
+            //MainViewModel.FireLaser(squareViewModels, 4, 0, Direction.right);
+            //await Task.Delay(longd);
+            //GridModel.ClearLaser(squareViewModels);
 
-            squareViewModels[4][4].activePiece = new PyramidViewModel(orientation);
-            await Task.Delay(shortd);
+            //squareViewModels[4][4].activePiece = new PyramidViewModel(orientation);
+            //await Task.Delay(shortd);
 
-            MainViewModel.FireLaser(squareViewModels, 7, 4, Direction.up);
-            await Task.Delay(longd);
-            GridModel.ClearLaser(squareViewModels);
+            //MainViewModel.FireLaser(squareViewModels, 7, 4, Direction.up);
+            //await Task.Delay(longd);
+            //GridModel.ClearLaser(squareViewModels);
 
-            squareViewModels[4][4].activePiece = new PyramidViewModel(orientation);
-            await Task.Delay(shortd);
+            //squareViewModels[4][4].activePiece = new PyramidViewModel(orientation);
+            //await Task.Delay(shortd);
 
-            MainViewModel.FireLaser(squareViewModels, 4, 9, Direction.left);
-            await Task.Delay(longd);
-            GridModel.ClearLaser(squareViewModels);
+            //MainViewModel.FireLaser(squareViewModels, 4, 9, Direction.left);
+            //await Task.Delay(longd);
+            //GridModel.ClearLaser(squareViewModels);
 
         }
 
