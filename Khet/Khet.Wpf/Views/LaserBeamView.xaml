@@ -4,23 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Khet.Wpf.Views"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
-             Height="100" Width="100">
+             d:DesignHeight="100" d:DesignWidth="100">
+
+    <i:Interaction.Triggers>
+
+        <i:EventTrigger EventName="Loaded">
+            <i:ChangePropertyAction TargetObject="{Binding}"
+                        PropertyName="controlWidth"
+                        Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            <i:ChangePropertyAction TargetObject="{Binding}"
+                        PropertyName="controlHeight"
+                        Value="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="SizeChanged">
+            <i:ChangePropertyAction TargetObject="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            PropertyName="controlWidth"
+                            Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            <i:ChangePropertyAction TargetObject="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            PropertyName="controlHeight"
+                            Value="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid>
-        <!--<Rectangle Fill="Red" Height="{Binding height[0]}" Width="{Binding width[0]}" HorizontalAlignment="{Binding horizontalAlignment[0]}" VerticalAlignment="{Binding verticalAlignment[0]}"/>
-        <Rectangle Fill="Red" Height="{Binding height[1]}" Width="{Binding width[1]}" HorizontalAlignment="{Binding horizontalAlignment[1]}" VerticalAlignment="{Binding verticalAlignment[1]}"/>-->
 
+        <Rectangle Fill="{Binding fill[0]}" Height="{Binding height[0]}" Width="{Binding width[0]}" VerticalAlignment="Top"/>
+        <Rectangle Fill="{Binding fill[1]}" Height="{Binding height[1]}" Width="{Binding width[1]}" VerticalAlignment="Bottom"/>
+        <Rectangle Fill="{Binding fill[2]}" Height="{Binding height[2]}" Width="{Binding width[2]}" HorizontalAlignment="Left"/>
+        <Rectangle Fill="{Binding fill[3]}" Height="{Binding height[3]}" Width="{Binding width[3]}" HorizontalAlignment="Right"/>
 
-        <Rectangle Fill="Red" Height="50" Width="5" VerticalAlignment="Top">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="{Binding angle[0]}" CenterX="2.5" CenterY="50"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        
-        <Rectangle Fill="Red" Height="50" Width="5" VerticalAlignment="Top">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="{Binding angle[1]}" CenterX="2.5" CenterY="50"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
     </Grid>
 </UserControl>

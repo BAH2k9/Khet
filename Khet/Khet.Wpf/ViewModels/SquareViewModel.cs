@@ -20,8 +20,8 @@ namespace Khet.Wpf.ViewModels
         private IPiece? _activePiece;
         public IPiece? activePiece { get => _activePiece; set => SetProperty(ref _activePiece, value); }
 
-        private ViewModelBase _activeLaser;
-        public ViewModelBase activeLaser { get => _activeLaser; set => SetProperty(ref _activeLaser, value); }
+        private LaserBeamViewModel? _activeLaser;
+        public LaserBeamViewModel? activeLaser { get => _activeLaser; set => SetProperty(ref _activeLaser, value); }
 
         private Brush _selectColor;
         public Brush selectColor { get => _selectColor; set => SetProperty(ref _selectColor, value); }
@@ -50,7 +50,7 @@ namespace Khet.Wpf.ViewModels
             var inDirection = getInDirection(firingDirection);
 
             // Display this sqaures laser
-            activeLaser = new LaserBeamViewModel(inDirection, activePiece);
+            activeLaser = new LaserBeamViewModel(inDirection, activePiece, activeLaser);
 
             // Check for active piece
             if (activePiece != null)

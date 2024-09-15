@@ -2,6 +2,7 @@
 using Khet.Wpf.Enums;
 using Khet.Wpf.Models;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Khet.Wpf.ViewModels
@@ -36,11 +37,17 @@ namespace Khet.Wpf.ViewModels
 
         async Task FireLaserPlayer(int x, int y, Direction direction)
         {
-            FireLaser(boardViewModel.squareViewModels, x, y, direction);
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                FireLaser(boardViewModel.squareViewModels, x, y, direction);
+            });
 
-            await Task.Delay(1000);
+            await Task.Delay(3000);
 
-            GridModel.ClearLaser(boardViewModel.squareViewModels);
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                GridModel.ClearLaser(boardViewModel.squareViewModels);
+            });
         }
 
         public static void FireLaser(GridModel squareViewModels, int i, int j, Direction direction)

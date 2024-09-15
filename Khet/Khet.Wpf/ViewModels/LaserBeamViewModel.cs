@@ -1,28 +1,66 @@
-﻿using Khet.Wpf.Core;
+﻿using Khet.Wpf.AbstractClasses;
+using Khet.Wpf.Core;
 using Khet.Wpf.Enums;
 using Khet.Wpf.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Collections.ObjectModel;
+using System.Windows.Media;
 
 namespace Khet.Wpf.ViewModels
 {
-    class LaserBeamViewModel : ViewModelBase
+    public class LaserBeamViewModel : ViewModelBase
     {
 
-        private Direction _direction;       
+        private double _controlWidth;
+        public double controlWidth
+        {
+            get { return _controlWidth; }
+            set { _controlWidth = value; UpdateDisplay(); }
+        }
+        private double _controlHeight { get; set; }
+        public double controlHeight
+        {
+            get { return _controlHeight; }
+            set { _controlHeight = value; UpdateDisplay(); }
+        }
 
-        private List<string> _angle = new List<string> { "0", "0" };
-        public List<string> angle { get => _angle; set => SetProperty(ref _angle, value); }
+        private ObservableCollection<double> _width = [0, 0, 0, 0];
+        public ObservableCollection<double> width
+        {
+            get => _width;
+            set => SetProperty(ref _width, value);
+        }
+        private ObservableCollection<double> _height = [0,0,0,0];
+        public ObservableCollection<double> height
+        {
+            get => _height;
+            set => SetProperty(ref _height, value);
+        }
 
+        private ObservableCollection<Brush> _fill = [Brushes.Transparent,
+                                                     Brushes.Transparent,
+                                                     Brushes.Transparent,
+                                                     Brushes.Transparent];
+       
 
+        public ObservableCollection<Brush> fill
+        {
+            get => _fill;
+            set => SetProperty(ref _fill, value);
+        }
 
-        public LaserBeamViewModel(Direction direction, IPiece piece)
+        private Direction _direction;
+
+        public LaserBeamViewModel(Direction direction, IPiece piece, LaserBeamViewModel activeLaser)
         {
             _direction = direction;
+
+            if (activeLaser != null)
+            {
+                this.height = activeLaser.height;
+                this.width = activeLaser.width;
+                this.fill = activeLaser.fill;
+            }
+
 
             if (piece is DjedViewModel djed)
             {
@@ -30,14 +68,13 @@ namespace Khet.Wpf.ViewModels
                 return;
             }
 
-            if(piece is PyramidViewModel pyramid)
+            if (piece is PyramidViewModel pyramid)
             {
                 DisplayLaser(pyramid);
                 return;
             }
 
             DisplayLaser();
-
         }
 
         private void DisplayLaser()
@@ -45,127 +82,110 @@ namespace Khet.Wpf.ViewModels
             if (_direction == Direction.up || _direction == Direction.down)
             {
 
-                angle[0] = "0";
-                angle[1] = "180";
+                FillLaser(Laser.Top);
+                FillLaser(Laser.Bottom);
             }
 
             if (_direction == Direction.left || _direction == Direction.right)
             {
 
-                angle[0] = "90";
-                angle[1] = "270";
+                FillLaser(Laser.Left);
+                FillLaser(Laser.Right);
             }
         }
+
+        private double CalculateRatio()
+        {
+            return Math.Abs(controlWidth / controlHeight) ;
+        }
+
+        private void UpdateDisplay()
+        {
+            // Top laser
+            height[0] = controlHeight / 2;
+            width[0] = (int)CalculateRatio() * 5;
+
+            // Bottom Laser
+            height[1] = controlHeight / 2;
+            width[1] = (int)CalculateRatio() * 5;
+
+            // Left Laser
+            height[2] = (int)CalculateRatio() * 5;
+            width[2] = controlWidth / 2;
+
+            // Right laser
+            height[3] = (int)CalculateRatio() * 5;
+            width[3] = controlWidth / 2;
+        }
+        public void FillLaser(Laser laserPos)
+        {
+            fill[(int)laserPos] = Brushes.Red; 
+        }
+
 
         private void DisplayLaser(PyramidViewModel pyramid)
         {
             switch (_direction)
             {
                 case Direction.up:
-                    angle[0] = "0";
-
-                    if (pyramid.orientation == Pyramid.tl)
-                    {
-                        Kill();
-                    }
-
-                    if (pyramid.orientation == Pyramid.tr)
-                    {
-                        Kill();
-                    }
-
+                    FillLaser(Laser.Top);
                     if (pyramid.orientation == Pyramid.bl)
                     {
-                        angle[1] = "90";
+                        FillLaser(Laser.Right);
                     }
 
                     if (pyramid.orientation == Pyramid.br)
                     {
-                        angle[1] = "270";
+                        FillLaser(Laser.Left);
                     }
                     break;
 
                 case Direction.down:
-                    angle[0] = "180";
-                    angle[1] = "180";
+                    FillLaser(Laser.Bottom);
 
                     if (pyramid.orientation == Pyramid.tl)
                     {
-                        angle[1] = "90";
+                        FillLaser(Laser.Right);
                     }
 
                     if (pyramid.orientation == Pyramid.tr)
                     {
-                        angle[1] = "270";
-                    }
-
-                    if (pyramid.orientation == Pyramid.bl)
-                    {
-                        Kill();
-                    }
-
-                    if (pyramid.orientation == Pyramid.br)
-                    {
-                        Kill();
+                        FillLaser(Laser.Left);
                     }
                     break;
 
                 case Direction.left:
-                    angle[0] = "270";
-                    angle[1] = "270";
-
-                    if (pyramid.orientation == Pyramid.tl)
-                    {
-                        Kill();
-                    }
-
+                    FillLaser(Laser.Left);
                     if (pyramid.orientation == Pyramid.tr)
                     {
-                        angle[1] = "180";
-                    }
-
-                    if (pyramid.orientation == Pyramid.bl)
-                    {
-                        Kill();
+                        FillLaser(Laser.Bottom);
                     }
 
                     if (pyramid.orientation == Pyramid.br)
                     {
-                        angle[1] = "0";
+                        FillLaser(Laser.Top);
                     }
                     break;
 
                 case Direction.right:
-                    angle[0] = "90";
-                    angle[1] = "90";
+                    FillLaser(Laser.Right);
 
                     if (pyramid.orientation == Pyramid.tl)
                     {
-                        angle[1] = "180";
-                    }
+                        FillLaser(Laser.Bottom);
 
-                    if (pyramid.orientation == Pyramid.tr)
-                    {
-                        Kill();
                     }
 
                     if (pyramid.orientation == Pyramid.bl)
                     {
-                        angle[1] = "0";
+                        FillLaser(Laser.Top);
+
                     }
 
-                    if (pyramid.orientation == Pyramid.br)
-                    {
-                        Kill();
-                    }
                     break;
             }
         }
 
-        private void Kill()
-        {
-            
-        }
 
         private void DisplayLaser(DjedViewModel djed)
         {
@@ -173,61 +193,68 @@ namespace Khet.Wpf.ViewModels
             switch (_direction)
             {
                 case Direction.up:
-                    angle[0] = "0";
+                    FillLaser(Laser.Top);
 
                     if (djed.orientation == Djed.dl)
                     {
-                        angle[1] = "90";
+                        FillLaser(Laser.Right);
                     }
 
                     if (djed.orientation == Djed.dr)
                     {
-                        angle[1] = "270";
+                        FillLaser(Laser.Left);
                     }
                     break;
 
                 case Direction.down:
-                    angle[0] = "180";
+                    FillLaser(Laser.Bottom);
 
                     if (djed.orientation == Djed.dl)
                     {
-                        angle[1] = "270";
+                        FillLaser(Laser.Left);
                     }
 
                     if (djed.orientation == Djed.dr)
                     {
-                        angle[1] = "90";
+                        FillLaser(Laser.Right);
                     }
                     break;
 
                 case Direction.left:
-                    angle[0] = "270";
+                    FillLaser(Laser.Left);
 
                     if (djed.orientation == Djed.dl)
                     {
-                        angle[1] = "180";
+                        FillLaser(Laser.Bottom);
                     }
 
                     if (djed.orientation == Djed.dr)
                     {
-                        angle[1] = "0";
+                        FillLaser(Laser.Top);
                     }
                     break;
 
                 case Direction.right:
-                    angle[0] = "90";
+                    FillLaser(Laser.Right);
 
                     if (djed.orientation == Djed.dl)
                     {
-                        angle[1] = "0";
+                        FillLaser(Laser.Top);
                     }
 
                     if (djed.orientation == Djed.dr)
                     {
-                        angle[1] = "180";
+                        FillLaser(Laser.Bottom);
                     }
                     break;
             }
         }
+
+
+
+
+
     }
+
+
 }

@@ -5,18 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Khet.Wpf"
         xmlns:viewmodels="clr-namespace:Khet.Wpf.ViewModels" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="1025" Width="1260"
         FocusManager.FocusedElement="{Binding ElementName=BoardView}">
-    <!--d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"-->
 
-
-    <!--<Window.InputBindings>
-        <MouseBinding Gesture="LeftClick" Command="{Binding Player1FireCommand}" />
-        <MouseBinding Gesture="RightClick" Command="{Binding Player2FireCommand}" />
-    </Window.InputBindings>-->
-
-    <Grid>
+    <Grid Focusable="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="8*"/>
@@ -57,7 +51,9 @@
 
         </Grid>
 
-        <Button Content="Fire!" Grid.Row="0" Grid.Column="0" FontSize="40" Margin="10" Command="{Binding Player1FireCommand}"/>
+
+
+        <Button Content="Fire!" Grid.Row="0" Grid.Column="0" FontSize="40" Margin="10" Command="{Binding Player1FireCommand}" />
 
         <Button Content="Fire!" Grid.Row="2" Grid.Column="2" FontSize="40" Margin="10" Command="{Binding Player2FireCommand}"/>
 
