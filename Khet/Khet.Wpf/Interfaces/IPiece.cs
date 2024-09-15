@@ -1,5 +1,6 @@
 ﻿using Khet.Wpf.Enums;
 using Khet.Wpf.Models;
+using Khet.Wpf.ViewModels;
 
 namespace Khet.Wpf.Interfaces
 {
@@ -8,6 +9,8 @@ namespace Khet.Wpf.Interfaces
         Direction ResolveLaserDirection(Direction direction);
 
         public void RotatePiece(Rotate rotation);
+
+        public void MovePiece(SquareViewModel previousSquare, SquareViewModel nextSquare);
 
 
 

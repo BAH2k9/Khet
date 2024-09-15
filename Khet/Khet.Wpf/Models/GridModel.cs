@@ -18,7 +18,7 @@ namespace Khet.Wpf.Models
 
                 for (int j = 0; j < cols; j++)
                 {
-                    squareViewModels[i].Add(new SquareViewModel());
+                    squareViewModels[i].Add(new SquareViewModel(i,j));
                 }
             }
 

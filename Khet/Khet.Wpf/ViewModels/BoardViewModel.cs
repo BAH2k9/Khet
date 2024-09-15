@@ -24,7 +24,9 @@ namespace Khet.Wpf.ViewModels
         public ICommand SetGridCommand { get; }
         public ICommand LeftKeyCommand { get; }
         public ICommand RightKeyCommand { get; }
-        public SquareViewModel SelectedSquare { get; set; } = new SquareViewModel() { Selected = false };
+        public SquareViewModel SelectedSquare { get; set; } = new SquareViewModel(0,0) { IsSelected = false };
+
+        private MoveModel _mover = new MoveModel();
         public GridModel squareViewModels { get; set; }
 
         private string _warningMessage;
@@ -60,37 +62,16 @@ namespace Khet.Wpf.ViewModels
 
         private void ExecuteSelectClick(SquareViewModel squareViewModel)
         {
-            // TODO: Logic needs to be sorted out here
-            // Set the selected square on first pass
-            if (this.SelectedSquare?.activePiece == null)
+            try
             {
-                this.SelectedSquare = squareViewModel;
-            }
+                WarningMessage = "";
+                this.SelectedSquare = _mover.NewSquareClicked(squareViewModel);
 
-            // Only allow selecting on squares with active piece
-            if (squareViewModel.activePiece != null)
+            }
+            catch(PieceMoveException ex)
             {
-                // Allow highlighting and unhighlighting of selected square
-                if (this.SelectedSquare.Selected)
-                {
-                    squareViewModel.Select(false);
-                    this.SelectedSquare = null;
-                }
-                else
-                {
-                    squareViewModel.Select(true);
-                }
+                WarningMessage = ex.Message;
             }
-
-
-            if (this.SelectedSquare != squareViewModel && this.SelectedSquare != null)
-            {
-                squareViewModel.activePiece = this.SelectedSquare.activePiece;
-                this.SelectedSquare.Select(false);
-                this.SelectedSquare.activePiece = null;
-            }
-
-
         }
         private void RotatePiece(Rotate rotation)
         {

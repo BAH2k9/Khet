@@ -36,5 +36,18 @@ namespace Khet.Wpf.Exceptions
         }
     }
 
+    public class PieceMoveException : UserExceptions
+    {
+        public PieceMoveException(string errorMessage)
+            : base(errorMessage) // Call base constructor to pass the message
+        {
+        }
+
+        public PieceMoveException(string errorMessage, Exception innerException)
+            : base(errorMessage, innerException) // Allow chaining exceptions
+        {
+        }
+    }
+
 }
 

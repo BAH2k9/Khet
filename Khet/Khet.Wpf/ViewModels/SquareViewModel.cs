@@ -29,21 +29,20 @@ namespace Khet.Wpf.ViewModels
         private Brush _background;
         public Brush Background { get => _background; set => SetProperty(ref _background, value); }
 
-        public bool Selected { get; set; }
-        public RelayCommand<DragEventArgs> StartDragCommand { get; }
+        public bool IsSelected { get; set; } = false;
 
-        public SquareViewModel()
+        public int positionX { get; }
+
+        public int positionY {  get; }
+
+        public SquareViewModel(int positionX, int positionY)
         {
-            StartDragCommand = new RelayCommand<DragEventArgs>(StartDrag);
-
             selectColor = Brushes.Black;
             Background = Brushes.Transparent;
+            this.positionX = positionX;
+            this.positionY = positionY;
         }
 
-        private void StartDrag(DragEventArgs e)
-        {
-            DragDrop.DoDragDrop(Application.Current.MainWindow, this, DragDropEffects.Move);
-        }
 
         public Direction FireLaser(Direction firingDirection)
         {
@@ -74,15 +73,23 @@ namespace Khet.Wpf.ViewModels
         {
             if (selected)
             {
-                this.Selected = true;
+                this.IsSelected = true;
                 selectColor = Brushes.LawnGreen;
             }
             else
             {
-                this.Selected = false;
+                this.IsSelected = false;
                 selectColor = Brushes.Black;
             }
             
+        }
+
+        public void movePiece(SquareViewModel nextSquare)
+        {
+          
+             activePiece?.MovePiece(this, nextSquare);
+           
+
         }
 
         private Direction getInDirection(Direction firingDirection)
