@@ -6,9 +6,11 @@
         xmlns:local="clr-namespace:Khet.Wpf"
         xmlns:viewmodels="clr-namespace:Khet.Wpf.ViewModels" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:b="clr-namespace:Khet.Wpf.Behaviors"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1025" Width="1260"
-        FocusManager.FocusedElement="{Binding ElementName=BoardView}">
+        Title="MainWindow" Height="1025" Width="1260">
+    <!--FocusManager.FocusedElement="{Binding ElementName=BoardView}"-->
+        
 
     <Grid Focusable="True">
         <Grid.RowDefinitions>
@@ -39,7 +41,20 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal">
-                <Button Content="Djed Test" Command="{Binding boardViewModel.DjedTestCommand}" Width="200" Margin="30 0 0 0"/>
+
+                <ComboBox Width="200" Height="30"
+                    ItemsSource="{Binding boardViewModel.boardConfigurations}"
+                    SelectedItem="{Binding boardViewModel.selectedConfiguration, Mode=TwoWay}"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="50 0 0 0"
+                    b:ComboBoxBehavior.DisableArrowKeysBehavior="True">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding boardViewModel.selectionChangedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                
                 <Button Content="Pyramid Test" Command="{Binding boardViewModel.PyramidTestCommand}" Width="200" Margin="50 0 0 0"/>
                 <Button Content="Set Grid" Command="{Binding boardViewModel.SetGridCommand}" Width="200" Margin="50 0 0 0"/>
                 <Button Content="Clear Grid" Command="{Binding boardViewModel.ClearGridCommand}" Width="200" Margin="50 0 0 0"/>
@@ -56,6 +71,8 @@
         <Button Content="Fire!" Grid.Row="0" Grid.Column="0" FontSize="40" Margin="10" Command="{Binding Player1FireCommand}" />
 
         <Button Content="Fire!" Grid.Row="2" Grid.Column="2" FontSize="40" Margin="10" Command="{Binding Player2FireCommand}"/>
+        
+        
 
     </Grid>
 

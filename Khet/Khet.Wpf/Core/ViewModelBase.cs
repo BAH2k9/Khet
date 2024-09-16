@@ -20,15 +20,17 @@ namespace Khet.Wpf.Core
         }
 
         // Helper method to set the value of a property and raise PropertyChanged event
-        protected bool SetProperty<T>(ref T backingField, T value, [CallerMemberName] string propertyName = null)
+        protected bool SetProperty<T>(ref T backingField, T value, bool forceUpdate = false, [CallerMemberName] string propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(backingField, value))
+            // Raise PropertyChanged even if the value is the same, when forceUpdate is true
+            if (!forceUpdate && EqualityComparer<T>.Default.Equals(backingField, value))
                 return false;
 
             backingField = value;
             OnPropertyChanged(propertyName);
             return true;
         }
+
 
 
     }

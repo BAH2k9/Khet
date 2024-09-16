@@ -2,15 +2,7 @@
 using Khet.Wpf.Enums;
 using Khet.Wpf.Exceptions;
 using Khet.Wpf.Models;
-using Khet.Wpf.Tests;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Khet.Wpf.ViewModels
@@ -24,12 +16,27 @@ namespace Khet.Wpf.ViewModels
         public ICommand SetGridCommand { get; }
         public ICommand LeftKeyCommand { get; }
         public ICommand RightKeyCommand { get; }
+
+        public ICommand selectionChangedCommand { get; }
         public SquareViewModel SelectedSquare { get; set; } = new SquareViewModel(0,0) { IsSelected = false };
 
         private MoveModel _mover = new MoveModel();
         public GridModel squareViewModels { get; set; }
 
         private string _warningMessage;
+
+        private ObservableCollection<BoardConfig> _boardConfigurations = new ObservableCollection<BoardConfig> { BoardConfig.Classic, BoardConfig.Dynasty };
+
+        public ObservableCollection<BoardConfig> boardConfigurations
+        {
+            get => _boardConfigurations; set => SetProperty(ref _boardConfigurations, value);
+        }
+
+        private BoardConfig _selectedConfiguration;
+        public BoardConfig selectedConfiguration
+        {
+            get => _selectedConfiguration; set { SetProperty(ref _selectedConfiguration, value); }
+        }
 
         public string WarningMessage
         {
@@ -45,17 +52,16 @@ namespace Khet.Wpf.ViewModels
         public BoardViewModel()
         {
             SelectClick = new RelayCommand<SquareViewModel>(ExecuteSelectClick);
-            PyramidTestCommand = new RelayCommandAsync(param => PyramidTest.AllOrientations(squareViewModels));
-            DjedTestCommand = new RelayCommandAsync(param => DjedTest.AllOrientations(squareViewModels));
-            ClearGridCommand = new RelayCommand<object>(param => GridModel.ClearGrid(squareViewModels));
-            SetGridCommand = new RelayCommand<object>(param => GridModel.SetBoardConfiguration(squareViewModels));
+            ClearGridCommand = new RelayCommandAsync(param =>  GridModel.ClearGrid(squareViewModels));
+            SetGridCommand = new RelayCommand<object>(param => BoardConfiguration.Classic(squareViewModels));
             RightKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Right));
             LeftKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Left));
+            selectionChangedCommand = new RelayCommandAsync(param => ConfigurationChange());
 
             squareViewModels = GridModel.Create();
 
-            GridModel.SetBoardConfiguration(squareViewModels);
-            GridModel.SetSquareColor(squareViewModels);
+            BoardConfiguration.Classic(squareViewModels);
+            BoardConfiguration.SetSquareColor(squareViewModels);
 
 
         }
@@ -85,6 +91,32 @@ namespace Khet.Wpf.ViewModels
                 WarningMessage = ex.Message;
             }
             
+        }
+
+        private async Task ConfigurationChange(object param=null)
+        {
+            await GridModel.ClearGrid(squareViewModels);
+
+            switch (this.selectedConfiguration)
+            {
+                case BoardConfig.Classic:
+
+                    BoardConfiguration.Classic(squareViewModels);
+
+
+                    break;
+
+                case BoardConfig.Dynasty:
+                    
+                    BoardConfiguration.Dynasty(squareViewModels);
+
+                    break;
+
+                default:
+
+                    break;
+            }
+
         }
 
 

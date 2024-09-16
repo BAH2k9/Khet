@@ -20,5 +20,6 @@ namespace Khet.Wpf
         {
             InitializeComponent();
         }
+
     }
 }
