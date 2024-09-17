@@ -49,15 +49,22 @@ namespace Khet.Wpf.Behaviors
                 // Re-raise the event at the window level
                 if (sender is ComboBox comboBox)
                 {
-                    var window = Window.GetWindow(comboBox);
-                    if (window != null)
-                    {
-                        var newEvent = new KeyEventArgs(e.KeyboardDevice, e.InputSource, e.Timestamp, e.Key)
-                        {
-                            RoutedEvent = Keyboard.KeyDownEvent
-                        };
-                        window.RaiseEvent(newEvent);
-                    }
+                    //var window = Window.GetWindow(comboBox);
+                    //if (window != null)
+                    //{
+                    //    var newEvent = new KeyEventArgs(e.KeyboardDevice, e.InputSource, e.Timestamp, e.Key)
+                    //    {
+                    //        RoutedEvent = Keyboard.KeyDownEvent
+                    //    };
+                    //    window.RaiseEvent(newEvent);
+                    //}
+
+                    // Focus moves to the next or previous control instead of the ComboBox handling it
+                    TraversalRequest tRequest = e.Key == Key.Right || e.Key == Key.Left
+                        ? new TraversalRequest(FocusNavigationDirection.Previous)
+                        : new TraversalRequest(FocusNavigationDirection.Next);
+
+                    comboBox.MoveFocus(tRequest);
                 }
             }
         }
