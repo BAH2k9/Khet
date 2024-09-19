@@ -10,9 +10,9 @@ namespace Khet.Wpf.ViewModels
     public class BoardViewModel : ViewModelBase
     {
         // private members
-        private MoveModel _mover = new MoveModel();
+        private MoveModel _mover;
         private BoardConfiguration _boardConfiguration;
-        private SquareViewModel SelectedSquare { get; set; } = new SquareViewModel(0, 0) { IsSelected = false };
+        private SquareViewModel _selectedSquare;
         
       
         // Commands
@@ -35,25 +35,28 @@ namespace Khet.Wpf.ViewModels
             set { _warningMessage = value; SetProperty(ref _warningMessage, value); }
         }
 
+
         // Bindables UI -> VM
         public BoardConfig selectedConfiguration { get; set; }
 
         
+
         public BoardViewModel()
         {
             
             squareViewModels = GridModel.Create();
 
+            _mover = new MoveModel();
             _boardConfiguration = new BoardConfiguration(squareViewModels);
             _boardConfiguration.SetNames(boardConfigurationNames);
             _boardConfiguration.SetSquareColor();
             _boardConfiguration.SetClassic();
 
-            SelectClick = new RelayCommand<SquareViewModel>(ExecuteSelectClick);
-            ClearGridCommand = new RelayCommandAsync(param =>  GridModel.ClearGridAsync(squareViewModels));
+            SelectClick = new RelayCommand<SquareViewModel>(ExecuteSelectClick);           
             SetGridCommand = new RelayCommand<object>(param => _boardConfiguration.SetClassic());
             RightKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Right));
             LeftKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Left));
+            ClearGridCommand = new RelayCommandAsync(param => GridModel.ClearGridAsync(squareViewModels));
             selectionChangedCommand = new RelayCommandAsync(param => ConfigurationChange(null));
 
         }
@@ -63,7 +66,7 @@ namespace Khet.Wpf.ViewModels
             try
             {
                 WarningMessage = "";
-                this.SelectedSquare = _mover.NewSquareClicked(squareViewModel);
+                _selectedSquare = _mover.NewSquareClicked(squareViewModel);
 
             }
             catch(PieceMoveException ex)
@@ -75,7 +78,7 @@ namespace Khet.Wpf.ViewModels
         {
             try
             {
-                this.SelectedSquare.activePiece?.RotatePiece(rotation);
+                _selectedSquare.activePiece?.RotatePiece(rotation);
                 WarningMessage = "";
             }
             catch(UserExceptions ex) 
@@ -92,25 +95,16 @@ namespace Khet.Wpf.ViewModels
             switch (this.selectedConfiguration)
             {
                 case BoardConfig.Classic:
-
                     _boardConfiguration.SetClassic();
-
-
                     break;
 
-                case BoardConfig.Dynasty:
-                    
+                case BoardConfig.Dynasty:                
                     _boardConfiguration.SetDynasty();
-
                     break;
 
                 default:
-
                     break;
             }
-
         }
-
-
     }
 }
