@@ -7,8 +7,8 @@
              xmlns:local="clr-namespace:Khet.Wpf.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Focusable="True"
-             FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}">
+             Focusable="True">
+    <!--FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}">-->
 
     <UserControl.InputBindings>
         <!-- Bind the Left Arrow key to LeftKeyCommand in the ViewModel -->

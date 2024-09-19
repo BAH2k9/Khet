@@ -8,9 +8,14 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:b="clr-namespace:Khet.Wpf.Behaviors"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1025" Width="1260">
+        Title="MainWindow" Height="1000" Width="1200">
     <!--FocusManager.FocusedElement="{Binding ElementName=BoardView}"-->
-        
+
+    <Window.InputBindings>
+        <!-- Bind the Left Arrow key to LeftKeyCommand in the ViewModel -->
+        <KeyBinding Key="Left" Command="{Binding boardViewModel.LeftKeyCommand}" />
+        <KeyBinding Key="Right" Command="{Binding boardViewModel.RightKeyCommand}" />
+    </Window.InputBindings>
 
     <Grid Focusable="True">
         <Grid.RowDefinitions>
@@ -43,10 +48,11 @@
             <StackPanel Orientation="Horizontal">
 
                 <ComboBox Width="200" Height="30"
+                    Focusable="False"
                     ItemsSource="{Binding boardViewModel.boardConfigurations}"
                     SelectedItem="{Binding boardViewModel.selectedConfiguration, Mode=TwoWay}"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="50 0 0 0"
-                    b:ComboBoxBehavior.DisableArrowKeysBehavior="True">
+                    HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="50 0 0 0">
+                    <!--b:ComboBoxBehavior.DisableArrowKeysBehavior="True">-->
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
