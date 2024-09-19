@@ -9,60 +9,52 @@ namespace Khet.Wpf.ViewModels
 {
     public class BoardViewModel : ViewModelBase
     {
+        // private members
+        private MoveModel _mover = new MoveModel();
+        private BoardConfiguration _boardConfiguration;
+        private SquareViewModel SelectedSquare { get; set; } = new SquareViewModel(0, 0) { IsSelected = false };
+        
+      
+        // Commands
         public ICommand SelectClick { get; }
-        public ICommand PyramidTestCommand { get; }
-        public ICommand DjedTestCommand { get; }
         public ICommand ClearGridCommand { get; }
         public ICommand SetGridCommand { get; }
         public ICommand LeftKeyCommand { get; }
         public ICommand RightKeyCommand { get; }
-
         public ICommand selectionChangedCommand { get; }
-        public SquareViewModel SelectedSquare { get; set; } = new SquareViewModel(0,0) { IsSelected = false };
 
-        private MoveModel _mover = new MoveModel();
+
+        // Bindables - VM -> UI
         public GridModel squareViewModels { get; set; }
+        public ObservableCollection<BoardConfig> boardConfigurationNames { get; set; } = new ObservableCollection<BoardConfig>();
 
         private string _warningMessage;
-
-        private ObservableCollection<BoardConfig> _boardConfigurations = new ObservableCollection<BoardConfig> { BoardConfig.Classic, BoardConfig.Dynasty };
-
-        public ObservableCollection<BoardConfig> boardConfigurations
-        {
-            get => _boardConfigurations; set => SetProperty(ref _boardConfigurations, value);
-        }
-
-        private BoardConfig _selectedConfiguration;
-        public BoardConfig selectedConfiguration
-        {
-            get => _selectedConfiguration; set { SetProperty(ref _selectedConfiguration, value); }
-        }
-
         public string WarningMessage
         {
             get => _warningMessage;
-            set
-            {
-                _warningMessage = value;
-                OnPropertyChanged(nameof(WarningMessage));
-            }
+            set { _warningMessage = value; SetProperty(ref _warningMessage, value); }
         }
 
+        // Bindables UI -> VM
+        public BoardConfig selectedConfiguration { get; set; }
 
+        
         public BoardViewModel()
         {
-            SelectClick = new RelayCommand<SquareViewModel>(ExecuteSelectClick);
-            ClearGridCommand = new RelayCommandAsync(param =>  GridModel.ClearGrid(squareViewModels));
-            SetGridCommand = new RelayCommand<object>(param => BoardConfiguration.Classic(squareViewModels));
-            RightKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Right));
-            LeftKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Left));
-            selectionChangedCommand = new RelayCommandAsync(param => ConfigurationChange());
-
+            
             squareViewModels = GridModel.Create();
 
-            BoardConfiguration.Classic(squareViewModels);
-            BoardConfiguration.SetSquareColor(squareViewModels);
+            _boardConfiguration = new BoardConfiguration(squareViewModels);
+            _boardConfiguration.SetNames(boardConfigurationNames);
+            _boardConfiguration.SetSquareColor();
+            _boardConfiguration.SetClassic();
 
+            SelectClick = new RelayCommand<SquareViewModel>(ExecuteSelectClick);
+            ClearGridCommand = new RelayCommandAsync(param =>  GridModel.ClearGridAsync(squareViewModels));
+            SetGridCommand = new RelayCommand<object>(param => _boardConfiguration.SetClassic());
+            RightKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Right));
+            LeftKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Left));
+            selectionChangedCommand = new RelayCommandAsync(param => ConfigurationChange(null));
 
         }
 
@@ -93,22 +85,22 @@ namespace Khet.Wpf.ViewModels
             
         }
 
-        private async Task ConfigurationChange(object param=null)
+        private async Task ConfigurationChange(object param)
         {
-            await GridModel.ClearGrid(squareViewModels);
+            await GridModel.ClearGridAsync(squareViewModels);
 
             switch (this.selectedConfiguration)
             {
                 case BoardConfig.Classic:
 
-                    BoardConfiguration.Classic(squareViewModels);
+                    _boardConfiguration.SetClassic();
 
 
                     break;
 
                 case BoardConfig.Dynasty:
                     
-                    BoardConfiguration.Dynasty(squareViewModels);
+                    _boardConfiguration.SetDynasty();
 
                     break;
 

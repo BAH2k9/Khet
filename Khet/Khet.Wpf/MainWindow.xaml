@@ -49,7 +49,7 @@
 
                 <ComboBox Width="200" Height="30"
                     Focusable="False"
-                    ItemsSource="{Binding boardViewModel.boardConfigurations}"
+                    ItemsSource="{Binding boardViewModel.boardConfigurationNames}"
                     SelectedItem="{Binding boardViewModel.selectedConfiguration, Mode=TwoWay}"
                     HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="50 0 0 0">
                     <!--b:ComboBoxBehavior.DisableArrowKeysBehavior="True">-->

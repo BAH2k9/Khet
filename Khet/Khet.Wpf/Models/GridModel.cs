@@ -60,7 +60,7 @@ namespace Khet.Wpf.Models
             }
         }
 
-        public static async Task ClearGrid(GridModel squareViewModels)
+        public static async Task ClearGridAsync(GridModel squareViewModels)
         {
             foreach (var row in squareViewModels)
             {
@@ -72,6 +72,18 @@ namespace Khet.Wpf.Models
             }
 
             await Task.Delay(50);
+        }
+
+        public static void ClearGrid(GridModel squareViewModels)
+        {
+            foreach (var row in squareViewModels)
+            {
+                foreach (var square in row)
+                {
+                    square.ClearPiece();
+                    square.ClearLaser();
+                }
+            }
         }
     }
 }
