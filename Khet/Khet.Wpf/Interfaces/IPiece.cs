@@ -12,6 +12,8 @@ namespace Khet.Wpf.Interfaces
 
         public void MovePiece(SquareViewModel previousSquare, SquareViewModel nextSquare);
 
+        public void SetColor(int player);
+
 
 
     }

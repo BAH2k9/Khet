@@ -41,6 +41,7 @@ namespace Khet.Wpf.ViewModels
             Background = Brushes.Transparent;
             this.positionX = positionX;
             this.positionY = positionY;
+            
         }
 
 

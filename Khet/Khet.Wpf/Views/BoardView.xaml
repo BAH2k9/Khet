@@ -16,7 +16,7 @@
         <KeyBinding Key="Right" Command="{Binding RightKeyCommand}" />
     </UserControl.InputBindings>
 
-    <Grid>
+    <Grid VirtualizingPanel.IsVirtualizing="False" >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
