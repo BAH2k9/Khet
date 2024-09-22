@@ -60,8 +60,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                
-                <Button Content="Pyramid Test" Command="{Binding boardViewModel.PyramidTestCommand}" Width="200" Margin="50 0 0 0"/>
+
                 <Button Content="Set Grid" Command="{Binding boardViewModel.SetGridCommand}" Width="200" Margin="50 0 0 0"/>
                 <Button Content="Clear Grid" Command="{Binding boardViewModel.ClearGridCommand}" Width="200" Margin="50 0 0 0"/>
             </StackPanel>
@@ -77,12 +76,12 @@
         <Button Content="Fire!" Grid.Row="0" Grid.Column="0" FontSize="40" Margin="10" Command="{Binding Player1FireCommand}" />
 
         <Button Content="Fire!" Grid.Row="2" Grid.Column="2" FontSize="40" Margin="10" Command="{Binding Player2FireCommand}"/>
-        
-        
+
+
 
     </Grid>
 
-    
+
 
 
 

@@ -29,7 +29,7 @@ namespace Khet.Wpf.ViewModels
             get => _width;
             set => SetProperty(ref _width, value);
         }
-        private ObservableCollection<double> _height = [0,0,0,0];
+        private ObservableCollection<double> _height = [0, 0, 0, 0];
         public ObservableCollection<double> height
         {
             get => _height;
@@ -40,7 +40,7 @@ namespace Khet.Wpf.ViewModels
                                                      Brushes.Transparent,
                                                      Brushes.Transparent,
                                                      Brushes.Transparent];
-       
+
 
         public ObservableCollection<Brush> fill
         {
@@ -94,10 +94,7 @@ namespace Khet.Wpf.ViewModels
             }
         }
 
-        private double CalculateRatio()
-        {
-            return Math.Abs(controlWidth / controlHeight) ;
-        }
+
 
         private void UpdateDisplay()
         {
@@ -117,9 +114,18 @@ namespace Khet.Wpf.ViewModels
             height[3] = (int)CalculateRatio() * 5;
             width[3] = controlWidth / 2;
         }
+
+        private double CalculateRatio()
+        {
+            if (controlHeight == 0)
+                return 0;
+
+            return Math.Abs(controlWidth / controlHeight);
+        }
+
         public void FillLaser(Laser laserPosition)
         {
-            fill[(int)laserPosition] = Brushes.Red; 
+            fill[(int)laserPosition] = Brushes.Red;
         }
 
 
@@ -249,9 +255,6 @@ namespace Khet.Wpf.ViewModels
                     break;
             }
         }
-
-
-
     }
 
 

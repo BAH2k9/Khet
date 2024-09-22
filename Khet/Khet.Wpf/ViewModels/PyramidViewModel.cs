@@ -1,21 +1,12 @@
-﻿using Khet.Wpf.Core;
-using Khet.Wpf.Enums;
-using Khet.Wpf.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
 using System.Windows.Media;
-using System.Windows;
-using System.Numerics;
-using System.Collections.ObjectModel;
 using Khet.Wpf.AbstractClasses;
-using Khet.Wpf.Models;
+using Khet.Wpf.Core;
+using Khet.Wpf.Enums;
 
 namespace Khet.Wpf.ViewModels
 {
-    public class PyramidViewModel :  Piece
+    public class PyramidViewModel : Piece
     {
 
         public new Brush playerColor
@@ -41,7 +32,7 @@ namespace Khet.Wpf.ViewModels
         public double controlHeight
         {
             get { return _controlHeight; }
-            set { _controlHeight = value;  SetOrientation(); }
+            set { _controlHeight = value; SetOrientation(); }
         }
 
         private PointCollection _points;
@@ -105,17 +96,17 @@ namespace Khet.Wpf.ViewModels
             var input = Tuple.Create(inDirection, this.orientation);
             var outDirection = Mappings.PyramidDirection[input];
             return outDirection;
-           
+
         }
 
         public override void RotatePiece(Rotate rotation)
         {
-            var maxEnumValue = (Pyramid)Enum.GetValues(typeof(Pyramid)).Length-1;
-    
+            var maxEnumValue = (Pyramid)Enum.GetValues(typeof(Pyramid)).Length - 1;
+
             switch (rotation)
             {
                 case Rotate.Left:
-                    if(orientation == 0)
+                    if (orientation == 0)
                     {
                         orientation = maxEnumValue;
                     }
@@ -123,7 +114,7 @@ namespace Khet.Wpf.ViewModels
                     {
                         orientation--;
                     }
-                    
+
                     break;
                 case Rotate.Right:
                     if (orientation == maxEnumValue)
@@ -137,7 +128,7 @@ namespace Khet.Wpf.ViewModels
                     break;
 
             }
-                      
+
         }
     }
 }
