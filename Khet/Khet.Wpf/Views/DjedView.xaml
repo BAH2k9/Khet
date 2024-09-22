@@ -41,7 +41,19 @@
           Y1="{Binding point1[1]}"
           X2="{Binding point2[0]}"
           Y2="{Binding point2[1]}"
-          Stroke="{Binding playerColor}" StrokeThickness="10">
+          Stroke="{Binding playerColor}" StrokeThickness="8"
+            Panel.ZIndex="1">
         </Line>
+
+        <Line 
+            X1="{Binding point1[0]}"
+            Y1="{Binding point1[1]}"
+            X2="{Binding point2[0]}"
+            Y2="{Binding point2[1]}"
+            Stroke="Black" StrokeThickness="10"
+            Panel.ZIndex="0">
+        </Line>
+
+
     </Grid>
 </UserControl>
