@@ -117,9 +117,9 @@ namespace Khet.Wpf.ViewModels
             height[3] = (int)CalculateRatio() * 5;
             width[3] = controlWidth / 2;
         }
-        public void FillLaser(Laser laserPos)
+        public void FillLaser(Laser laserPosition)
         {
-            fill[(int)laserPos] = Brushes.Red; 
+            fill[(int)laserPosition] = Brushes.Red; 
         }
 
 
@@ -249,8 +249,6 @@ namespace Khet.Wpf.ViewModels
                     break;
             }
         }
-
-
 
 
 
