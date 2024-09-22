@@ -32,7 +32,7 @@ namespace Khet.Wpf.ViewModels
         public string WarningMessage
         {
             get => _warningMessage;
-            set { _warningMessage = value; SetProperty(ref _warningMessage, value); }
+            set { _warningMessage = value; SetProperty(ref _warningMessage, value, true); }
         }
 
 

@@ -9,10 +9,8 @@
         xmlns:b="clr-namespace:Khet.Wpf.Behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1200">
-    <!--FocusManager.FocusedElement="{Binding ElementName=BoardView}"-->
 
     <Window.InputBindings>
-        <!-- Bind the Left Arrow key to LeftKeyCommand in the ViewModel -->
         <KeyBinding Key="Left" Command="{Binding boardViewModel.LeftKeyCommand}" />
         <KeyBinding Key="Right" Command="{Binding boardViewModel.RightKeyCommand}" />
     </Window.InputBindings>
