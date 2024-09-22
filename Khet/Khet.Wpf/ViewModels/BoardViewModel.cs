@@ -13,8 +13,8 @@ namespace Khet.Wpf.ViewModels
         private MoveModel _mover;
         private BoardConfiguration _boardConfiguration;
         private SquareViewModel _selectedSquare;
-        
-      
+
+
         // Commands
         public ICommand SelectClick { get; }
         public ICommand ClearGridCommand { get; }
@@ -32,24 +32,17 @@ namespace Khet.Wpf.ViewModels
         public string WarningMessage
         {
             get => _warningMessage;
-            set { _warningMessage = value; SetProperty(ref _warningMessage, value); }
+            set { _warningMessage = value; SetProperty(ref _warningMessage, value, true); }
         }
 
 
         // Bindables UI -> VM
         public BoardConfig selectedConfiguration { get; set; }
 
-        
+
 
         public BoardViewModel(MoveModel mover, BoardConfiguration boardConfiguration)
         {
-
-            //squareViewModels = GridModel.Create();
-
-            
-
-            //_mover = new MoveModel();
-            //_boardConfiguration = new BoardConfiguration(squareViewModels);
             _mover = mover;
             _boardConfiguration = boardConfiguration;
             squareViewModels = _boardConfiguration.GetGridModel();
@@ -57,7 +50,7 @@ namespace Khet.Wpf.ViewModels
             _boardConfiguration.SetSquareColor();
             _boardConfiguration.SetClassic();
 
-            SelectClick = new RelayCommand<SquareViewModel>(ExecuteSelectClick);           
+            SelectClick = new RelayCommand<SquareViewModel>(ExecuteSelectClick);
             SetGridCommand = new RelayCommand<object>(param => _boardConfiguration.SetClassic());
             RightKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Right));
             LeftKeyCommand = new RelayCommand<object>(param => RotatePiece(Rotate.Left));
@@ -74,7 +67,7 @@ namespace Khet.Wpf.ViewModels
                 _selectedSquare = _mover.NewSquareClicked(squareViewModel);
 
             }
-            catch(PieceMoveException ex)
+            catch (PieceMoveException ex)
             {
                 WarningMessage = ex.Message;
             }
@@ -103,7 +96,7 @@ namespace Khet.Wpf.ViewModels
                     _boardConfiguration.SetClassic();
                     break;
 
-                case BoardConfig.Dynasty:                
+                case BoardConfig.Dynasty:
                     _boardConfiguration.SetDynasty();
                     break;
 

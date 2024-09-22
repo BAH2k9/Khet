@@ -13,4 +13,12 @@
     <PackageReference Include="SimpleInjector" Version="5.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\baile\source\GitHub\Personal\Khet\Khet\Khet.Wpf\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\baile\source\GitHub\Personal\Khet\Khet\Khet.Wpf\.editorconfig" />
+  </ItemGroup>
+
 </Project>

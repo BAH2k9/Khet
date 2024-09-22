@@ -16,8 +16,8 @@ namespace Khet.Wpf.ViewModels
             set => SetProperty(ref _activePiece, value);
         }
 
-        private LaserBeamViewModel? _activeLaser;
-        public LaserBeamViewModel? activeLaser
+        private LaserBeamViewModel _activeLaser;
+        public LaserBeamViewModel activeLaser
         {
             get => _activeLaser;
             set => SetProperty(ref _activeLaser, value);

@@ -9,10 +9,8 @@
         xmlns:b="clr-namespace:Khet.Wpf.Behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1200">
-    <!--FocusManager.FocusedElement="{Binding ElementName=BoardView}"-->
 
     <Window.InputBindings>
-        <!-- Bind the Left Arrow key to LeftKeyCommand in the ViewModel -->
         <KeyBinding Key="Left" Command="{Binding boardViewModel.LeftKeyCommand}" />
         <KeyBinding Key="Right" Command="{Binding boardViewModel.RightKeyCommand}" />
     </Window.InputBindings>
@@ -60,8 +58,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                
-                <Button Content="Pyramid Test" Command="{Binding boardViewModel.PyramidTestCommand}" Width="200" Margin="50 0 0 0"/>
+
                 <Button Content="Set Grid" Command="{Binding boardViewModel.SetGridCommand}" Width="200" Margin="50 0 0 0"/>
                 <Button Content="Clear Grid" Command="{Binding boardViewModel.ClearGridCommand}" Width="200" Margin="50 0 0 0"/>
             </StackPanel>
@@ -77,12 +74,12 @@
         <Button Content="Fire!" Grid.Row="0" Grid.Column="0" FontSize="40" Margin="10" Command="{Binding Player1FireCommand}" />
 
         <Button Content="Fire!" Grid.Row="2" Grid.Column="2" FontSize="40" Margin="10" Command="{Binding Player2FireCommand}"/>
-        
-        
+
+
 
     </Grid>
 
-    
+
 
 
 
