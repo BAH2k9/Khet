@@ -21,14 +21,9 @@ namespace Khet.Wpf.ViewModels
         public ICommand Player2FireCommand { get; }
         
 
-        public MainViewModel()
+        public MainViewModel(BoardViewModel boardViewModel)
         {
-            MoveModel moveModel = new MoveModel();
-            GridModel gridModel = GridModel.Create();
-            BoardConfiguration boardConfiguration = new BoardConfiguration(gridModel);
-            
-
-            boardViewModel = new BoardViewModel(moveModel, boardConfiguration);
+            _boardViewModel = boardViewModel;
 
             Player1FireCommand = new RelayCommand<object>(FireLaserPlayer1);
             Player2FireCommand = new RelayCommand<object>(FireLaserPlayer2);
@@ -59,6 +54,8 @@ namespace Khet.Wpf.ViewModels
             {
                 GridModel.ClearLaser(boardViewModel.squareViewModels);
             });
+
+            
         }
 
         public static void FireLaser(GridModel squareViewModels, int i, int j, Direction direction)

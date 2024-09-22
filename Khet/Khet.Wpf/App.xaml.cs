@@ -1,4 +1,5 @@
-﻿using Khet.Wpf.ViewModels;
+﻿using Khet.Wpf.Models;
+using Khet.Wpf.ViewModels;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -14,8 +15,16 @@ namespace Khet.Wpf
         {
             base.OnStartup(e);
 
-            var mainVM = new MainViewModel();
-            var mainWindow = new MainWindow() { DataContext = mainVM };
+            MoveModel moveModel = new MoveModel();
+            GridModel gridModel = GridModel.Create();
+            BoardConfiguration boardConfiguration = new BoardConfiguration(gridModel);
+
+
+            var boardViewModel = new BoardViewModel(moveModel, boardConfiguration);
+
+            var mainViewModel = new MainViewModel(boardViewModel);
+
+            var mainWindow = new MainWindow() { DataContext = mainViewModel };
 
             mainWindow.Show();          
         }
