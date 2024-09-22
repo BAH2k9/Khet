@@ -54,7 +54,7 @@ namespace Khet.Wpf.Models
             // Move the piece if both squares are valid
             if (previousSquare != null && nextSquare != null && previousSquare.activePiece != null)
             {
-                previousSquare.movePiece(nextSquare); // Transfer the piece
+                previousSquare.MovePiece(nextSquare); // Transfer the piece
             }
         }
     }

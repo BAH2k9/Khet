@@ -23,7 +23,7 @@ namespace Khet.Wpf.Core
 
         public bool CanExecute(object parameter) => true;
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHanDLer CanExecuteChanged;
     }
 
 }

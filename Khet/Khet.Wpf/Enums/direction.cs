@@ -8,10 +8,10 @@ namespace Khet.Wpf.Enums
 {
      public enum Direction
      {
-        up,
-        down,
-        left ,
-        right,
-        kill,
+        Up,
+        Down,
+        Left ,
+        Right,
+        Kill,
      }
 }

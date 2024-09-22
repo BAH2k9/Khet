@@ -11,7 +11,7 @@ namespace Khet.Wpf.Core
     public class ViewModelBase : INotifyPropertyChanged
     {
         // PropertyChanged event to notify the UI of property changes
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHanDLer PropertyChanged;
 
         // Method to raise the PropertyChanged event
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

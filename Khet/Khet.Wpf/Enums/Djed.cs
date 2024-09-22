@@ -2,7 +2,7 @@
 {
     public enum Djed
     {
-        dl = 0,
-        dr = 1
+        DL = 0,
+        DR = 1
     }
 }

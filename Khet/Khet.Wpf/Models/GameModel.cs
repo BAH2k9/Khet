@@ -29,18 +29,18 @@ namespace Khet.Wpf.Models
         {
             var pieceList = new List<Piece>
             {
-                //new PyramidViewModel(Pyramid.bl, player),
-                //new PyramidViewModel(Pyramid.tl, player),
-                //new PyramidViewModel(Pyramid.tr, player),
+                //new PyramidViewModel(Pyramid.BL, player),
+                //new PyramidViewModel(Pyramid.TL, player),
+                //new PyramidViewModel(Pyramid.TR, player),
                 //new ObeliskViewModel(player),
-                //new DjedViewModel(Djed.dl, player),
+                //new DjedViewModel(Djed.DL, player),
                 //new PharaohViewModel(player),
-                //new DjedViewModel(Djed.dr, player),
+                //new DjedViewModel(Djed.DR, player),
                 //new ObeliskViewModel(player),
-                //new PyramidViewModel(Pyramid.tl, player),
-                //new PyramidViewModel(Pyramid.tl, player),
-                //new PyramidViewModel(Pyramid.tl, player),
-                //new PyramidViewModel(Pyramid.bl, player)
+                //new PyramidViewModel(Pyramid.TL, player),
+                //new PyramidViewModel(Pyramid.TL, player),
+                //new PyramidViewModel(Pyramid.TL, player),
+                //new PyramidViewModel(Pyramid.BL, player)
             };
 
             //player.Pieces = pieceList;

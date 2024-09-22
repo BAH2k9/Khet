@@ -79,14 +79,14 @@ namespace Khet.Wpf.ViewModels
 
         private void DisplayLaser()
         {
-            if (_direction == Direction.up || _direction == Direction.down)
+            if (_direction == Direction.Up || _direction == Direction.Down)
             {
 
                 FillLaser(Laser.Top);
                 FillLaser(Laser.Bottom);
             }
 
-            if (_direction == Direction.left || _direction == Direction.right)
+            if (_direction == Direction.Left || _direction == Direction.Right)
             {
 
                 FillLaser(Laser.Left);
@@ -127,56 +127,56 @@ namespace Khet.Wpf.ViewModels
         {
             switch (_direction)
             {
-                case Direction.up:
+                case Direction.Up:
                     FillLaser(Laser.Top);
-                    if (pyramid.orientation == Pyramid.bl)
+                    if (pyramid.orientation == Pyramid.BL)
                     {
                         FillLaser(Laser.Right);
                     }
 
-                    if (pyramid.orientation == Pyramid.br)
+                    if (pyramid.orientation == Pyramid.BR)
                     {
                         FillLaser(Laser.Left);
                     }
                     break;
 
-                case Direction.down:
+                case Direction.Down:
                     FillLaser(Laser.Bottom);
 
-                    if (pyramid.orientation == Pyramid.tl)
+                    if (pyramid.orientation == Pyramid.TL)
                     {
                         FillLaser(Laser.Right);
                     }
 
-                    if (pyramid.orientation == Pyramid.tr)
+                    if (pyramid.orientation == Pyramid.TR)
                     {
                         FillLaser(Laser.Left);
                     }
                     break;
 
-                case Direction.left:
+                case Direction.Left:
                     FillLaser(Laser.Left);
-                    if (pyramid.orientation == Pyramid.tr)
+                    if (pyramid.orientation == Pyramid.TR)
                     {
                         FillLaser(Laser.Bottom);
                     }
 
-                    if (pyramid.orientation == Pyramid.br)
+                    if (pyramid.orientation == Pyramid.BR)
                     {
                         FillLaser(Laser.Top);
                     }
                     break;
 
-                case Direction.right:
+                case Direction.Right:
                     FillLaser(Laser.Right);
 
-                    if (pyramid.orientation == Pyramid.tl)
+                    if (pyramid.orientation == Pyramid.TL)
                     {
                         FillLaser(Laser.Bottom);
 
                     }
 
-                    if (pyramid.orientation == Pyramid.bl)
+                    if (pyramid.orientation == Pyramid.BL)
                     {
                         FillLaser(Laser.Top);
 
@@ -192,57 +192,57 @@ namespace Khet.Wpf.ViewModels
 
             switch (_direction)
             {
-                case Direction.up:
+                case Direction.Up:
                     FillLaser(Laser.Top);
 
-                    if (djed.orientation == Djed.dl)
+                    if (djed.orientation == Djed.DL)
                     {
                         FillLaser(Laser.Right);
                     }
 
-                    if (djed.orientation == Djed.dr)
+                    if (djed.orientation == Djed.DR)
                     {
                         FillLaser(Laser.Left);
                     }
                     break;
 
-                case Direction.down:
+                case Direction.Down:
                     FillLaser(Laser.Bottom);
 
-                    if (djed.orientation == Djed.dl)
+                    if (djed.orientation == Djed.DL)
                     {
                         FillLaser(Laser.Left);
                     }
 
-                    if (djed.orientation == Djed.dr)
+                    if (djed.orientation == Djed.DR)
                     {
                         FillLaser(Laser.Right);
                     }
                     break;
 
-                case Direction.left:
+                case Direction.Left:
                     FillLaser(Laser.Left);
 
-                    if (djed.orientation == Djed.dl)
+                    if (djed.orientation == Djed.DL)
                     {
                         FillLaser(Laser.Bottom);
                     }
 
-                    if (djed.orientation == Djed.dr)
+                    if (djed.orientation == Djed.DR)
                     {
                         FillLaser(Laser.Top);
                     }
                     break;
 
-                case Direction.right:
+                case Direction.Right:
                     FillLaser(Laser.Right);
 
-                    if (djed.orientation == Djed.dl)
+                    if (djed.orientation == Djed.DL)
                     {
                         FillLaser(Laser.Top);
                     }
 
-                    if (djed.orientation == Djed.dr)
+                    if (djed.orientation == Djed.DR)
                     {
                         FillLaser(Laser.Bottom);
                     }

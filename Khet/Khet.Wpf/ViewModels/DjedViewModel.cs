@@ -51,7 +51,7 @@ namespace Khet.Wpf.ViewModels
 
         private void SetOrientation()
         {
-            if (this.orientation == Djed.dl)
+            if (this.orientation == Djed.DL)
             {
                 point1[0] = 0;
                 point1[1] = 0;
@@ -83,13 +83,13 @@ namespace Khet.Wpf.ViewModels
         public override void RotatePiece(Rotate rotation)
         {
             // Only two states so can just switch state for either rotation
-            if (orientation == Djed.dl)
+            if (orientation == Djed.DL)
             {
-                orientation = Djed.dr; 
+                orientation = Djed.DR; 
             }
             else
             {
-                orientation = Djed.dl;
+                orientation = Djed.DL;
             }
  
         }

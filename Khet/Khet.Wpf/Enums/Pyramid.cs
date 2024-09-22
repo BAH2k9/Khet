@@ -8,9 +8,9 @@ namespace Khet.Wpf.Enums
 {
     public enum Pyramid
     {
-        tl = 0,
-        tr = 1,
-        br = 2,
-        bl = 3,
+        TL = 0,
+        TR = 1,
+        BR = 2,
+        BL = 3,
     }
 }

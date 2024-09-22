@@ -62,7 +62,7 @@ namespace Khet.Wpf.ViewModels
         {
             switch (this.orientation)
             {
-                case Pyramid.tl:
+                case Pyramid.TL:
                     points = new PointCollection
                     {
                         new Point(0,0),
@@ -70,7 +70,7 @@ namespace Khet.Wpf.ViewModels
                         new Point(0, controlHeight)
                     };
                     break;
-                case Pyramid.tr:
+                case Pyramid.TR:
                     points = new PointCollection
                     {
                          new Point(0, 0),
@@ -78,7 +78,7 @@ namespace Khet.Wpf.ViewModels
                          new Point(controlWidth, controlHeight)
                     };
                     break;
-                case Pyramid.bl:
+                case Pyramid.BL:
                     points = new PointCollection
                     {
                          new Point(0, 0),
@@ -86,7 +86,7 @@ namespace Khet.Wpf.ViewModels
                          new Point(controlWidth, controlHeight)
                     };
                     break;
-                case Pyramid.br:
+                case Pyramid.BR:
 
                     points = new PointCollection
                     {
