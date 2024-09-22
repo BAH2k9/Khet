@@ -44,7 +44,7 @@ namespace Khet.Wpf.Behaviors
             {
                 // Instead of marking the event as handled, we'll just suppress the
                 // default behavior of the ComboBox for these keys
-               // e.handled = true;
+               // e.Handled = true;
 
                 // Re-raise the event at the window level
                 if (sender is ComboBox comboBox)
