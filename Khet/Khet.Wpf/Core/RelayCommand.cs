@@ -24,7 +24,7 @@ namespace Khet.Wpf.Core
             _execute((T)parameter);
         }
 
-        public event EventHanDLer CanExecuteChanged
+        public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }

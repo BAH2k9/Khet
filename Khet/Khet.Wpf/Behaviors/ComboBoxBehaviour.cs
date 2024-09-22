@@ -42,9 +42,9 @@ namespace Khet.Wpf.Behaviors
         {
             if (e.Key == Key.Left || e.Key == Key.Right)
             {
-                // Instead of marking the event as Handled, we'll just suppress the
+                // Instead of marking the event as handled, we'll just suppress the
                 // default behavior of the ComboBox for these keys
-               // e.Handled = true;
+               // e.handled = true;
 
                 // Re-raise the event at the window level
                 if (sender is ComboBox comboBox)
@@ -59,7 +59,7 @@ namespace Khet.Wpf.Behaviors
                     //    window.RaiseEvent(newEvent);
                     //}
 
-                    // Focus moves to the next or previous control instead of the ComboBox hanDLing it
+                    // Focus moves to the next or previous control instead of the ComboBox handling it
                     TraversalRequest tRequest = e.Key == Key.Right || e.Key == Key.Left
                         ? new TraversalRequest(FocusNavigationDirection.Previous)
                         : new TraversalRequest(FocusNavigationDirection.Next);
