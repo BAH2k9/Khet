@@ -42,9 +42,9 @@ namespace Khet.Wpf.Behaviors
         {
             if (e.Key == Key.Left || e.Key == Key.Right)
             {
-                // Instead of marking the event as hanDLed, we'll just suppress the
+                // Instead of marking the event as Handled, we'll just suppress the
                 // default behavior of the ComboBox for these keys
-               // e.HanDLed = true;
+               // e.Handled = true;
 
                 // Re-raise the event at the window level
                 if (sender is ComboBox comboBox)
