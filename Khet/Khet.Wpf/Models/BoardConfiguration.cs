@@ -23,37 +23,37 @@ namespace Khet.Wpf.Models
             GridModel.ClearGrid(_squareViewModels);
 
             // Standard Configuration
-            _squareViewModels[3][0].activePiece = new PyramidViewModel(Pyramid.bl, 1);
-            _squareViewModels[4][0].activePiece = new PyramidViewModel(Pyramid.tl, 1);
+            _squareViewModels[3][0].activePiece = new PyramidViewModel(Pyramid.BL, 1);
+            _squareViewModels[4][0].activePiece = new PyramidViewModel(Pyramid.TL, 1);
             
-            _squareViewModels[1][2].activePiece = new PyramidViewModel(Pyramid.tr, 1);
-            _squareViewModels[3][2].activePiece = new PyramidViewModel(Pyramid.tr, 2);
-            _squareViewModels[4][2].activePiece = new PyramidViewModel(Pyramid.br, 2);
-            _squareViewModels[7][2].activePiece = new PyramidViewModel(Pyramid.br, 2);
+            _squareViewModels[1][2].activePiece = new PyramidViewModel(Pyramid.TR, 1);
+            _squareViewModels[3][2].activePiece = new PyramidViewModel(Pyramid.TR, 2);
+            _squareViewModels[4][2].activePiece = new PyramidViewModel(Pyramid.BR, 2);
+            _squareViewModels[7][2].activePiece = new PyramidViewModel(Pyramid.BR, 2);
             
-            _squareViewModels[2][3].activePiece = new PyramidViewModel(Pyramid.br, 2);
+            _squareViewModels[2][3].activePiece = new PyramidViewModel(Pyramid.BR, 2);
             _squareViewModels[7][3].activePiece = new ObeliskViewModel(2);
             
             _squareViewModels[0][4].activePiece = new ObeliskViewModel(1);
-            _squareViewModels[3][4].activePiece = new DjedViewModel(Djed.dl, 1);
-            _squareViewModels[4][4].activePiece = new DjedViewModel(Djed.dr, 2);
+            _squareViewModels[3][4].activePiece = new DjedViewModel(Djed.DL, 1);
+            _squareViewModels[4][4].activePiece = new DjedViewModel(Djed.DR, 2);
             _squareViewModels[7][4].activePiece = new PharaohViewModel(2);
             
             _squareViewModels[0][5].activePiece = new PharaohViewModel(1);
-            _squareViewModels[3][5].activePiece = new DjedViewModel(Djed.dr, 1);
-            _squareViewModels[4][5].activePiece = new DjedViewModel(Djed.dl, 2);
+            _squareViewModels[3][5].activePiece = new DjedViewModel(Djed.DR, 1);
+            _squareViewModels[4][5].activePiece = new DjedViewModel(Djed.DL, 2);
             _squareViewModels[7][5].activePiece = new ObeliskViewModel(2);
             
             _squareViewModels[0][6].activePiece = new ObeliskViewModel(1);
-            _squareViewModels[5][6].activePiece = new PyramidViewModel(Pyramid.tl, 1);
+            _squareViewModels[5][6].activePiece = new PyramidViewModel(Pyramid.TL, 1);
             
-            _squareViewModels[0][7].activePiece = new PyramidViewModel(Pyramid.tl, 1);
-            _squareViewModels[3][7].activePiece = new PyramidViewModel(Pyramid.tl, 1);
-            _squareViewModels[4][7].activePiece = new PyramidViewModel(Pyramid.bl, 1);
-            _squareViewModels[6][7].activePiece = new PyramidViewModel(Pyramid.bl, 2);
+            _squareViewModels[0][7].activePiece = new PyramidViewModel(Pyramid.TL, 1);
+            _squareViewModels[3][7].activePiece = new PyramidViewModel(Pyramid.TL, 1);
+            _squareViewModels[4][7].activePiece = new PyramidViewModel(Pyramid.BL, 1);
+            _squareViewModels[6][7].activePiece = new PyramidViewModel(Pyramid.BL, 2);
             
-            _squareViewModels[3][9].activePiece = new PyramidViewModel(Pyramid.br, 2);
-            _squareViewModels[4][9].activePiece = new PyramidViewModel(Pyramid.tr, 2);
+            _squareViewModels[3][9].activePiece = new PyramidViewModel(Pyramid.BR, 2);
+            _squareViewModels[4][9].activePiece = new PyramidViewModel(Pyramid.TR, 2);
 
             return _squareViewModels;
         }
@@ -63,18 +63,18 @@ namespace Khet.Wpf.Models
             GridModel.ClearGrid(_squareViewModels);
 
             // Standard Configuration
-            _squareViewModels[2][0].activePiece = new PyramidViewModel(Pyramid.bl, 1);
-            _squareViewModels[3][0].activePiece = new PyramidViewModel(Pyramid.tl, 1);
+            _squareViewModels[2][0].activePiece = new PyramidViewModel(Pyramid.BL, 1);
+            _squareViewModels[3][0].activePiece = new PyramidViewModel(Pyramid.TL, 1);
             
-            _squareViewModels[3][2].activePiece = new DjedViewModel(Djed.dl, 1);
+            _squareViewModels[3][2].activePiece = new DjedViewModel(Djed.DL, 1);
             
-            _squareViewModels[4][3].activePiece = new PyramidViewModel(Pyramid.br, 1);
-            _squareViewModels[5][3].activePiece = new DjedViewModel(Djed.dr, 2);
-            _squareViewModels[7][3].activePiece = new PyramidViewModel(Pyramid.br, 2);
+            _squareViewModels[4][3].activePiece = new PyramidViewModel(Pyramid.BR, 1);
+            _squareViewModels[5][3].activePiece = new DjedViewModel(Djed.DR, 2);
+            _squareViewModels[7][3].activePiece = new PyramidViewModel(Pyramid.BR, 2);
                         
-            _squareViewModels[0][4].activePiece = new PyramidViewModel(Pyramid.tr, 1);
-            _squareViewModels[2][4].activePiece = new PyramidViewModel(Pyramid.tr, 1);
-            _squareViewModels[3][4].activePiece = new PyramidViewModel(Pyramid.br, 2);
+            _squareViewModels[0][4].activePiece = new PyramidViewModel(Pyramid.TR, 1);
+            _squareViewModels[2][4].activePiece = new PyramidViewModel(Pyramid.TR, 1);
+            _squareViewModels[3][4].activePiece = new PyramidViewModel(Pyramid.BR, 2);
             _squareViewModels[5][4].activePiece = new ObeliskViewModel(2);
             _squareViewModels[6][4].activePiece = new PharaohViewModel(2);
             _squareViewModels[7][4].activePiece = new ObeliskViewModel(2);
@@ -82,18 +82,18 @@ namespace Khet.Wpf.Models
             _squareViewModels[0][5].activePiece = new ObeliskViewModel(1);
             _squareViewModels[1][5].activePiece = new PharaohViewModel(1);
             _squareViewModels[2][5].activePiece = new ObeliskViewModel(1);
-            _squareViewModels[4][5].activePiece = new PyramidViewModel(Pyramid.tl, 1);
-            _squareViewModels[5][5].activePiece = new PyramidViewModel(Pyramid.bl, 2);
-            _squareViewModels[7][5].activePiece = new PyramidViewModel(Pyramid.bl, 2);
+            _squareViewModels[4][5].activePiece = new PyramidViewModel(Pyramid.TL, 1);
+            _squareViewModels[5][5].activePiece = new PyramidViewModel(Pyramid.BL, 2);
+            _squareViewModels[7][5].activePiece = new PyramidViewModel(Pyramid.BL, 2);
             
-            _squareViewModels[0][6].activePiece = new PyramidViewModel(Pyramid.tl, 1);
-            _squareViewModels[0][6].activePiece = new DjedViewModel(Djed.dr, 1);
-            _squareViewModels[0][6].activePiece = new PyramidViewModel(Pyramid.tl, 2);
+            _squareViewModels[0][6].activePiece = new PyramidViewModel(Pyramid.TL, 1);
+            _squareViewModels[0][6].activePiece = new DjedViewModel(Djed.DR, 1);
+            _squareViewModels[0][6].activePiece = new PyramidViewModel(Pyramid.TL, 2);
             
-            _squareViewModels[4][7].activePiece = new DjedViewModel(Djed.dl, 2);
+            _squareViewModels[4][7].activePiece = new DjedViewModel(Djed.DL, 2);
             
-            _squareViewModels[4][9].activePiece = new PyramidViewModel(Pyramid.br, 2);
-            _squareViewModels[5][9].activePiece = new PyramidViewModel(Pyramid.tr, 2);
+            _squareViewModels[4][9].activePiece = new PyramidViewModel(Pyramid.BR, 2);
+            _squareViewModels[5][9].activePiece = new PyramidViewModel(Pyramid.TR, 2);
         }
 
         public void SetSquareColor()
@@ -114,6 +114,11 @@ namespace Khet.Wpf.Models
             Names.Add(BoardConfig.Classic);
             Names.Add(BoardConfig.Dynasty);
 
+        }
+
+        public GridModel GetGridModel()
+        {
+            return _squareViewModels;
         }
     }
 }

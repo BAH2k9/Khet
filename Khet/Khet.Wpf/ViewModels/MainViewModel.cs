@@ -18,10 +18,9 @@ namespace Khet.Wpf.ViewModels
         public ICommand Player2FireCommand { get; }
         
 
-        public MainViewModel()
+        public MainViewModel(BoardViewModel boardViewModel)
         {
-
-            boardViewModel = new BoardViewModel();
+            _boardViewModel = boardViewModel;
 
             Player1FireCommand = new RelayCommand<object>(FireLaserPlayer1);
             Player2FireCommand = new RelayCommand<object>(FireLaserPlayer2);
@@ -30,12 +29,12 @@ namespace Khet.Wpf.ViewModels
 
         public void FireLaserPlayer1(object obj)
         {
-            FireLaserPlayer(0, 0, Direction.down);
+            FireLaserPlayer(0, 0, Direction.Down);
         }
 
         public void FireLaserPlayer2(object obj)
         {
-            FireLaserPlayer(7, 9, Direction.up);
+            FireLaserPlayer(7, 9, Direction.Up);
         }
 
         async Task FireLaserPlayer(int x, int y, Direction direction)
@@ -51,26 +50,28 @@ namespace Khet.Wpf.ViewModels
             {
                 GridModel.ClearLaser(boardViewModel.squareViewModels);
             });
+
+            
         }
 
         public static void FireLaser(GridModel squareViewModels, int i, int j, Direction direction)
         {
             GridModel.ClearLaser(squareViewModels);
 
-            while (GridModel.InBounds(i, j) && direction != Direction.kill)
+            while (GridModel.InBounds(i, j) && direction != Direction.Kill)
             {
                 switch (direction = squareViewModels[i][j].FireLaser(direction))
                 {
-                    case Direction.up:
+                    case Direction.Up:
                         i--;
                         break;
-                    case Direction.down:
+                    case Direction.Down:
                         i++;
                         break;
-                    case Direction.left:
+                    case Direction.Left:
                         j--;
                         break;
-                    case Direction.right:
+                    case Direction.Right:
                         j++;
                         break;
 

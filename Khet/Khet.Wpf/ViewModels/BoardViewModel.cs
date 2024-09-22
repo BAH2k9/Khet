@@ -41,13 +41,18 @@ namespace Khet.Wpf.ViewModels
 
         
 
-        public BoardViewModel()
+        public BoardViewModel(MoveModel mover, BoardConfiguration boardConfiguration)
         {
-            
-            squareViewModels = GridModel.Create();
 
-            _mover = new MoveModel();
-            _boardConfiguration = new BoardConfiguration(squareViewModels);
+            //squareViewModels = GridModel.Create();
+
+            
+
+            //_mover = new MoveModel();
+            //_boardConfiguration = new BoardConfiguration(squareViewModels);
+            _mover = mover;
+            _boardConfiguration = boardConfiguration;
+            squareViewModels = _boardConfiguration.GetGridModel();
             _boardConfiguration.SetNames(boardConfigurationNames);
             _boardConfiguration.SetSquareColor();
             _boardConfiguration.SetClassic();
@@ -81,11 +86,11 @@ namespace Khet.Wpf.ViewModels
                 _selectedSquare.activePiece?.RotatePiece(rotation);
                 WarningMessage = "";
             }
-            catch(UserExceptions ex) 
+            catch (UserExceptions ex)
             {
                 WarningMessage = ex.Message;
             }
-            
+
         }
 
         private async Task ConfigurationChange(object param)

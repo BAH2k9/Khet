@@ -27,8 +27,7 @@ namespace Khet.Wpf.ViewModels
 
         public override Direction ResolveLaserDirection(Direction direction)
         {
-
-            return Direction.kill;
+            return Direction.Kill;
         }
 
     }
