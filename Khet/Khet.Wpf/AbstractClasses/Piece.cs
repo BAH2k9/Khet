@@ -65,11 +65,11 @@ namespace Khet.Wpf.AbstractClasses
         {
             if (player == 1)
             {
-                this.playerColor = Brushes.DarkGray;
+                this.playerColor = Brushes.Red;
             }
             else if (player == 2)
             {
-                this.playerColor = Brushes.Red;
+                this.playerColor = Brushes.DarkGray;
             }
         }
     }

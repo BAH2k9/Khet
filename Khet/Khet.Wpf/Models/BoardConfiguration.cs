@@ -12,8 +12,6 @@ namespace Khet.Wpf.Models
 {
     public class BoardConfiguration
     {
-        private ObservableCollection<BoardConfig> _names { get; set; }
-
         private GridModel _squareViewModels;
         public BoardConfiguration(GridModel squareViewModels)
         {

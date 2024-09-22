@@ -127,11 +127,11 @@ namespace Khet.Wpf.ViewModels
         {
             if (player == 1)
             {
-                this.Background = Brushes.LightGray;
+                this.Background = Brushes.IndianRed;
             }
             else if (player == 2)
             {
-                this.Background = Brushes.IndianRed;
+                this.Background = Brushes.LightGray;
 
             }
 

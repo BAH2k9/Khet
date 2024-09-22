@@ -14,9 +14,6 @@ namespace Khet.Wpf.ViewModels
         private BoardViewModel _boardViewModel;
         public BoardViewModel boardViewModel { get => _boardViewModel; set => SetProperty(ref _boardViewModel, value); }
 
-        
-        
-
         public ICommand Player1FireCommand { get; }
         public ICommand Player2FireCommand { get; }
         
@@ -29,7 +26,6 @@ namespace Khet.Wpf.ViewModels
             Player1FireCommand = new RelayCommand<object>(FireLaserPlayer1);
             Player2FireCommand = new RelayCommand<object>(FireLaserPlayer2);
             
-
         }
 
         public void FireLaserPlayer1(object obj)
