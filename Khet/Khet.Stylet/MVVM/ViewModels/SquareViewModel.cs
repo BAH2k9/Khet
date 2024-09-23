@@ -13,5 +13,12 @@ namespace Khet.Stylet.MVVM.ViewModels
         {
 
         }
+
+        //square properties 
+        /*
+         * square: piece + laser
+         * piece: player + specific piece
+         * laser: on/off, where on square
+         */
     }
 }

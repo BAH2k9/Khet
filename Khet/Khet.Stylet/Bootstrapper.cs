@@ -33,6 +33,7 @@ namespace Khet.Stylet
         protected override void Configure()
         {
             // Perform any other configuration before the application starts
+
         }
     }
 }

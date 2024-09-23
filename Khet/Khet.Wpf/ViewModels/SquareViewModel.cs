@@ -1,4 +1,5 @@
-﻿using Khet.Wpf.Core;
+﻿using Khet.Wpf.AbstractClasses;
+using Khet.Wpf.Core;
 using Khet.Wpf.Enums;
 using Khet.Wpf.Interfaces;
 using Khet.Wpf.Models;

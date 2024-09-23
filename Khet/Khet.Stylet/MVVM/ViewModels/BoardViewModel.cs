@@ -18,5 +18,14 @@ namespace Khet.Stylet.MVVM.ViewModels
 
             grid = GridModel.Create();
         }
+
+        public void ClickSquare()
+        {
+            var a = 0;
+        }
+
+        //piece movement
+        //configuration
+        //player information
     }
 }
