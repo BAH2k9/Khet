@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Khet.Stylet.MVVM.Models.MyPieces.Enum;
+using System.Collections.Generic;
 
 namespace Khet.Stylet.MVVM.Models.MyPieces
 {
@@ -8,14 +9,7 @@ namespace Khet.Stylet.MVVM.Models.MyPieces
 
         public (int x, int y) position { get; set; }
 
-        public Enum.Orientations orientation { get; set; }
-
-        public class Piece(int player, (int x, int y) position, Enum.Orientations orientation)
-        {
-            this.player = player;
-            this.position = position;
-                this.orientation = orientation;
-        }
+        public Orientations orientation { get; set; }
 
         public PieceInfo GetPieceInfo()
         {
@@ -26,6 +20,8 @@ namespace Khet.Stylet.MVVM.Models.MyPieces
                 position = position
             };
         }
+
+        public abstract void Rotate(Rotate rotation);
 
     }
 

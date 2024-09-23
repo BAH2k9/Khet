@@ -20,7 +20,7 @@ namespace Khet.Stylet.MVVM.Models.MyPieces
             this.orientation = orientation;
         }
 
-        virtual public int Rotation(Rotate rotate)
+        virtual public void Rotate(Rotate rotation)
         {
             throw new NotImplementedException();
             // throw new PieceRotationException("Piece cannot be rotated!");

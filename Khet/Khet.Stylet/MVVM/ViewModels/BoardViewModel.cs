@@ -16,7 +16,7 @@ namespace Khet.Stylet.MVVM.ViewModels
             _moveModel = moveModel;
             _boardConfigurationModel = boardConfigurationModel;
 
-            grid = GridModel.Create();
+            grid = _boardConfigurationModel.CreateGrid();
         }
 
         public void ClickSquare()

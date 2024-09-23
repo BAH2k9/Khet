@@ -15,13 +15,13 @@ namespace Khet.Stylet.MVVM.Models.MyPieces
         {
         }
 
-        public override Orientations Rotation(Rotate rotation)
+        public override void Rotate(Rotate rotation)
         {
-            var maxEnumValue = (Orientation)Enum.GetValues(typeof(Orientation)).Length - 1;
+            var maxEnumValue = (Pyramid)Enum.GetValues(typeof(Pyramid)).Length - 1;
 
             switch (rotation)
             {
-                case Rotate.Left:
+                case Enum.Rotate.Left:
                     if (orientation == 0)
                     {
                         orientation = maxEnumValue;
@@ -29,11 +29,10 @@ namespace Khet.Stylet.MVVM.Models.MyPieces
                     else
                     {
                         orientation--;
-                        orientation--;
                     }
 
-                    return orientation;
-                case Rotate.Right:
+                    break;
+                case Enum.Rotate.Right:
                     if (orientation == maxEnumValue)
                     {
                         orientation = 0;
@@ -41,11 +40,11 @@ namespace Khet.Stylet.MVVM.Models.MyPieces
                     else
                     {
                         orientation++;
-                        orientation++;
                     }
-                    return orientation;
+                    break;
+
             }
-            return orientation;
+
         }
     }
 }

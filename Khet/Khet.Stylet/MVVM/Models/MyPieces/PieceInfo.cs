@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Khet.Stylet.MVVM.Models.MyPieces.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,6 @@ namespace Khet.Stylet.MVVM.Models.MyPieces
 
         public (int x, int y) position { get; set; }
 
-        public IOrientation orientation { get; set; }
+        public Orientations orientation { get; set; }
     }
 }

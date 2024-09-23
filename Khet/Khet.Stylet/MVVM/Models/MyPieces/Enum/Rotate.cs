@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Khet.Wpf.Enums
+namespace Khet.Stylet.MVVM.Models.MyPieces.Enum
 {
     public enum Rotate
     {

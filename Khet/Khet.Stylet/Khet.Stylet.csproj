@@ -15,4 +15,12 @@
   <ItemGroup>
     <Folder Include="MVVM\Services\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\baile\source\GitHub\Personal\Khet\Khet\Khet.Stylet\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\baile\source\GitHub\Personal\Khet\Khet\Khet.Stylet\.editorconfig" />
+  </ItemGroup>
 </Project>

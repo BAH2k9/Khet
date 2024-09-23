@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Khet.Stylet.MVVM.Models.MyPieces.Enum
+namespace Khet.Stylet.MVVM.Models.Pieces
 {
-    public enum Orientations
+    public enum Orientation
     {
-        North,
-        East,
-        South,
-        West,
+        NW,
+        NE,
+        SE,
+        SW,
     }
 }
