@@ -1,4 +1,5 @@
 ﻿using Khet2._0.CustomTypes;
+using Khet2._0.MVVM.Models;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -15,26 +16,13 @@ namespace Khet2._0.MVVM.ViewModel
         private MyGrid _grid;
         public MyGrid grid { get => _grid; set => SetAndNotify(ref _grid, value); }
 
-        public BoardViewModel()
+        public BoardViewModel(BoardModel boardModel)
         {
-            CreateGrid();
+            grid = boardModel.CreateGrid();
+
+            boardModel.ClassicSetUp(grid);
+
         }
 
-        public void CreateGrid()
-        {
-            var squareViewModels = new MyGrid();
-
-            for (int i = 0; i < 8; i++)
-            {
-                squareViewModels.Add(new BindableCollection<SquareViewModel>());
-
-                for (int j = 0; j < 10; j++)
-                {
-                    squareViewModels[i].Add(new SquareViewModel());
-                }
-            }
-
-            grid = squareViewModels;
-        }
     }
 }

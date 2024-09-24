@@ -4,13 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:s="https://github.com/canton7/Stylet"
-             xmlns:local="clr-namespace:Khet2._0.MVVM.View"
+             xmlns:vm="clr-namespace:Khet2._0.MVVM.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="150" d:DesignWidth="150"
+             d:DataContext="{d:DesignInstance vm:SquareViewModel}"
              Background="Transparent"
-             MouseDown="{s:Action ExecuteMouseDown}" >
+             MouseDown="{s:Action ExecuteMouseDown}">
 
-    <Border BorderBrush="Black" BorderThickness="2"/>
+
+    <Border BorderBrush="Black" BorderThickness="2">
+        <Grid>
+            <ContentControl s:View.Model="{Binding ActiveLaser}" Panel.ZIndex="1"/>
+            <ContentControl s:View.Model="{Binding ActivePiece}" Panel.ZIndex="0"/>
+        </Grid>
+    </Border>
 
 
 </UserControl>

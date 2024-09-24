@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:Khet.Wpf.Views"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="100">
+             d:DesignHeight="100" d:DesignWidth="100"
+             >
 
     <i:Interaction.Triggers>
 
@@ -37,13 +38,13 @@
                  Stroke="Black" 
                  Fill="{Binding playerColor}" 
                  StrokeThickness="2" >
-            
+
             <!--<Polygon.RenderTransform>
                 <RotateTransform Angle="{Binding rotationAngle}" 
                                  CenterX="{Binding rotationPoint[0]}" 
                                  CenterY="{Binding rotationPoint[1]}" />
             </Polygon.RenderTransform>-->
-                
+
         </Polygon>
     </Grid>
 </UserControl>

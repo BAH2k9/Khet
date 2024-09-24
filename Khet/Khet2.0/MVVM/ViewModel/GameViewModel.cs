@@ -1,4 +1,5 @@
 ﻿using Stylet;
+using System;
 
 namespace Khet2._0.MVVM.ViewModel
 {
@@ -11,5 +12,6 @@ namespace Khet2._0.MVVM.ViewModel
         {
             this.boardViewModel = boardViewModel;
         }
+
     }
 }

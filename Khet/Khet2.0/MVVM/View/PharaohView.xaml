@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Khet2._0.MVVM.View.PharaohView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:conv="clr-namespace:Khet2._0.CustomTypes"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+
+    <Grid >
+        <Image Panel.ZIndex="1">
+            <Image.Source>
+                <BitmapImage  UriSource="../../Assets/Pharaoh.png" />
+            </Image.Source>
+        </Image>
+
+        <Rectangle Height="auto" Width="auto" Fill="Red" Panel.ZIndex="0"/>
+    </Grid>
+</UserControl>
