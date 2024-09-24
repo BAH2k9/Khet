@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Khet2._0.MVVM.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:local="clr-namespace:Khet2._0.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Home View" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Button Grid.Row="1"
+            Content="Play Game"
+            FontSize="30"
+            Margin="300, 80, 300, 80"
+            Click="{s:Action NavigateToGameView}" />
+    </Grid>
+</UserControl>
