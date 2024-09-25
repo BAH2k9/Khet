@@ -18,8 +18,9 @@ namespace Khet2._0.MVVM.ViewModel
         private PointCollection _points;
         public PointCollection points { get => _points; set => SetAndNotify(ref _points, value); }
 
-        public PyramidViewModel(int player)
+        public PyramidViewModel(Orientations orientation, int player)
         {
+            this.orientation = orientation;
             if (player == 1)
             {
                 playerColor = Brushes.Silver;

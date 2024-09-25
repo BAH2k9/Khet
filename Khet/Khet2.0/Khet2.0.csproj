@@ -9,6 +9,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Assets\Fire.png" />
+	  <None Remove="Assets\laserCanon.png" />
+	  <None Remove="Assets\laserCanonB.png" />
 	  <None Remove="Assets\Pharaoh.png" />
 	</ItemGroup>
 
@@ -21,6 +24,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Resource Include="Assets\Fire.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Assets\laserCanon.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Assets\laserCanonB.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="Assets\Pharaoh.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Resource>

@@ -6,7 +6,7 @@
              xmlns:s="https://github.com/canton7/Stylet"
              xmlns:vm="clr-namespace:Khet2._0.MVVM.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="200"
+             d:DesignHeight="100" d:DesignWidth="100"
              d:DataContext="{d:DesignInstance vm:PyramidViewModel}"
              SizeChanged="{s:Action OnSizeChanged }"
              Loaded="{s:Action OnLoaded}">
