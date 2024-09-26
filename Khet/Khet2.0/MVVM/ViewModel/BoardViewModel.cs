@@ -14,6 +14,7 @@ namespace Khet2._0.MVVM.ViewModel
     public class BoardViewModel : Screen
     {
         private MoveModel _moveModel;
+        private RotateModel _rotateModel;
         private LaserModel _laserModel;
 
         private MyGrid _grid;
@@ -21,9 +22,10 @@ namespace Khet2._0.MVVM.ViewModel
 
         //private Index _selectedSquareIndex;
 
-        public BoardViewModel(BoardModel boardModel, MoveModel moveModel, LaserModel laserModel, EventAggregator eventAggregator)
+        public BoardViewModel(BoardModel boardModel, RotateModel rotateModel, MoveModel moveModel, LaserModel laserModel, EventAggregator eventAggregator)
         {
             _moveModel = moveModel;
+            _rotateModel = rotateModel;
             _laserModel = laserModel;
 
 

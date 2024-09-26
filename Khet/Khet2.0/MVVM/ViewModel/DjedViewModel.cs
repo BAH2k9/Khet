@@ -18,9 +18,11 @@ namespace Khet2._0.MVVM.ViewModel
 
         public ObservableCollection<double> point1 { get; set; } = [0, 0];
         public ObservableCollection<double> point2 { get; set; } = [0, 0];
+        public int player { get; set; }
 
         public DjedViewModel(Orientations orientation, int player)
         {
+            this.player = player;
             this.orientation = orientation;
             if (player == 1)
             {
@@ -51,7 +53,7 @@ namespace Khet2._0.MVVM.ViewModel
             RenderPiece();
         }
 
-        private void RenderPiece()
+        public void RenderPiece()
         {
             if (this.orientation == Orientations.NE || this.orientation == Orientations.SW)
             {

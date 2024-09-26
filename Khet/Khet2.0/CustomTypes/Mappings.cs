@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System;
 using UnusedAlias = System.Windows.Controls.Orientation;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Khet2._0.CustomTypes
 {
@@ -64,6 +65,19 @@ namespace Khet2._0.CustomTypes
             {Direction.Down,Direction.Up },
             {Direction.Left, Direction.Right},
             {Direction.Right,Direction.Left },
+        };
+
+        public static readonly Dictionary<(Orientations, Key), Orientations> Rotate = new Dictionary<(Orientations, Key), Orientations>
+        {
+            {(Orientations.NW, Key.Left), Orientations.SW},
+            {(Orientations.SW, Key.Left), Orientations.SE},
+            {(Orientations.SE, Key.Left), Orientations.NE},
+            {(Orientations.NE, Key.Left), Orientations.NW},
+
+            {(Orientations.NE, Key.Right), Orientations.SE},
+            {(Orientations.SE, Key.Right), Orientations.SW},
+            {(Orientations.SW, Key.Right), Orientations.NW},
+            {(Orientations.NW, Key.Right), Orientations.NE},
         };
     }
 }

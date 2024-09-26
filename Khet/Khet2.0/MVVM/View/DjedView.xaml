@@ -9,7 +9,8 @@
              d:DesignHeight="100" d:DesignWidth="100"
              d:DataContext="{d:DesignInstance vm:DjedViewModel}"
              SizeChanged="{s:Action OnSizeChanged }"
-             Loaded="{s:Action OnLoaded}">
+             Loaded="{s:Action OnLoaded}"
+             IsEnabled="False">
 
     <Grid>
         <Line 

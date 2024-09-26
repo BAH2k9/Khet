@@ -9,7 +9,10 @@
              d:DesignHeight="100" d:DesignWidth="100"
              d:DataContext="{d:DesignInstance vm:SquareViewModel}"
              Background="Transparent"
-             MouseDown="{s:Action ExecuteMouseDown}">
+             MouseDown="{s:Action ExecuteMouseDown}"
+             PreviewKeyDown="{s:Action ExecuteKeyDown}"
+             FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
+             Focusable="True">
 
 
     <Border BorderBrush="Black" BorderThickness="2">

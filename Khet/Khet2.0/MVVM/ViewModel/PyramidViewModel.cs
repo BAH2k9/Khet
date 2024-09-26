@@ -18,8 +18,12 @@ namespace Khet2._0.MVVM.ViewModel
         private PointCollection _points;
         public PointCollection points { get => _points; set => SetAndNotify(ref _points, value); }
 
+        public int player { get; set; }
+
         public PyramidViewModel(Orientations orientation, int player)
         {
+            this.player = player;
+
             this.orientation = orientation;
             if (player == 1)
             {
@@ -50,7 +54,7 @@ namespace Khet2._0.MVVM.ViewModel
             RenderPiece();
         }
 
-        private void RenderPiece()
+        public void RenderPiece()
         {
             switch (this.orientation)
             {
