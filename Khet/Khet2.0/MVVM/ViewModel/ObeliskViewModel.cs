@@ -14,8 +14,11 @@ namespace Khet2._0.MVVM.ViewModel
         private Brush _playerColor;
         public Brush playerColor { get => _playerColor; set => SetAndNotify(ref _playerColor, value); }
 
+        public int player { get; set; }
+
         public ObeliskViewModel(int player)
         {
+            this.player = player;
             if (player == 1)
             {
                 playerColor = Brushes.Silver;

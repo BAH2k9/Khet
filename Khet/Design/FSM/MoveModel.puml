@@ -1,0 +1,39 @@
+@startuml
+
+[*] --> State1 : Start
+State1 : No piece saved
+State1 : Piece Square not highlighted
+State1 : Disabled Laser Fire
+State1 : Disabled Back button
+
+State1 --> State2 : Piece Clicked
+State2 : Piece saved
+State2 : Piece Square highlighted
+State2 : Disabled Laser Fire
+State2 : Disabled Back button
+
+State2 --> State3 : New Piece Clicked
+State3 : New Piece saved
+State3 : Old Piece deleted
+State3 : New Piece Square highlighted
+State3 : Old Piece Square un-highlighted
+State3: Disabled Laser Fire
+State3 : Disabled Back button
+
+State3 --> State4 : Legal move click 
+State4 : Piece unsaved
+State4 : Piece square highlighted
+State4 : Piece highlighted
+State4 : Enabled Laser Fire 
+State4 : Enabled disabled back button 
+
+
+State2 --> State1 : Saved Piece Clicked
+State3 --> State3 : New Piece clicked
+
+
+State4 --> [*] : Laser Fired
+
+
+
+@enduml

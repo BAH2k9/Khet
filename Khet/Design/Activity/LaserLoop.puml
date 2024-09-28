@@ -1,0 +1,10 @@
+@startuml
+start
+: Get Starting sqaure and direction;
+repeat : Calculate Laser positions
+:Display Laser Positions;
+: Calculate Laser Direction;
+backward: Get Next square;
+repeat while(piece hit or wall hit) is (no)
+->yes;
+end

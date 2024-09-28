@@ -10,5 +10,11 @@ namespace Khet2._0.CustomTypes
     {
         public int row { get; set; }
         public int column { get; set; }
+
+        public Idx(int row, int col)
+        {
+            this.row = row;
+            this.column = col;
+        }
     }
 }

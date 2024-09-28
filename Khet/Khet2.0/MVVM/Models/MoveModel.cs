@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Khet2._0.MVVM.Models
 {
-    public class MoveModel : IHandle<SquareClickEvent>
+    public class MoveModel : IHandle<SquareClickEvent>, IHandle<LaserFireEvent>
     {
         //private TwoElementList<SquareViewModel> clickedSquares = new TwoElementList<SquareViewModel>();
 
@@ -16,53 +16,70 @@ namespace Khet2._0.MVVM.Models
         private EventAggregator _eventAggregator;
 
         private int state = 1;
+        private int _playerTurn = 1;
 
         public MoveModel(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
         }
+        public void Handle(LaserFireEvent e)
+        {
+            _playerTurn = e.player;
+        }
 
         public void Handle(SquareClickEvent e)
         {
-            if (state == 1)
+            if (e.hasPiece)
             {
-                if (e.hasPiece)
+                if (e.square.ActivePiece.player == _playerTurn)
                 {
                     square = e.square;
                     square.SelectSquare();
-                    state = 2;
-                    return;
+
+                    _eventAggregator.Publish(new PieceSelectedEvent(square.idx)); //This enables squares around the selected piece
                 }
             }
 
-            if (state == 2)
-            {
-                if (e.square == square) // Same square clicked twice -> unselect square
-                {
-                    square.UnselectSquare();
-                    square = null;
-                    state = 1;
-                }
-                else                  // Different square clicked -> move piece
-                {
 
-                    if (movePiece(square, e.square))
-                    {
-                        square.UnselectSquare();
-                        square = null;
-                        state = 1;
-                    }
-                    else
-                    {
-                        square.UnselectSquare();
-                        e.square.SelectSquare();
-                        square = e.square;
-                    }
+            //if (state == 1)
+            //{
+            //    if (e.hasPiece)
+            //    {
+            //        square = e.square;
+            //        square.SelectSquare();
+            //        state = 2;
+            //        return;
+            //    }
+            //}
 
-                }
-                return;
-            }
+            //if (state == 2)
+            //{
+            //    if (e.square == square) // Same square clicked twice -> unselect square
+            //    {
+            //        square.UnselectSquare();
+            //        square = null;
+            //        state = 1;
+            //    }
+            //    else                  // Different square clicked -> move piece
+            //    {
+
+            //        if (movePiece(square, e.square))
+            //        {
+            //            square.UnselectSquare();
+            //            square = null;
+            //            state = 1;
+            //        }
+            //        else
+            //        {
+            //            square.UnselectSquare();
+            //            e.square.SelectSquare();
+            //            square = e.square;
+            //        }
+
+            //    }
+            //    return;
+            //}
 
         }
 

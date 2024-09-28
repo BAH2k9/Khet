@@ -21,7 +21,11 @@ namespace Khet2._0.MVVM.ViewModel
 
         //private Index _selectedSquareIndex;
 
-        public BoardViewModel(BoardModel boardModel, MoveModel moveModel, LaserModel laserModel, EventAggregator eventAggregator)
+        public BoardViewModel(BoardModel boardModel,
+                                MoveModel moveModel,
+                                LaserModel laserModel,
+                                EventAggregator eventAggregator,
+                                GamePlayModel gamePlayModel)
         {
             _moveModel = moveModel;
             _laserModel = laserModel;
@@ -31,6 +35,7 @@ namespace Khet2._0.MVVM.ViewModel
             boardModel.ClassicSetUp(grid);
 
             laserModel.SetGrid(grid);
+            gamePlayModel.SetGrid(grid);
 
         }
     }

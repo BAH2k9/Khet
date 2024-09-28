@@ -14,8 +14,8 @@ namespace Khet2._0.MVVM.Models
 {
     public class LaserModel : IHandle<LaserFireEvent>
     {
-        private readonly Idx StartP1 = new Idx { row = 7, column = 9 };
-        private readonly Idx StartP2 = new Idx { row = 0, column = 0 };
+        private readonly Idx StartP1 = new Idx(7, 9);
+        private readonly Idx StartP2 = new Idx(0, 0);
 
         private readonly Direction directionP1 = Direction.Up;
         private readonly Direction directionP2 = Direction.Down;

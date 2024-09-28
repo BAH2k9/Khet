@@ -2,5 +2,6 @@
 {
     public interface IPiece
     {
+        public int player { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Khet2._0.CustomTypes;
 using Khet2._0.Enums;
+using Khet2._0.Interfaces;
 using Khet2._0.MVVM.ViewModel;
 using Stylet;
+using System.Collections.Generic;
 //using System.Windows.Controls;
 
 namespace Khet2._0.MVVM.Models
@@ -27,8 +29,7 @@ namespace Khet2._0.MVVM.Models
 
                 for (int j = 0; j < _columns; j++)
                 {
-                    var index = new Idx { row = i, column = j };
-                    squareViewModels[i].Add(new SquareViewModel(_eventAggregator, index));
+                    squareViewModels[i].Add(new SquareViewModel(_eventAggregator, new Idx(i, j)));
                 }
             }
 
@@ -37,6 +38,13 @@ namespace Khet2._0.MVVM.Models
 
         public void ClassicSetUp(MyGrid grid)
         {
+            Dictionary<Idx, IPiece> pieces = new Dictionary<Idx, IPiece>()
+            {
+                {new Idx(3,0), new PyramidViewModel(Orientations.NE, 1) },
+                {new Idx(4,0), new PyramidViewModel(Orientations.SE, 1) },
+            };
+
+
             // Standard Configuration
             grid[3][0].ActivePiece = new PyramidViewModel(Orientations.NE, 1);
             grid[4][0].ActivePiece = new PyramidViewModel(Orientations.SE, 1);
