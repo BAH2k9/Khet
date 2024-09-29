@@ -1,0 +1,19 @@
+@startuml
+HomeView -> HomeViewModel: PlayGameButtonEvent
+HomeViewModel -> EventAggregator: Publish NavigateEvent
+EventAggregator -> ShellViewModel: Handle(NavigateEvent)
+ShellViewModel -> ShellViewModel: Set ActiveItem \nas GameViewModel
+ShellViewModel -> GameView: Display
+ShellViewModel -> GameViewModel: Begin Game
+GameViewModel -> BoardView: Display
+GameViewModel -> BoardViewModel: Create Grid
+BoardViewModel -> BoardConfigurationService : Create Grid
+BoardConfigurationService -> SquareViewModel : Create
+BoardViewModel -> BoardConfigurationService : Set Configuration
+BoardConfigurationService -> IPiece: Create
+BoardConfigurationService -> SquareViewModel : Set Piece
+SquareViewModel -> PieceView: Display
+GameViewModel -> EventAggregator: Publish PlayerChange\nEvent (player = 1)
+EventAggregator -> BoardConfigurationService: Handle(PlayerChangeEvent)
+BoardConfigurationService -> SquareViewModel: Enable / Disable
+BoardConfigurationService -> GameViewModel: Enable Laser Fire button

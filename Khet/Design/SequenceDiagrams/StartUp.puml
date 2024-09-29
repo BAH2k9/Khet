@@ -1,0 +1,14 @@
+@startuml
+Application -> Bootstrapper: Initialize
+Bootstrapper -> Bootstrapper: Configure IoC Container
+Bootstrapper -> IoC_Container: Register Dependencies
+Bootstrapper -> Bootstrapper: Configure 
+Bootstrapper -> ViewManager: Initialize
+Bootstrapper -> ShellViewModel: Create
+ViewManager -> ShellView: Create
+ViewManager -> Application: Set ShellView as Main Window
+Application -> ShellView: Display
+ShellViewModel -> ShellViewModel: Set ActiveItem as\n HomeViewModel
+ShellViewModel -> EventAggregator: Subscribe to NavigateEvent
+Application -> HomeView: Display
+@enduml
