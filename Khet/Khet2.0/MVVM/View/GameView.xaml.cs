@@ -24,5 +24,10 @@ namespace Khet2._0.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Focus(); // Ensure the UserControl is focused.
+        }
     }
 }

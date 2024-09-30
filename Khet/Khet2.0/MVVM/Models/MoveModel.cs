@@ -1,5 +1,7 @@
 ﻿using Khet2._0.CustomTypes;
+using Khet2._0.Enums;
 using Khet2._0.Events;
+using Khet2._0.Interfaces;
 using Khet2._0.MVVM.ViewModel;
 using Stylet;
 using System;
@@ -7,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Khet2._0.MVVM.Models
 {
-    public class MoveModel : IHandle<SquareClickEvent>, IHandle<LaserFireEvent>
+    public class MoveModel : IHandle<SquareClickEvent>, IHandle<PlayerChangeEvent>, IHandle<RotateEvent>
     {
         //private TwoElementList<SquareViewModel> clickedSquares = new TwoElementList<SquareViewModel>();
 
@@ -23,98 +25,76 @@ namespace Khet2._0.MVVM.Models
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
         }
-        public void Handle(LaserFireEvent e)
-        {
-            _playerTurn = e.player;
-        }
+
 
         public void Handle(SquareClickEvent e)
         {
-            if (e.hasPiece)
+            if (state == 1)
             {
                 if (e.square.ActivePiece.player == _playerTurn)
                 {
                     square = e.square;
                     square.SelectSquare();
-
                     _eventAggregator.Publish(new PieceSelectedEvent(square.idx)); //This enables squares around the selected piece
+                    state = 2;
+                    return;
                 }
             }
 
-
-            //if (state == 1)
-            //{
-            //    if (e.hasPiece)
-            //    {
-            //        square = e.square;
-            //        square.SelectSquare();
-            //        state = 2;
-            //        return;
-            //    }
-            //}
-
-            //if (state == 2)
-            //{
-            //    if (e.square == square) // Same square clicked twice -> unselect square
-            //    {
-            //        square.UnselectSquare();
-            //        square = null;
-            //        state = 1;
-            //    }
-            //    else                  // Different square clicked -> move piece
-            //    {
-
-            //        if (movePiece(square, e.square))
-            //        {
-            //            square.UnselectSquare();
-            //            square = null;
-            //            state = 1;
-            //        }
-            //        else
-            //        {
-            //            square.UnselectSquare();
-            //            e.square.SelectSquare();
-            //            square = e.square;
-            //        }
-
-            //    }
-            //    return;
-            //}
-
-        }
-
-        private bool movePiece(SquareViewModel Old, SquareViewModel New)
-        {
-            var row_diff = Math.Abs(Old.idx.row - New.idx.row);
-            var col_diff = Math.Abs(Old.idx.column - New.idx.column);
-
-
-            if (row_diff <= 1 && col_diff <= 1)
+            if (state == 2)
             {
-                if (Old.ActivePiece is DjedViewModel djed)
+                if (e.square.ActivePiece == square.ActivePiece)
                 {
-                    if (New.ActivePiece is not DjedViewModel && New.ActivePiece is not PharaohViewModel)
+                    square.UnselectSquare();
+                    square = null;
+                    state = 1;
+                    _eventAggregator.Publish(new PieceUnselectedEvent(_playerTurn)); //This enables squares around the selected piece
+                    return;
+                }
+
+                if (e.square.ActivePiece == null)
+                {
+                    e.square.ActivePiece = square.ActivePiece;
+                    square.ActivePiece = null;
+                    square.UnselectSquare();
+                    state = 1;
+                    _eventAggregator.Publish(new PieceMoveEvent(_playerTurn));
+                    return;
+                }
+
+                if (square.ActivePiece is DjedViewModel djed)
+                {
+                    if (e.square.ActivePiece is PyramidViewModel || e.square.ActivePiece is ObeliskViewModel)
                     {
-                        var temp = New.ActivePiece;
-                        New.ActivePiece = Old.ActivePiece;
-                        Old.ActivePiece = temp;
-                        return true;
+                        var temp = e.square.ActivePiece;
+                        e.square.ActivePiece = square.ActivePiece;
+                        square.ActivePiece = temp;
+                        square.UnselectSquare();
+                        state = 1;
+                        _eventAggregator.Publish(new PieceMoveEvent(_playerTurn));
+                        return;
                     }
-
                 }
-
-                if (New.ActivePiece == null)
-                {
-                    New.ActivePiece = Old.ActivePiece;
-                    Old.ActivePiece = null;
-                    return true;
-                }
-
+                return;
 
             }
-            return false;
-
         }
 
+        public void Handle(PlayerChangeEvent e)
+        {
+            _playerTurn = e.player;
+        }
+
+        public void Handle(RotateEvent e)
+        {
+
+            if (this.square?.ActivePiece != null)
+            {
+                if (this.square.ActivePiece is IRotatable rotatablePiece)
+                {
+                    rotatablePiece.Rotate(e.direction);
+                }
+            }
+        }
     }
 }

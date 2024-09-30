@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace Khet2._0.MVVM.ViewModel
 {
-    public class DjedViewModel : Screen, IPiece
+    public class DjedViewModel : Screen, IPiece, IRotatable
     {
         public Orientations orientation { get; set; }
         private ControlSize controlSize { get; set; } = new ControlSize();
@@ -53,6 +53,21 @@ namespace Khet2._0.MVVM.ViewModel
             RenderPiece();
         }
 
+        public void Rotate(RotationDirection direction)
+        {
+            switch (direction)
+            {
+                case RotationDirection.CCW:
+                    orientation = (Orientations)(((int)orientation + 1) % 4);
+                    break;
+                case RotationDirection.CW:
+                    orientation = (Orientations)(((int)orientation + 3) % 4);
+                    break;
+            }
+
+            RenderPiece();
+        }
+
         private void RenderPiece()
         {
             if (this.orientation == Orientations.NE || this.orientation == Orientations.SW)
@@ -71,5 +86,7 @@ namespace Khet2._0.MVVM.ViewModel
             }
 
         }
+
+
     }
 }

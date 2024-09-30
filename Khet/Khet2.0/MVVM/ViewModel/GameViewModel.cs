@@ -1,11 +1,14 @@
-﻿using Khet2._0.Events;
+﻿using Khet2._0.Enums;
+using Khet2._0.Events;
 using Khet2._0.MVVM.Models;
 using Stylet;
 using System;
+using System.Diagnostics;
+using System.Windows.Input;
 
 namespace Khet2._0.MVVM.ViewModel
 {
-    public class GameViewModel : Screen
+    public class GameViewModel : Screen, IHandle<PieceMoveEvent>
     {
         private BoardViewModel _boardViewModel;
         public BoardViewModel boardViewModel { get => _boardViewModel; set => SetAndNotify(ref _boardViewModel, value); }
@@ -22,34 +25,88 @@ namespace Khet2._0.MVVM.ViewModel
         {
             this.boardViewModel = boardViewModel;
             _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
 
             BeginGame();
+
         }
 
         public void BeginGame()
         {
             _eventAggregator.Publish(new PlayerChangeEvent(1));
-            IsEnabledP1 = true;
-            IsEnabledP2 = false;
+
         }
 
         public void ExecuteFireLaserP1()
         {
             _eventAggregator.Publish(new LaserFireEvent { player = 1 });
-            _eventAggregator.Publish(new PlayerChangeEvent(1));
+            _eventAggregator.Publish(new PlayerChangeEvent(2));
 
-            IsEnabledP1 = false;
-            IsEnabledP2 = true;
+            DisablePlayerLaser(1);
         }
 
         public void ExecuteFireLaserP2()
         {
             _eventAggregator.Publish(new LaserFireEvent { player = 2 });
-            _eventAggregator.Publish(new PlayerChangeEvent(2));
+            _eventAggregator.Publish(new PlayerChangeEvent(1));
 
-            IsEnabledP1 = true;
-            IsEnabledP2 = false;
+            DisablePlayerLaser(2);
         }
 
+        private void DisablePlayerLaser(int player)
+        {
+            switch (player)
+            {
+                case 1:
+                    IsEnabledP1 = false;
+                    break;
+                case 2:
+                    IsEnabledP2 = false;
+                    break;
+                default: break;
+            }
+        }
+
+        private void EnablePlayerLaser(int player)
+        {
+            switch (player)
+            {
+                case 1:
+                    IsEnabledP1 = true;
+                    break;
+                case 2:
+                    IsEnabledP2 = true;
+                    break;
+                default: break;
+            }
+        }
+
+        public void Handle(PieceMoveEvent e)
+        {
+            EnablePlayerLaser(e.player);
+
+        }
+
+        public void ExecuteKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Left)
+            {
+                Trace.WriteLine("Left key pressed");
+                var rotationDirection = RotationDirection.CCW;
+                _eventAggregator.Publish(new RotateEvent(rotationDirection));
+                return;
+
+            }
+            if (e.Key == Key.Right)
+            {
+                Trace.WriteLine("Right key pressed");
+                var rotationDirection = RotationDirection.CW;
+                _eventAggregator.Publish(new RotateEvent(rotationDirection));
+                return;
+            }
+
+            e.Handled = true;
+
+        }
     }
 }

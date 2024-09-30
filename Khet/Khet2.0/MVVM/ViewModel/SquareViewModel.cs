@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace Khet2._0.MVVM.ViewModel
 {
-    public class SquareViewModel : Screen, IHandle<PieceSelectedEvent>, IHandle<PlayerChangeEvent>
+    public class SquareViewModel : Screen, IHandle<PieceSelectedEvent>, IHandle<PlayerChangeEvent>, IHandle<PieceMoveEvent>, IHandle<PieceUnselectedEvent>
     {
         private EventAggregator _eventAggregator;
         public Idx idx { get; set; }
@@ -50,9 +50,9 @@ namespace Khet2._0.MVVM.ViewModel
             highlight = Brushes.Transparent;
         }
 
-        private void SetEnable(IPiece setPiece)
+        private void SetEnable(IPiece myPiece)
         {
-            if (setPiece != null)
+            if (myPiece != null)
             {
                 IsEnabled = true;
             }
@@ -80,14 +80,49 @@ namespace Khet2._0.MVVM.ViewModel
 
         public void Handle(PlayerChangeEvent e)
         {
-            if (ActivePiece?.player == e.player)
+            if (HavePiece())
             {
-                IsEnabled = true;
+                if (ActivePiece.player == e.player)
+                {
+                    IsEnabled = true;
+                }
+                else
+                {
+                    IsEnabled = false;
+                }
             }
-            else
+
+        }
+
+        private bool HavePiece()
+        {
+            if (ActivePiece == null)
             {
-                IsEnabled = false;
+                return false;
             }
+
+            return true;
+        }
+
+        public void Handle(PieceMoveEvent e)
+        {
+            IsEnabled = false;
+        }
+
+        public void Handle(PieceUnselectedEvent e)
+        {
+            if (HavePiece())
+            {
+                if (ActivePiece.player == e.playerTurn)
+                {
+                    IsEnabled = true;
+                }
+                else
+                {
+                    IsEnabled = false;
+                }
+            }
+
         }
     }
 }

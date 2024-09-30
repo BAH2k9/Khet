@@ -38,45 +38,38 @@ namespace Khet2._0.MVVM.Models
 
         public void ClassicSetUp(MyGrid grid)
         {
-            Dictionary<Idx, IPiece> pieces = new Dictionary<Idx, IPiece>()
-            {
-                {new Idx(3,0), new PyramidViewModel(Orientations.NE, 1) },
-                {new Idx(4,0), new PyramidViewModel(Orientations.SE, 1) },
-            };
-
-
             // Standard Configuration
-            grid[3][0].ActivePiece = new PyramidViewModel(Orientations.NE, 1);
-            grid[4][0].ActivePiece = new PyramidViewModel(Orientations.SE, 1);
+            grid[3][0].ActivePiece = new PyramidViewModel(Orientations.NE, 2);
+            grid[4][0].ActivePiece = new PyramidViewModel(Orientations.SE, 2);
 
-            grid[1][2].ActivePiece = new PyramidViewModel(Orientations.SW, 1);
-            grid[3][2].ActivePiece = new PyramidViewModel(Orientations.SW, 2);
-            grid[4][2].ActivePiece = new PyramidViewModel(Orientations.NW, 2);
-            grid[7][2].ActivePiece = new PyramidViewModel(Orientations.NW, 2);
+            grid[1][2].ActivePiece = new PyramidViewModel(Orientations.SW, 2);
+            grid[3][2].ActivePiece = new PyramidViewModel(Orientations.SW, 1);
+            grid[4][2].ActivePiece = new PyramidViewModel(Orientations.NW, 1);
+            grid[7][2].ActivePiece = new PyramidViewModel(Orientations.NW, 1);
 
-            grid[2][3].ActivePiece = new PyramidViewModel(Orientations.NW, 2);
-            grid[7][3].ActivePiece = new ObeliskViewModel(2);
+            grid[2][3].ActivePiece = new PyramidViewModel(Orientations.NW, 1);
+            grid[7][3].ActivePiece = new ObeliskViewModel(1);
 
-            grid[0][4].ActivePiece = new ObeliskViewModel(1);
-            grid[3][4].ActivePiece = new DjedViewModel(Orientations.NE, 1);
-            grid[4][4].ActivePiece = new DjedViewModel(Orientations.NW, 2);
-            grid[7][4].ActivePiece = new PharaohViewModel(2);
+            grid[0][4].ActivePiece = new ObeliskViewModel(2);
+            grid[3][4].ActivePiece = new DjedViewModel(Orientations.NE, 2);
+            grid[4][4].ActivePiece = new DjedViewModel(Orientations.NW, 1);
+            grid[7][4].ActivePiece = new PharaohViewModel(1);
 
-            grid[0][5].ActivePiece = new PharaohViewModel(1);
-            grid[3][5].ActivePiece = new DjedViewModel(Orientations.NW, 1);
-            grid[4][5].ActivePiece = new DjedViewModel(Orientations.NE, 2);
-            grid[7][5].ActivePiece = new ObeliskViewModel(2);
+            grid[0][5].ActivePiece = new PharaohViewModel(2);
+            grid[3][5].ActivePiece = new DjedViewModel(Orientations.NW, 2);
+            grid[4][5].ActivePiece = new DjedViewModel(Orientations.NE, 1);
+            grid[7][5].ActivePiece = new ObeliskViewModel(1);
 
-            grid[0][6].ActivePiece = new ObeliskViewModel(1);
-            grid[5][6].ActivePiece = new PyramidViewModel(Orientations.SE, 1);
+            grid[0][6].ActivePiece = new ObeliskViewModel(2);
+            grid[5][6].ActivePiece = new PyramidViewModel(Orientations.SE, 2);
 
-            grid[0][7].ActivePiece = new PyramidViewModel(Orientations.SE, 1);
-            grid[3][7].ActivePiece = new PyramidViewModel(Orientations.SE, 1);
-            grid[4][7].ActivePiece = new PyramidViewModel(Orientations.NE, 1);
-            grid[6][7].ActivePiece = new PyramidViewModel(Orientations.NE, 2);
+            grid[0][7].ActivePiece = new PyramidViewModel(Orientations.SE, 2);
+            grid[3][7].ActivePiece = new PyramidViewModel(Orientations.SE, 2);
+            grid[4][7].ActivePiece = new PyramidViewModel(Orientations.NE, 2);
+            grid[6][7].ActivePiece = new PyramidViewModel(Orientations.NE, 1);
 
-            grid[3][9].ActivePiece = new PyramidViewModel(Orientations.NW, 2);
-            grid[4][9].ActivePiece = new PyramidViewModel(Orientations.SW, 2);
+            grid[3][9].ActivePiece = new PyramidViewModel(Orientations.NW, 1);
+            grid[4][9].ActivePiece = new PyramidViewModel(Orientations.SW, 1);
         }
     }
 }

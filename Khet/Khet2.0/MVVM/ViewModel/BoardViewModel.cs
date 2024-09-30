@@ -4,10 +4,12 @@ using Khet2._0.MVVM.Models;
 using Stylet;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Khet2._0.MVVM.ViewModel
 {
@@ -24,8 +26,7 @@ namespace Khet2._0.MVVM.ViewModel
         public BoardViewModel(BoardModel boardModel,
                                 MoveModel moveModel,
                                 LaserModel laserModel,
-                                EventAggregator eventAggregator,
-                                GamePlayModel gamePlayModel)
+                                EventAggregator eventAggregator)
         {
             _moveModel = moveModel;
             _laserModel = laserModel;
@@ -35,8 +36,8 @@ namespace Khet2._0.MVVM.ViewModel
             boardModel.ClassicSetUp(grid);
 
             laserModel.SetGrid(grid);
-            gamePlayModel.SetGrid(grid);
 
         }
+
     }
 }

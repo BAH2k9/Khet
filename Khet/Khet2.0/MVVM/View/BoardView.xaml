@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:Khet2._0.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <!--KeyDown="{s:Action ExecuteKeyDown}" >-->
 
     <Border BorderBrush="Black" BorderThickness="2">
 
