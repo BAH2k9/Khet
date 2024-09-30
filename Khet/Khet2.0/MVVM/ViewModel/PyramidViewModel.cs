@@ -22,6 +22,8 @@ namespace Khet2._0.MVVM.ViewModel
         public int player { get; set; }
         public PyramidViewModel(Orientations orientation, int player)
         {
+            this.player = player;
+
             this.orientation = orientation;
             this.player = player;
             if (player == 1)

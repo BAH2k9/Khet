@@ -96,6 +96,8 @@ namespace Khet2._0.MVVM.Models
                         break;
                 }
             }
+
+
         }
 
 

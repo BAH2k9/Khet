@@ -1,4 +1,6 @@
-﻿namespace Khet2._0.Interfaces
+﻿using Khet2._0.Enums;
+
+namespace Khet2._0.Interfaces
 {
     public interface IPiece
     {

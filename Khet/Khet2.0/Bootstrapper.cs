@@ -1,4 +1,5 @@
-﻿using Khet2._0.MVVM.ViewModel;
+﻿using Khet2._0.MVVM.Models;
+using Khet2._0.MVVM.ViewModel;
 using Khet2._0.Pages;
 using Stylet;
 using StyletIoC;
@@ -16,11 +17,13 @@ namespace Khet2._0
             builder.Bind<GameViewModel>().ToSelf();
             builder.Bind<HomeViewModel>().ToSelf();
             builder.Bind<BoardViewModel>().ToSelf();
+            builder.Bind<RotateModel>().ToSelf();
+            builder.Bind<GameModel>().ToSelf();
         }
 
         protected override void Configure()
         {
-
+            var gameModel = this.Container.Get<GameModel>();
         }
 
     }

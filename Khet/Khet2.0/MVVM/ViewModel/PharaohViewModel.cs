@@ -1,4 +1,5 @@
-﻿using Khet2._0.Interfaces;
+﻿using Khet2._0.Enums;
+using Khet2._0.Interfaces;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Khet2._0.MVVM.ViewModel
 {
     public class PharaohViewModel : Screen, IPiece
     {
+        public Orientations orientation { get; set; }
         private Brush _playerColor;
         public Brush playerColor { get => _playerColor; set => SetAndNotify(ref _playerColor, value); }
 
@@ -26,6 +28,11 @@ namespace Khet2._0.MVVM.ViewModel
             {
                 playerColor = Brushes.Red;
             }
+        }
+
+        public void RenderPiece()
+        {
+            throw new NotImplementedException();
         }
     }
 }

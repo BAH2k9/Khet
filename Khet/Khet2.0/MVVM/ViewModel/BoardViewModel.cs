@@ -16,6 +16,7 @@ namespace Khet2._0.MVVM.ViewModel
     public class BoardViewModel : Screen
     {
         private MoveModel _moveModel;
+        private RotateModel _rotateModel;
         private LaserModel _laserModel;
         private BoardModel _boardModel;
 
@@ -31,6 +32,7 @@ namespace Khet2._0.MVVM.ViewModel
         {
             _boardModel = boardModel;
             _moveModel = moveModel;
+            _rotateModel = rotateModel;
             _laserModel = laserModel;
 
 

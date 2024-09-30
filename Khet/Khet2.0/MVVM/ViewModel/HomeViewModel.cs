@@ -1,5 +1,6 @@
 ﻿using Khet2._0.Enums;
 using Khet2._0.Events;
+using Khet2._0.MVVM.Models;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace Khet2._0.MVVM.ViewModel
     {
         private EventAggregator _eventAggregator;
 
+        private GameModel _gameModel;
+
         public HomeViewModel(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
@@ -20,6 +23,7 @@ namespace Khet2._0.MVVM.ViewModel
         public void NavigateToGameView()
         {
             _eventAggregator.Publish(new NavigateEvent { page = AppPages.Game });
+            _eventAggregator.Publish(new GameBeginEvent());
         }
     }
 

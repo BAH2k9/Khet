@@ -6,19 +6,22 @@ using Khet2._0.MVVM.ViewModel;
 using Stylet;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 
 namespace Khet2._0.MVVM.Models
 {
     public class MoveModel : IHandle<SquareClickEvent>, IHandle<PlayerChangeEvent>, IHandle<RotateEvent>
     {
-        //private TwoElementList<SquareViewModel> clickedSquares = new TwoElementList<SquareViewModel>();
-
+        private int playerTurn;
         private SquareViewModel square = null;
 
         private EventAggregator _eventAggregator;
 
         private int state = 1;
         private int _playerTurn = 1;
+
+        private bool pieceAlreadyMoved = false;
 
         public MoveModel(EventAggregator eventAggregator)
         {
@@ -29,6 +32,7 @@ namespace Khet2._0.MVVM.Models
 
         public void Handle(SquareClickEvent e)
         {
+
             if (state == 1)
             {
                 if (e.square.ActivePiece.player == _playerTurn)
@@ -38,6 +42,7 @@ namespace Khet2._0.MVVM.Models
                     _eventAggregator.Publish(new PieceSelectedEvent(square.idx)); //This enables squares around the selected piece
                     state = 2;
                     return;
+
                 }
             }
 
@@ -97,4 +102,6 @@ namespace Khet2._0.MVVM.Models
             }
         }
     }
+
+
 }
