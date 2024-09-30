@@ -48,17 +48,17 @@ namespace Khet2._0.MVVM.Models
                     square.UnselectSquare();
                     square = null;
                     state = 1;
-                    _eventAggregator.Publish(new PieceUnselectedEvent(_playerTurn)); //This enables squares around the selected piece
+                    _eventAggregator.Publish(new PieceUnselectedEvent(_playerTurn)); //This disables squares around the selected piece
                     return;
                 }
 
                 if (e.square.ActivePiece == null)
                 {
                     e.square.ActivePiece = square.ActivePiece;
-                    square.ActivePiece = null;
                     square.UnselectSquare();
                     state = 1;
-                    _eventAggregator.Publish(new PieceMoveEvent(_playerTurn));
+                    _eventAggregator.Publish(new PieceMovedEvent(_playerTurn, square, e.square));
+                    square.ActivePiece = null;
                     return;
                 }
 
@@ -71,7 +71,7 @@ namespace Khet2._0.MVVM.Models
                         square.ActivePiece = temp;
                         square.UnselectSquare();
                         state = 1;
-                        _eventAggregator.Publish(new PieceMoveEvent(_playerTurn));
+                        _eventAggregator.Publish(new PieceMovedEvent(_playerTurn, square, e.square));
                         return;
                     }
                 }
@@ -87,12 +87,12 @@ namespace Khet2._0.MVVM.Models
 
         public void Handle(RotateEvent e)
         {
-
-            if (this.square?.ActivePiece != null)
+            if (this.square?.ActivePiece != null && this.square.IsEnabled)
             {
                 if (this.square.ActivePiece is IRotatable rotatablePiece)
                 {
                     rotatablePiece.Rotate(e.direction);
+                    _eventAggregator.Publish(new PieceRotatedEvent());
                 }
             }
         }

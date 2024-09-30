@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Assets\BackButton.png" />
 	  <None Remove="Assets\Fire.png" />
 	  <None Remove="Assets\laserCanon.png" />
 	  <None Remove="Assets\laserCanonB.png" />
@@ -24,7 +25,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="Assets\Fire.png">
+	  <Resource Include="Assets\BackButton.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Resource>
 	  <Resource Include="Assets\laserCanon.png">

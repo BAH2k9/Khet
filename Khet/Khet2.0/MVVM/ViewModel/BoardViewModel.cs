@@ -17,6 +17,7 @@ namespace Khet2._0.MVVM.ViewModel
     {
         private MoveModel _moveModel;
         private LaserModel _laserModel;
+        private BoardModel _boardModel;
 
         private MyGrid _grid;
         public MyGrid grid { get => _grid; set => SetAndNotify(ref _grid, value); }
@@ -28,6 +29,7 @@ namespace Khet2._0.MVVM.ViewModel
                                 LaserModel laserModel,
                                 EventAggregator eventAggregator)
         {
+            _boardModel = boardModel;
             _moveModel = moveModel;
             _laserModel = laserModel;
 

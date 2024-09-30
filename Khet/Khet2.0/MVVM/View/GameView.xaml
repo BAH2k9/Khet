@@ -38,7 +38,7 @@
 
             <Button Background="Transparent" 
                     Click="{s:Action ExecuteFireLaserP2}"
-                    IsEnabled="{Binding IsEnabledP2}"
+                    IsEnabled="{Binding IsLaserP2Enabled}"
                     BorderBrush="Transparent">
                 <Image Panel.ZIndex="1">
                     <Image.Source>
@@ -64,7 +64,7 @@
 
             <Button Grid.Column="1" Background="Transparent" 
                     Click="{s:Action ExecuteFireLaserP1}"
-                     IsEnabled="{Binding IsEnabledP1}"
+                     IsEnabled="{Binding IsLaserP1Enabled}"
                     BorderBrush="Transparent">
                 <Image Panel.ZIndex="1">
                     <Image.Source>
@@ -78,6 +78,57 @@
                 </Image>
             </Button>
         </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ContentControl Grid.Row="1" Grid.Column="1" s:View.Model="{Binding capturedPieceViewModel2}"/>
+            <ContentControl Grid.Row="3" Grid.Column="1" s:View.Model="{Binding capturedPieceViewModel1}"/>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1" Grid.Row="0" 
+                    Background="Transparent" 
+                    BorderBrush="Transparent"
+                    IsEnabled="{Binding IsBackButtonEnabled}"
+                    Click="{s:Action ExecuteBackButtonClicked}">
+                <Image Panel.ZIndex="1">
+                    <Image.Source>
+                        <BitmapImage  UriSource="../../Assets/BackButton.png" />
+                    </Image.Source>
+                </Image>
+            </Button>
+
+
+        </Grid>
+
+
+
+
+
 
     </Grid>
 </UserControl>

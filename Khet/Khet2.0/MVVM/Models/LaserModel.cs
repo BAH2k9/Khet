@@ -14,6 +14,8 @@ namespace Khet2._0.MVVM.Models
 {
     public class LaserModel : IHandle<LaserFireEvent>
     {
+        private EventAggregator _eventAggregator;
+
         private readonly Idx StartP1 = new Idx(7, 9);
         private readonly Idx StartP2 = new Idx(0, 0);
 
@@ -26,7 +28,8 @@ namespace Khet2._0.MVVM.Models
         private MyGrid _grid;
         public LaserModel(EventAggregator eventAggregator)
         {
-            eventAggregator.Subscribe(this);
+            _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
         }
 
         public void SetGrid(MyGrid grid)
@@ -63,6 +66,7 @@ namespace Khet2._0.MVVM.Models
 
                 if (outDirection == Direction.Stop)
                 {
+                    _eventAggregator.Publish(new PieceCapturedEvent(_grid[row][col].ActivePiece));
                     // DeletePiece and exit loop
                     _grid[row][col].ActivePiece = null;
                     break;
@@ -71,7 +75,7 @@ namespace Khet2._0.MVVM.Models
                 _grid[row][col].ActiveLaser.FillLaser(inDirection);
                 _grid[row][col].ActiveLaser.FillLaser(outDirection);
 
-                await Task.Delay(50);
+                await Task.Delay(200);
                 _grid[row][col].ActiveLaser.ClearLaser(); // Example method; implement accordingly
 
                 switch (outDirection)

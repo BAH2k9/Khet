@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace Khet2._0.MVVM.ViewModel
 {
-    public class SquareViewModel : Screen, IHandle<PieceSelectedEvent>, IHandle<PlayerChangeEvent>, IHandle<PieceMoveEvent>, IHandle<PieceUnselectedEvent>
+    public class SquareViewModel : Screen, IHandle<PieceSelectedEvent>, IHandle<PlayerChangeEvent>, IHandle<PieceMovedEvent>, IHandle<PieceUnselectedEvent>, IHandle<PieceRotatedEvent>
     {
         private EventAggregator _eventAggregator;
         public Idx idx { get; set; }
@@ -104,7 +104,12 @@ namespace Khet2._0.MVVM.ViewModel
             return true;
         }
 
-        public void Handle(PieceMoveEvent e)
+        public void Handle(PieceMovedEvent e)
+        {
+            IsEnabled = false;
+        }
+
+        public void Handle(PieceRotatedEvent e)
         {
             IsEnabled = false;
         }

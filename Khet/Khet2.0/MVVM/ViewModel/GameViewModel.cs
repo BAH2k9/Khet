@@ -8,18 +8,27 @@ using System.Windows.Input;
 
 namespace Khet2._0.MVVM.ViewModel
 {
-    public class GameViewModel : Screen, IHandle<PieceMoveEvent>
+    public class GameViewModel : Screen, IHandle<PieceMovedEvent>, IHandle<PieceRotatedEvent>, IHandle<PlayerChangeEvent>
     {
         private BoardViewModel _boardViewModel;
         public BoardViewModel boardViewModel { get => _boardViewModel; set => SetAndNotify(ref _boardViewModel, value); }
 
+        private CapturedPieceViewModel _capturedPieceViewModel1;
+        public CapturedPieceViewModel capturedPieceViewModel1 { get => _capturedPieceViewModel1; set => SetAndNotify(ref _capturedPieceViewModel1, value); }
+
+        private CapturedPieceViewModel _capturedPieceViewModel2;
+        public CapturedPieceViewModel capturedPieceViewModel2 { get => _capturedPieceViewModel2; set => SetAndNotify(ref _capturedPieceViewModel2, value); }
+
         private EventAggregator _eventAggregator;
 
-        private bool _IsEnabledP1;
-        public bool IsEnabledP1 { get => _IsEnabledP1; set => SetAndNotify(ref _IsEnabledP1, value); }
+        private bool _IsLaserP1Enabled;
+        public bool IsLaserP1Enabled { get => _IsLaserP1Enabled; set => SetAndNotify(ref _IsLaserP1Enabled, value); }
 
-        private bool _IsEnabledP2;
-        public bool IsEnabledP2 { get => _IsEnabledP2; set => SetAndNotify(ref _IsEnabledP2, value); }
+        private bool _IsLaserP2Enabled;
+        public bool IsLaserP2Enabled { get => _IsLaserP2Enabled; set => SetAndNotify(ref _IsLaserP2Enabled, value); }
+
+        private bool _IsBackButtonEnabled;
+        public bool IsBackButtonEnabled { get => _IsBackButtonEnabled; set => SetAndNotify(ref _IsBackButtonEnabled, value); }
 
         public GameViewModel(BoardViewModel boardViewModel, EventAggregator eventAggregator)
         {
@@ -27,6 +36,12 @@ namespace Khet2._0.MVVM.ViewModel
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
+            capturedPieceViewModel1 = new CapturedPieceViewModel(eventAggregator, 1);
+            capturedPieceViewModel2 = new CapturedPieceViewModel(eventAggregator, 2);
+
+            DisablePlayerLaser(1);
+            DisablePlayerLaser(2);
+            DisableBackButton();
             BeginGame();
 
         }
@@ -53,15 +68,22 @@ namespace Khet2._0.MVVM.ViewModel
             DisablePlayerLaser(2);
         }
 
+        public void ExecuteBackButtonClicked()
+        {
+            _eventAggregator.Publish(new BackButtonClickEvent());
+            DisablePlayerLaser(1);
+            DisablePlayerLaser(2);
+        }
+
         private void DisablePlayerLaser(int player)
         {
             switch (player)
             {
                 case 1:
-                    IsEnabledP1 = false;
+                    IsLaserP1Enabled = false;
                     break;
                 case 2:
-                    IsEnabledP2 = false;
+                    IsLaserP2Enabled = false;
                     break;
                 default: break;
             }
@@ -72,20 +94,25 @@ namespace Khet2._0.MVVM.ViewModel
             switch (player)
             {
                 case 1:
-                    IsEnabledP1 = true;
+                    IsLaserP1Enabled = true;
                     break;
                 case 2:
-                    IsEnabledP2 = true;
+                    IsLaserP2Enabled = true;
                     break;
                 default: break;
             }
         }
 
-        public void Handle(PieceMoveEvent e)
+        private void DisableBackButton()
         {
-            EnablePlayerLaser(e.player);
-
+            IsBackButtonEnabled = false;
         }
+
+        private void EnableBackButton()
+        {
+            IsBackButtonEnabled = true;
+        }
+
 
         public void ExecuteKeyDown(KeyEventArgs e)
         {
@@ -107,6 +134,23 @@ namespace Khet2._0.MVVM.ViewModel
 
             e.Handled = true;
 
+        }
+
+        public void Handle(PieceMovedEvent e)
+        {
+            EnablePlayerLaser(e.player);
+            EnableBackButton();
+
+        }
+
+        public void Handle(PieceRotatedEvent e)
+        {
+            EnableBackButton();
+        }
+
+        public void Handle(PlayerChangeEvent message)
+        {
+            DisableBackButton();
         }
     }
 }
