@@ -18,12 +18,10 @@ namespace Khet2._0
             builder.Bind<HomeViewModel>().ToSelf();
             builder.Bind<BoardViewModel>().ToSelf();
             builder.Bind<RotateModel>().ToSelf();
-            builder.Bind<GameModel>().ToSelf();
         }
 
         protected override void Configure()
         {
-            var gameModel = this.Container.Get<GameModel>();
         }
 
     }

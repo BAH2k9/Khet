@@ -14,8 +14,6 @@ namespace Khet2._0.MVVM.ViewModel
     {
         private EventAggregator _eventAggregator;
 
-        private GameModel _gameModel;
-
         public HomeViewModel(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;

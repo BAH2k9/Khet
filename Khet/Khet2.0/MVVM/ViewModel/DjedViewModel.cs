@@ -69,7 +69,7 @@ namespace Khet2._0.MVVM.ViewModel
             RenderPiece();
         }
 
-        private void RenderPiece()
+        public void RenderPiece()
         {
             if (this.orientation == Orientations.NE || this.orientation == Orientations.SW)
             {
