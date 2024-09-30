@@ -1,0 +1,22 @@
+@startuml Game play
+start;
+:Start Game;
+:Create Board and set configuration;
+:Set Player turn ;
+repeat :Enable Player pieces ;
+:Player Move;
+:Player Fire Laser;
+If(Laser Hit Piece) then (yes)
+    : Delete Piece;
+endif
+
+backward: Switch Player Turn;
+repeat while(Pharaoh hit) is (no)
+
+->yes;
+stop
+
+
+
+
+

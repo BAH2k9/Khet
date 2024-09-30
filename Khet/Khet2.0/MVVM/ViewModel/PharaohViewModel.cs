@@ -20,7 +20,6 @@ namespace Khet2._0.MVVM.ViewModel
         public PharaohViewModel(int player)
         {
             this.player = player;
-
             if (player == 1)
             {
                 playerColor = Brushes.Silver;

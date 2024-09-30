@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace Khet2._0.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for GameView.xaml
+    /// Interaction logic for CapturedPieceView.xaml
     /// </summary>
-    public partial class GameView : UserControl
+    public partial class CapturedPieceView : UserControl
     {
-        public GameView()
+        public CapturedPieceView()
         {
             InitializeComponent();
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.Focus(); // Ensure the UserControl is focused.
         }
     }
 }

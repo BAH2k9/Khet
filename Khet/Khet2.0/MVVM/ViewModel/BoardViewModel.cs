@@ -4,10 +4,12 @@ using Khet2._0.MVVM.Models;
 using Stylet;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Khet2._0.MVVM.ViewModel
 {
@@ -16,14 +18,19 @@ namespace Khet2._0.MVVM.ViewModel
         private MoveModel _moveModel;
         private RotateModel _rotateModel;
         private LaserModel _laserModel;
+        private BoardModel _boardModel;
 
         private MyGrid _grid;
         public MyGrid grid { get => _grid; set => SetAndNotify(ref _grid, value); }
 
         //private Index _selectedSquareIndex;
 
-        public BoardViewModel(BoardModel boardModel, RotateModel rotateModel, MoveModel moveModel, LaserModel laserModel, EventAggregator eventAggregator)
+        public BoardViewModel(BoardModel boardModel,
+                                MoveModel moveModel,
+                                LaserModel laserModel,
+                                EventAggregator eventAggregator)
         {
+            _boardModel = boardModel;
             _moveModel = moveModel;
             _rotateModel = rotateModel;
             _laserModel = laserModel;
@@ -35,5 +42,6 @@ namespace Khet2._0.MVVM.ViewModel
             laserModel.SetGrid(grid);
 
         }
+
     }
 }

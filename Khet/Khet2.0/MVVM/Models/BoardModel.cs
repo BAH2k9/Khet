@@ -1,38 +1,47 @@
 ﻿using Khet2._0.CustomTypes;
 using Khet2._0.Enums;
+using Khet2._0.Events;
+using Khet2._0.Interfaces;
 using Khet2._0.MVVM.ViewModel;
 using Stylet;
+using System.Collections.Generic;
 //using System.Windows.Controls;
 
 namespace Khet2._0.MVVM.Models
 {
-    public class BoardModel
+    public class BoardModel : IHandle<PieceMovedEvent>, IHandle<BackButtonClickEvent>
     {
         private readonly int _rows = 8;
         private readonly int _columns = 10;
 
         private EventAggregator _eventAggregator;
+
+        private MyGrid _grid = new MyGrid();
+
+        private SquareViewModel _square1;
+        private SquareViewModel _square2;
+        private int _playerTurn;
+
         public BoardModel(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
         }
 
         public MyGrid CreateGrid()
         {
-            var squareViewModels = new MyGrid();
 
             for (int i = 0; i < _rows; i++)
             {
-                squareViewModels.Add(new BindableCollection<SquareViewModel>());
+                _grid.Add(new BindableCollection<SquareViewModel>());
 
                 for (int j = 0; j < _columns; j++)
                 {
-                    var index = new Idx { row = i, column = j };
-                    squareViewModels[i].Add(new SquareViewModel(_eventAggregator, index));
+                    _grid[i].Add(new SquareViewModel(_eventAggregator, new Idx(i, j)));
                 }
             }
 
-            return squareViewModels;
+            return _grid;
         }
 
         public void ClassicSetUp(MyGrid grid)
@@ -69,6 +78,25 @@ namespace Khet2._0.MVVM.Models
 
             grid[3][9].ActivePiece = new PyramidViewModel(Orientations.NW, 1);
             grid[4][9].ActivePiece = new PyramidViewModel(Orientations.SW, 1);
+
+        }
+
+
+        public void Handle(PieceMovedEvent e)
+        {
+            _square1 = e.oldSquare;
+            _square2 = e.newSquare;
+            _playerTurn = e.player;
+        }
+
+        public void Handle(BackButtonClickEvent e)
+        {
+            var temp = _square1.ActivePiece;
+            _square1.ActivePiece = _square2.ActivePiece;
+            _square2.ActivePiece = temp;
+            _square1.UnselectSquare();
+            _square2.UnselectSquare();
+            _eventAggregator.Publish(new PlayerChangeEvent(_playerTurn));
         }
     }
 }

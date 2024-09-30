@@ -1,12 +1,19 @@
-﻿namespace Khet2._0.Events
-{
-    public class PieceMoveEvent
-    {
-        public int playerTurn;
+﻿using Khet2._0.MVVM.ViewModel;
 
-        public PieceMoveEvent(int playerTurn)
+namespace Khet2._0.Events
+{
+    public class PieceMovedEvent
+    {
+        public int player { get; set; }
+        public SquareViewModel oldSquare { get; set; }
+        public SquareViewModel newSquare { get; set; }
+        public PieceMovedEvent(int player, SquareViewModel oldSquare, SquareViewModel newSquare)
         {
-            this.playerTurn = playerTurn;
+            this.player = player;
+            this.oldSquare = oldSquare;
+            this.newSquare = newSquare;
         }
+
+
     }
 }

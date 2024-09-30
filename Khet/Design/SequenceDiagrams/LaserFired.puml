@@ -1,0 +1,13 @@
+@startuml
+GameView -> GameViewModel: Laser Fire button clicked
+GameViewModel -> EventAggregator: Publish Laser Fired Event
+EventAggregator -> LaserService: Handle Laser Fired Event
+loop Laser not ended
+    LaserService -> LaserService: Calculate Laser \nPosition on Square X
+    LaserService -> LaserViewModel: Create
+    LaserService -> SquareViewModel:  Set Laser on Square X
+    SquareViewModel -> SquareView:  Display
+end
+
+LaserService -> EventAggregator: Publish Laser Ended Event
+EventAggregator -> GameViewModel: Handle Laser Ended Event

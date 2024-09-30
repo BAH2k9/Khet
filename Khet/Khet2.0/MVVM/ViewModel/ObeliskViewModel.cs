@@ -18,11 +18,9 @@ namespace Khet2._0.MVVM.ViewModel
 
         public int player { get; set; }
 
-
         public ObeliskViewModel(int player)
         {
             this.player = player;
-
             if (player == 1)
             {
                 playerColor = Brushes.Silver;

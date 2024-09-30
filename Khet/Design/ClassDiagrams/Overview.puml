@@ -1,0 +1,93 @@
+@startuml
+
+left to right direction
+
+package "ViewModels" as VM {
+  class ShellViewModel 
+  {
+    - eventAggregator : EventAggregator
+  }
+  class HomeViewModel
+  {
+    - eventAggregator : EventAggregator
+  }
+  class GameViewModel
+  {
+    - eventAggregator : EventAggregator
+  }
+  class BoardViewModel
+  {
+    - eventAggregator : EventAggregator
+  }
+  class SquareViewModel
+  {
+    - eventAggregator : EventAggregator
+  }
+  class LaserViewModel
+  {
+    - eventAggregator : EventAggregator
+  }
+  interface IPiece
+  {
+    - eventAggregator : EventAggregator
+  }
+  class DjedViewModel
+  {
+    
+  }
+  class PyramidViewModel
+  {
+    
+  }
+  class PharaohViewModel
+  {
+    
+  }
+  class ObeliskViewModel
+  {
+    
+  }
+  ' Add other ViewModels here
+}
+
+class EventAggregator
+
+package "Servies" as Services {
+  class GamePlayService
+  {
+    - eventAggregator : EventAggregator
+  }
+  class MoveService
+  {
+    - eventAggregator : EventAggregator
+  }
+  class LaserService
+  {
+    - eventAggregator : EventAggregator
+  }
+  class BoardConfigurationService
+  {
+    - eventAggregator : EventAggregator
+  }
+  
+}
+
+VM o-up- EventAggregator
+
+GamePlayService o-down- EventAggregator
+MoveService o-down- EventAggregator
+LaserService o-down- EventAggregator
+BoardConfigurationService o-down- EventAggregator
+
+ShellViewModel *-- HomeViewModel
+ShellViewModel *-- GameViewModel
+GameViewModel *-- BoardViewModel
+BoardViewModel *-- SquareViewModel
+SquareViewModel *-- LaserViewModel
+SquareViewModel *-- IPiece
+
+IPiece<|-- DjedViewModel
+IPiece <|-- PyramidViewModel
+IPiece <|-- PharaohViewModel
+IPiece <|-- ObeliskViewModel
+@enduml
