@@ -1,17 +1,17 @@
-﻿using Khet2._0.Enums;
-using Khet2._0.Interfaces;
-using Khet2._0.MVVM.Models;
+﻿using Khet3.Enums;
+using KhetV3.Interfaces;
 using Stylet;
+using Stylet.Xaml;
+using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Khet2._0.MVVM.ViewModel
+namespace KhetV3.MVVM.ViewModels
 {
-    public class PyramidViewModel : Screen, IPiece, IRotatable
+    public class PyramidViewModel : Screen, IRotatable
     {
         public Orientations orientation { get; set; }
-        private ControlSize controlSize { get; set; } = new ControlSize();
+        private (double width, double height) controlSize { get; set; }
 
         private Brush _playerColor;
         public Brush playerColor { get => _playerColor; set => SetAndNotify(ref _playerColor, value); }
@@ -25,6 +25,11 @@ namespace Khet2._0.MVVM.ViewModel
             this.player = player;
             this.orientation = orientation;
 
+            SetColor();
+        }
+
+        private void SetColor()
+        {
             if (player == 1)
             {
                 playerColor = Brushes.Silver;
@@ -34,12 +39,12 @@ namespace Khet2._0.MVVM.ViewModel
                 playerColor = Brushes.Red;
             }
         }
+
         public void OnLoaded()
         {
             if (this.View is FrameworkElement view)
             {
-                controlSize.Width = view.ActualWidth;
-                controlSize.Height = view.ActualHeight;
+                controlSize = (view.ActualWidth, view.ActualHeight);
             }
 
             RenderPiece();
@@ -47,10 +52,7 @@ namespace Khet2._0.MVVM.ViewModel
 
         public void OnSizeChanged(SizeChangedEventArgs e)
         {
-            // Update properties when the control size changes
-            controlSize.Width = e.NewSize.Width;
-            controlSize.Height = e.NewSize.Height;
-
+            controlSize = (e.NewSize.Width, e.NewSize.Height);
             RenderPiece();
         }
 
@@ -77,33 +79,33 @@ namespace Khet2._0.MVVM.ViewModel
                     points = new PointCollection
                     {
                         new Point(0,0),
-                        new Point(controlSize.Width, 0),
-                        new Point(0, controlSize.Height)
+                        new Point(controlSize.width, 0),
+                        new Point(0, controlSize.height)
                     };
                     break;
                 case Orientations.SW:
                     points = new PointCollection
                     {
                          new Point(0, 0),
-                         new Point(controlSize.Width, 0),
-                         new Point(controlSize.Width, controlSize.Height)
+                         new Point(controlSize.width, 0),
+                         new Point(controlSize.width, controlSize.height)
                     };
                     break;
                 case Orientations.NE:
                     points = new PointCollection
                     {
                          new Point(0, 0),
-                         new Point(0, controlSize.Height),
-                         new Point(controlSize.Width, controlSize.Height)
+                         new Point(0, controlSize.height),
+                         new Point(controlSize.width, controlSize.height)
                     };
                     break;
                 case Orientations.NW:
 
                     points = new PointCollection
                     {
-                         new Point(controlSize.Width, 0),
-                         new Point(0, controlSize.Height),
-                         new Point(controlSize.Width, controlSize.Height)
+                         new Point(controlSize.width, 0),
+                         new Point(0, controlSize.height),
+                         new Point(controlSize.width, controlSize.height)
                     };
                     break;
             }

@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="KhetV3.MVVM.Views.PyramidView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:vm="clr-namespace:KhetV3.MVVM.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100"
+             d:DataContext="{d:DesignInstance vm:PyramidViewModel}"
+             SizeChanged="{s:Action OnSizeChanged }"
+             Loaded="{s:Action OnLoaded}">
+    <Grid>
+        <Polygon Points="{Binding points}" 
+                Stroke="Black" 
+                 Fill="{Binding playerColor}" 
+                 StrokeThickness="2" >
+        </Polygon>
+
+    </Grid>
+</UserControl>

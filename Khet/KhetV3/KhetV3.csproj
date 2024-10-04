@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    
+    <RootNamespace>KhetV3</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\BackButton.png" />
+    <None Remove="Assets\laserCanon.png" />
+    <None Remove="Assets\laserCanonB.png" />
+    <None Remove="Assets\Pharaoh.png" />
+    <None Remove="Assets\Shield.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Stylet" Version="1.3.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\BackButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\laserCanon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\laserCanonB.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Pharaoh.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Shield.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+</Project>
