@@ -22,7 +22,7 @@ namespace KhetV3.MVVM.Models
         {
 
             { Direction.Left, LaserPosition.Left},
-            { Direction.Right, LaserPosition.Left},
+            { Direction.Right, LaserPosition.Right},
             { Direction.Up, LaserPosition.Top},
             { Direction.Down, LaserPosition.Bottom},
             { Direction.Stop, LaserPosition.None},

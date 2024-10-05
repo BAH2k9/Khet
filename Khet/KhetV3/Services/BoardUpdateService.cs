@@ -62,12 +62,12 @@ namespace KhetV3.Services
             }
         }
 
-        public void DisplayLaser((int row, int col) squarePosition, (LaserPosition, LaserPosition) laserPosition)
+        public async Task DisplayLaser((int row, int col) squarePosition, (LaserPosition, LaserPosition) laserPosition)
         {
             Trace.WriteLine($"BoardUpdater: DisplayLaser at row: {squarePosition.row}, col: {squarePosition.col} with Laser: {laserPosition} ");
 
-            _squareDictionary[squarePosition].ActiveLaser = new LaserViewModel(laserPosition);
-
+            _squareDictionary[squarePosition].ActiveLaser = new LaserViewModel(laserPosition); ;
+            await _squareDictionary[squarePosition].ActiveLaser.Animate();
         }
 
         public bool InBounds((int row, int col) position)

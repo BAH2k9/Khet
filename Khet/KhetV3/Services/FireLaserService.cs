@@ -45,9 +45,7 @@ namespace KhetV3.Services
                 outDirection = laserResponse.direction;
 
 
-                _boardUpdater.DisplayLaser(position, laserResponse.LaserPositions);
-
-                await Task.Delay(100);
+                await _boardUpdater.DisplayLaser(position, laserResponse.LaserPositions);
 
                 position = MoveToNextSquare(position, outDirection);
             }

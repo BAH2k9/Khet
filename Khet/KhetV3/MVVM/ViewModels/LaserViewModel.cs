@@ -1,80 +1,114 @@
 ﻿using Khet3.Enums;
 using KhetV3.Enums;
+using KhetV3.MVVM.Models;
 using Stylet;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace KhetV3.MVVM.ViewModels
 {
     public class LaserViewModel : Screen
     {
-        private (double Width, double Height) controlSize;
+        private (double width, double height) controlSize;
+        private (double width, double height) center;
 
-        private BindableCollection<double> _width = [0, 0, 0, 0];
-        public BindableCollection<double> width { get => _width; set => SetAndNotify(ref _width, value); }
+        public BindableCollection<Brush> fill { get; set; } = [Brushes.Transparent, Brushes.Transparent, Brushes.Transparent, Brushes.Transparent];
 
-        private BindableCollection<double> _height = [0, 0, 0, 0];
-        public BindableCollection<double> height { get => _height; set => SetAndNotify(ref _height, value); }
+        private LaserCoordinates _topLaser;
+        public LaserCoordinates topLaser { get => _topLaser; set => SetAndNotify(ref _topLaser, value); }
 
-        private BindableCollection<Brush> _fill = [Brushes.Transparent,Brushes.Transparent,
-                                                     Brushes.Transparent, Brushes.Transparent];
-        public BindableCollection<Brush> fill { get => _fill; set => SetAndNotify(ref _fill, value); }
+        private LaserCoordinates _bottomLaser;
+        public LaserCoordinates bottomLaser { get => _bottomLaser; set => SetAndNotify(ref _bottomLaser, value); }
+
+        private LaserCoordinates _leftLaser;
+        public LaserCoordinates leftLaser { get => _leftLaser; set => SetAndNotify(ref _leftLaser, value); }
+
+        private LaserCoordinates _rightLaser;
+        public LaserCoordinates rightLaser { get => _rightLaser; set => SetAndNotify(ref _rightLaser, value); }
+
+        private (LaserPosition, LaserPosition) _laserPositions;
+
+        private int Delay = 100;
+        private double moveSpeed;
+        private TaskCompletionSource<bool> _loadedCompletionSource = new TaskCompletionSource<bool>();
 
         public LaserViewModel((LaserPosition, LaserPosition) laserPositions)
         {
-            FillLaser(laserPositions.Item1);
-            FillLaser(laserPositions.Item2);
+            _laserPositions = laserPositions;
+
+            FillLaser(_laserPositions.Item1);
+            FillLaser(_laserPositions.Item2);
+
+
         }
+
         public void OnLoaded()
         {
             if (this.View is FrameworkElement view)
             {
-                controlSize.Width = view.ActualWidth;
-                controlSize.Height = view.ActualHeight;
+                UpdateControlSizes(view.ActualWidth, view.ActualHeight);
+
+                moveSpeed = controlSize.width / 10;
+
+                _loadedCompletionSource.SetResult(true);
             }
 
-            RenderLaser();
         }
+
+
 
         public void OnSizeChanged(SizeChangedEventArgs e)
         {
-            // Update properties when the control size changes
-            controlSize.Width = e.NewSize.Width;
-            controlSize.Height = e.NewSize.Height;
+            if (topLaser != null)
+            {
+                RenderToNewSize(topLaser, e);
+            }
+            if (bottomLaser != null)
+            {
+                RenderToNewSize(bottomLaser, e);
+            }
+            if (leftLaser != null)
+            {
+                RenderToNewSize(leftLaser, e);
+            }
+            if (rightLaser != null)
+            {
+                RenderToNewSize(rightLaser, e);
+            }
 
-            RenderLaser();
+
+            UpdateControlSizes(e.NewSize.Width, e.NewSize.Height);
+
+
         }
 
-        public void RenderLaser()
+        public void UpdateControlSizes(double newControlWidth, double newControlheight)
         {
-            // Top laser
-            height[0] = controlSize.Height / 2;
-            width[0] = (int)CalculateRatio() * 5;
 
-            // Bottom Laser
-            height[1] = controlSize.Height / 2;
-            width[1] = (int)CalculateRatio() * 5;
+            controlSize.width = newControlWidth;
+            controlSize.height = newControlheight;
 
-            // Left Laser
-            height[2] = (int)CalculateRatio() * 5;
-            width[2] = controlSize.Width / 2;
-
-            // Right laser
-            height[3] = (int)CalculateRatio() * 5;
-            width[3] = controlSize.Width / 2;
+            center.width = controlSize.width / 2;
+            center.height = controlSize.height / 2;
         }
 
-        private double CalculateRatio()
+        private void RenderToNewSize(LaserCoordinates newPosition, SizeChangedEventArgs e)
         {
-            if (controlSize.Height == 0)
-                return 0;
+            var widthScale = e.NewSize.Width / controlSize.width;
+            var heightScale = e.NewSize.Height / controlSize.height;
 
-            return Math.Abs(controlSize.Width / controlSize.Height);
+            newPosition.x1 = newPosition.x1 * widthScale;
+            newPosition.x2 = newPosition.x2 * widthScale;
+            newPosition.y1 = newPosition.y1 * heightScale;
+            newPosition.y2 = newPosition.y2 * heightScale;
         }
 
         public void FillLaser(LaserPosition laserPosition)
@@ -89,5 +123,141 @@ namespace KhetV3.MVVM.ViewModels
             fill[2] = Brushes.Transparent;
             fill[3] = Brushes.Transparent;
         }
+
+        public async Task Animate()
+        {
+            await _loadedCompletionSource.Task;
+            await AnimateFirstLaser(_laserPositions.Item1);
+            await AnimateSecondLaser(_laserPositions.Item2);
+        }
+
+        private async Task AnimateFirstLaser(LaserPosition laserPosition)
+        {
+
+            switch (laserPosition)
+            {
+                case LaserPosition.Top:
+                    topLaser = new LaserCoordinates()
+                    {
+                        x1 = center.width,
+                        y1 = 0,
+                        x2 = center.width,
+                        y2 = 0,
+                    };
+
+                    while (topLaser.y2 < center.height) // Adjust to screen height
+                    {
+                        topLaser.y2 += moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Bottom:
+                    bottomLaser = new LaserCoordinates()
+                    {
+                        x1 = center.width,
+                        y1 = controlSize.height,
+                        x2 = center.width,
+                        y2 = controlSize.height,
+                    };
+
+                    while (bottomLaser.y2 > center.height) // Adjust to screen height
+                    {
+                        bottomLaser.y2 -= moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Left:
+                    leftLaser = new LaserCoordinates()
+                    {
+                        x1 = 0,
+                        y1 = center.height,
+                        x2 = 0,
+                        y2 = center.height,
+                    };
+
+                    while (leftLaser.x2 < center.width) // Adjust to screen height
+                    {
+                        leftLaser.x2 += moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Right:
+                    rightLaser = new LaserCoordinates()
+                    {
+                        x1 = controlSize.width,
+                        y1 = center.height,
+                        x2 = controlSize.width,
+                        y2 = center.height,
+                    };
+
+                    while (rightLaser.x2 > center.width) // Adjust to screen height
+                    {
+                        rightLaser.x2 -= moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+            }
+
+        }
+
+        private async Task AnimateSecondLaser(LaserPosition laserPosition)
+        {
+            var centerStart = new LaserCoordinates()
+            {
+                x1 = center.width,
+                y1 = center.height,
+                x2 = center.width,
+                y2 = center.height,
+            };
+
+            switch (laserPosition)
+            {
+                case LaserPosition.Top:
+                    topLaser = centerStart;
+
+                    while (topLaser.y2 > 0) // Adjust to screen height
+                    {
+                        topLaser.y2 -= moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Bottom:
+                    bottomLaser = centerStart;
+
+                    while (bottomLaser.y2 < controlSize.height) // Adjust to screen height
+                    {
+                        bottomLaser.y2 += moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Left:
+                    leftLaser = centerStart;
+
+                    while (leftLaser.x2 > 0) // Adjust to screen height
+                    {
+                        leftLaser.x2 -= moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Right:
+                    rightLaser = centerStart;
+
+                    while (rightLaser.x2 < controlSize.width) // Adjust to screen height
+                    {
+                        rightLaser.x2 += moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+            }
+        }
+
     }
 }

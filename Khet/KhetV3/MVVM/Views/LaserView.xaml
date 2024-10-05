@@ -6,16 +6,39 @@
              xmlns:s="https://github.com/canton7/Stylet"
              xmlns:vm="clr-namespace:KhetV3.MVVM.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="100" d:DesignWidth="100"
              d:DataContext="{d:DesignInstance vm:LaserViewModel}"
              SizeChanged="{s:Action OnSizeChanged }"
-             Loaded="{s:Action OnLoaded}">
+             Loaded="{s:Action OnLoaded}"
+             Background="Transparent">
     <Grid>
+        <!--Convention is Edge point is x1,y1 and center point is x2, y2-->
+        <!--Top-->
+        <Line X1="{Binding topLaser.x1}" Y1="{Binding topLaser.y1}" X2="{Binding topLaser.x2}" Y2="{Binding topLaser.y2}" StrokeThickness="10" Stroke="{Binding fill[0]}"/>
+        <!--Bottom-->
+        <Line X1="{Binding bottomLaser.x1}" Y1="{Binding bottomLaser.y1}" X2="{Binding bottomLaser.x2}" Y2="{Binding bottomLaser.y2}" StrokeThickness="10" Stroke="{Binding fill[1]}"/>
+        <!--Left-->
+        <Line X1="{Binding leftLaser.x1}" Y1="{Binding leftLaser.y1}" X2="{Binding leftLaser.x2}" Y2="{Binding leftLaser.y2}" StrokeThickness="10" Stroke="{Binding fill[2]}"/>
+        <!--Right-->
+        <Line X1="{Binding rightLaser.x1}" Y1="{Binding rightLaser.y1}" X2="{Binding rightLaser.x2}" Y2="{Binding rightLaser.y2}" StrokeThickness="10" Stroke="{Binding fill[3]}"/>
 
-        <Rectangle Fill="{Binding fill[0]}" Height="{Binding height[0]}" Width="{Binding width[0]}" VerticalAlignment="Top"/>
-        <Rectangle Fill="{Binding fill[1]}" Height="{Binding height[1]}" Width="{Binding width[1]}" VerticalAlignment="Bottom"/>
-        <Rectangle Fill="{Binding fill[2]}" Height="{Binding height[2]}" Width="{Binding width[2]}" HorizontalAlignment="Left"/>
-        <Rectangle Fill="{Binding fill[3]}" Height="{Binding height[3]}" Width="{Binding width[3]}" HorizontalAlignment="Right"/>
+
+
+        <!--Top-->
+        <!--
+<Line X1="50" Y1="0" X2="50" Y2="50" StrokeThickness="10" Stroke="Red"/>
+-->
+        <!--Bottom-->
+        <!--
+<Line X1="50" Y1="100" X2="50" Y2="50" StrokeThickness="10" Stroke="Red"/>
+-->
+        <!--Left-->
+        <!--
+<Line X1="0" Y1="50" X2="50" Y2="50" StrokeThickness="10" Stroke="Red"/>
+-->
+        <!--Right-->
+        <!--
+<Line X1="100" Y1="50" X2="50" Y2="50" StrokeThickness="10" Stroke="Red"/>-->
 
     </Grid>
 </UserControl>
