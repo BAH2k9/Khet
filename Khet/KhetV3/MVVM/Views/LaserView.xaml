@@ -14,13 +14,13 @@
     <Grid>
         <!--Convention is Edge point is x1,y1 and center point is x2, y2-->
         <!--Top-->
-        <Line X1="{Binding topLaser.x1}" Y1="{Binding topLaser.y1}" X2="{Binding topLaser.x2}" Y2="{Binding topLaser.y2}" StrokeThickness="10" Stroke="{Binding fill[0]}"/>
+        <Line X1="{Binding topLaser.x1}" Y1="{Binding topLaser.y1}" X2="{Binding topLaser.x2}" Y2="{Binding topLaser.y2}" StrokeThickness="5" Stroke="{Binding fill[0]}"/>
         <!--Bottom-->
-        <Line X1="{Binding bottomLaser.x1}" Y1="{Binding bottomLaser.y1}" X2="{Binding bottomLaser.x2}" Y2="{Binding bottomLaser.y2}" StrokeThickness="10" Stroke="{Binding fill[1]}"/>
+        <Line X1="{Binding bottomLaser.x1}" Y1="{Binding bottomLaser.y1}" X2="{Binding bottomLaser.x2}" Y2="{Binding bottomLaser.y2}" StrokeThickness="5" Stroke="{Binding fill[1]}"/>
         <!--Left-->
-        <Line X1="{Binding leftLaser.x1}" Y1="{Binding leftLaser.y1}" X2="{Binding leftLaser.x2}" Y2="{Binding leftLaser.y2}" StrokeThickness="10" Stroke="{Binding fill[2]}"/>
+        <Line X1="{Binding leftLaser.x1}" Y1="{Binding leftLaser.y1}" X2="{Binding leftLaser.x2}" Y2="{Binding leftLaser.y2}" StrokeThickness="5" Stroke="{Binding fill[2]}"/>
         <!--Right-->
-        <Line X1="{Binding rightLaser.x1}" Y1="{Binding rightLaser.y1}" X2="{Binding rightLaser.x2}" Y2="{Binding rightLaser.y2}" StrokeThickness="10" Stroke="{Binding fill[3]}"/>
+        <Line X1="{Binding rightLaser.x1}" Y1="{Binding rightLaser.y1}" X2="{Binding rightLaser.x2}" Y2="{Binding rightLaser.y2}" StrokeThickness="5" Stroke="{Binding fill[3]}"/>
 
 
 

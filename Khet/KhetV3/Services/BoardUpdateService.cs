@@ -68,6 +68,7 @@ namespace KhetV3.Services
 
             _squareDictionary[squarePosition].ActiveLaser = new LaserViewModel(laserPosition); ;
             await _squareDictionary[squarePosition].ActiveLaser.Animate();
+            _squareDictionary[squarePosition].ActiveLaser.AnimateRemoveLaser();
         }
 
         public bool InBounds((int row, int col) position)

@@ -17,9 +17,6 @@ namespace KhetV3.MVVM.ViewModels
 {
     public class LaserViewModel : Screen
     {
-        private (double width, double height) controlSize;
-        private (double width, double height) center;
-
         public BindableCollection<Brush> fill { get; set; } = [Brushes.Transparent, Brushes.Transparent, Brushes.Transparent, Brushes.Transparent];
 
         private LaserCoordinates _topLaser;
@@ -35,8 +32,9 @@ namespace KhetV3.MVVM.ViewModels
         public LaserCoordinates rightLaser { get => _rightLaser; set => SetAndNotify(ref _rightLaser, value); }
 
         private (LaserPosition, LaserPosition) _laserPositions;
-
-        private int Delay = 100;
+        private (double width, double height) controlSize;
+        private (double width, double height) center;
+        private int Delay = 50;
         private double moveSpeed;
         private TaskCompletionSource<bool> _loadedCompletionSource = new TaskCompletionSource<bool>();
 
@@ -56,14 +54,10 @@ namespace KhetV3.MVVM.ViewModels
             {
                 UpdateControlSizes(view.ActualWidth, view.ActualHeight);
 
-                moveSpeed = controlSize.width / 10;
-
                 _loadedCompletionSource.SetResult(true);
             }
 
         }
-
-
 
         public void OnSizeChanged(SizeChangedEventArgs e)
         {
@@ -84,20 +78,19 @@ namespace KhetV3.MVVM.ViewModels
                 RenderToNewSize(rightLaser, e);
             }
 
-
             UpdateControlSizes(e.NewSize.Width, e.NewSize.Height);
-
-
         }
 
         public void UpdateControlSizes(double newControlWidth, double newControlheight)
         {
-
             controlSize.width = newControlWidth;
             controlSize.height = newControlheight;
 
-            center.width = controlSize.width / 2;
-            center.height = controlSize.height / 2;
+            center.width = newControlWidth / 2;
+            center.height = newControlheight / 2;
+
+            moveSpeed = controlSize.width / 5;
+
         }
 
         private void RenderToNewSize(LaserCoordinates newPosition, SizeChangedEventArgs e)
@@ -258,6 +251,89 @@ namespace KhetV3.MVVM.ViewModels
 
             }
         }
+
+        public async void AnimateRemoveLaser()
+        {
+
+            switch (_laserPositions.Item1)
+            {
+                case LaserPosition.Top:
+
+                    while (topLaser.y1 < center.height) // Adjust to screen height
+                    {
+                        topLaser.y1 += moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Bottom:
+
+                    while (bottomLaser.y1 > center.height) // Adjust to screen height
+                    {
+                        bottomLaser.y1 -= moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Left:
+
+                    while (leftLaser.x1 < center.width) // Adjust to screen height
+                    {
+                        leftLaser.x1 += moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Right:
+
+                    while (rightLaser.x1 > center.width) // Adjust to screen height
+                    {
+                        rightLaser.x1 -= moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+            }
+
+
+            switch (_laserPositions.Item2)
+            {
+                case LaserPosition.Top:
+                    while (topLaser.y1 > 0) // Adjust to screen height
+                    {
+                        topLaser.y1 -= moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Bottom:
+                    while (bottomLaser.y1 < controlSize.height) // Adjust to screen height
+                    {
+                        bottomLaser.y1 += moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Left:
+                    while (leftLaser.x1 > 0) // Adjust to screen height
+                    {
+                        leftLaser.x1 -= moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+                case LaserPosition.Right:
+                    while (rightLaser.x1 < controlSize.width) // Adjust to screen height
+                    {
+                        rightLaser.x1 += moveSpeed;
+                        await Task.Delay(this.Delay);
+                    }
+                    break;
+
+            }
+        }
+
+
 
     }
 }

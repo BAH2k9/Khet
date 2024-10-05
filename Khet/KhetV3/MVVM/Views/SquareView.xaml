@@ -7,16 +7,17 @@
              xmlns:vm="clr-namespace:KhetV3.MVVM.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance vm:SquareViewModel}">
+             d:DataContext="{d:DesignInstance vm:SquareViewModel}"
+             ClipToBounds="True">
     <Grid>
         <Border BorderBrush="Black" BorderThickness="2">
             <Grid>
 
-                <ContentControl s:View.Model="{Binding ActiveLaser}" Panel.ZIndex="1"/>
+                <ContentControl s:View.Model="{Binding ActiveLaser}" Panel.ZIndex="0"/>
 
                 <Border BorderBrush="{Binding highlight}" BorderThickness="2">
                     <Grid>
-                        <ContentControl s:View.Model="{Binding ActivePiece}" Panel.ZIndex="0"/>
+                        <ContentControl s:View.Model="{Binding ActivePiece}" Panel.ZIndex="1"/>
                     </Grid>
                 </Border>
 
