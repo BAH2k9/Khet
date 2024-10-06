@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace KhetV3.MVVM.Models
 {
@@ -27,6 +28,19 @@ namespace KhetV3.MVVM.Models
             { Direction.Down, LaserPosition.Bottom},
             { Direction.Stop, LaserPosition.None},
 
+        };
+
+        public static readonly Dictionary<(Orientations, Key), Orientations> Rotate = new Dictionary<(Orientations, Key), Orientations>
+        {
+            {(Orientations.NW, Key.Left), Orientations.SW},
+            {(Orientations.SW, Key.Left), Orientations.SE},
+            {(Orientations.SE, Key.Left), Orientations.NE},
+            {(Orientations.NE, Key.Left), Orientations.NW},
+
+            {(Orientations.NE, Key.Right), Orientations.SE},
+            {(Orientations.SE, Key.Right), Orientations.SW},
+            {(Orientations.SW, Key.Right), Orientations.NW},
+            {(Orientations.NW, Key.Right), Orientations.NE},
         };
 
 

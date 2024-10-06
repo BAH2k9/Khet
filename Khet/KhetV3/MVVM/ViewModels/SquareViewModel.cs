@@ -28,9 +28,7 @@ namespace KhetV3.MVVM.ViewModels
         {
             _clickService = clickService;
 
-
         }
-
 
         public void Select(bool select)
         {
@@ -42,7 +40,6 @@ namespace KhetV3.MVVM.ViewModels
             {
                 highlight = Brushes.Transparent;
             }
-
         }
 
         public void ExecuteMouseDown()
