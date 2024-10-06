@@ -20,6 +20,8 @@ namespace KhetV3.AbstractClasses
             this.position = position;
         }
 
+
+
         protected virtual void SetColor(int player)
         {
             if (player == 1)

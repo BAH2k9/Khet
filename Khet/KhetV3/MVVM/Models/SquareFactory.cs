@@ -30,6 +30,7 @@ namespace KhetV3.MVVM.Models
                 for (int col = 0; col < cols; col++)
                 {
                     var square = new SquareViewModel(_clickService);
+                    square.position = (row, col);
                     _bindableSquares.Add(square);
                     _squareDict[(row, col)] = square;
                 }

@@ -30,19 +30,19 @@ namespace KhetV3.MVVM.Models
                 {(7, 2), new PyramidViewModel(_clickService, Orientations.NW, 1) },
 
                 {(2, 3), new PyramidViewModel(_clickService, Orientations.NW, 1) },
-                {(7, 3), new ObeliskViewModel(1) },
+                {(7, 3), new ObeliskViewModel(_clickService, 1) },
 
-                {(0, 4), new ObeliskViewModel(2) },
-                {(3, 4), new DjedViewModel(Orientations.NE, 2) },
-                {(4, 4), new DjedViewModel(Orientations.NW, 1) },
-                {(7, 4), new PharaohViewModel(1) },
+                {(0, 4), new ObeliskViewModel(_clickService, 2) },
+                {(3, 4), new DjedViewModel(_clickService, Orientations.NE, 2) },
+                {(4, 4), new DjedViewModel(_clickService, Orientations.NW, 1) },
+                {(7, 4), new PharaohViewModel(_clickService, 1) },
 
-                {(0, 5), new PharaohViewModel(2) },
-                {(3, 5), new DjedViewModel(Orientations.NW, 2) },
-                {(4, 5), new DjedViewModel(Orientations.NE, 1) },
-                {(7, 5), new ObeliskViewModel(1) },
+                {(0, 5), new PharaohViewModel(_clickService, 2) },
+                {(3, 5), new DjedViewModel(_clickService, Orientations.NW, 2) },
+                {(4, 5), new DjedViewModel(_clickService, Orientations.NE, 1) },
+                {(7, 5), new ObeliskViewModel(_clickService, 1) },
 
-                {(0, 6), new ObeliskViewModel(2) },
+                {(0, 6), new ObeliskViewModel(_clickService, 2) },
                 {(5, 6), new PyramidViewModel(_clickService, Orientations.SE, 2) },
 
                 {(0, 7), new PyramidViewModel(_clickService, Orientations.SE, 2) },

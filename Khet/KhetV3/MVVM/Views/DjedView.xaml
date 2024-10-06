@@ -10,7 +10,8 @@
              d:DataContext="{d:DesignInstance vm:DjedViewModel}"
              SizeChanged="{s:Action OnSizeChanged }"
              Loaded="{s:Action OnLoaded}"
-             IsEnabled="False">
+             Background="Transparent"
+             MouseDown="{s:Action ExecuteMouseDown}">
     <Grid>
         <Line 
       X1="{Binding point1[0]}"

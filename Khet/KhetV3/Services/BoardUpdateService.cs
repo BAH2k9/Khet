@@ -61,6 +61,34 @@ namespace KhetV3.Services
         {
             _squareDictionary[position].Select(true);
         }
+        public void UnselectSquare((int, int) position)
+        {
+            _squareDictionary[position].Select(false);
+        }
 
+        public SquareViewModel GetSquare((int row, int col) squarePosition)
+        {
+            return _squareDictionary[squarePosition];
+        }
+        internal void ShiftPiece(IPiece piece, (int row, int col) position)
+        {
+            //_pieceDictionary.Remove(piece.position);
+            //_pieceDictionary[position] = piece;
+
+            _squareDictionary[piece.position].ActivePiece = null;
+            _squareDictionary[position].ActivePiece = piece;
+            piece.position = position;
+
+        }
+
+        internal void ShiftPieces(DjedViewModel djed, IPiece piece)
+        {
+            _squareDictionary[djed.position].ActivePiece = piece;
+            _squareDictionary[piece.position].ActivePiece = djed;
+
+            var temp = piece.position;
+            piece.position = djed.position;
+            djed.position = temp;
+        }
     }
 }

@@ -13,7 +13,6 @@ namespace KhetV3.Services
     {
         private BoardUpdateService _boardUpdateService;
         private IPiece _storedPiece;
-        private SquareViewModel _storedSquareViewModel;
 
         public ClickService(BoardUpdateService boardUpdateService)
         {
@@ -21,23 +20,76 @@ namespace KhetV3.Services
         }
         public void Click(IPiece piece)
         {
-            Trace.WriteLine("ClickService.PieceClick");
             if (_storedPiece == null)
             {
                 _storedPiece = piece;
                 _boardUpdateService.SelectSquare(piece.position);
-
+                Trace.WriteLine("ClickService.PieceClick - Select Piece");
             }
-        }
-
-        public void Click(SquareViewModel squareViewModel)
-        {
-            Trace.WriteLine("ClickService.SquareClick");
-
-            if (_storedSquareViewModel == null)
+            else if (_storedPiece == piece)
             {
-                _storedSquareViewModel = squareViewModel;
+                _boardUpdateService.UnselectSquare(piece.position);
+                _storedPiece = null;
+                Trace.WriteLine("ClickService.PieceClick - Unselect Square");
+            }
+            else if (_storedPiece is DjedViewModel djed)
+            {
+                _boardUpdateService.UnselectSquare(_storedPiece.position);
+                _storedPiece = null;
+                DjedShift(djed, piece);
+            }
+            else
+            {
+                _boardUpdateService.UnselectSquare(_storedPiece.position);
+                _boardUpdateService.SelectSquare(piece.position);
+                _storedPiece = piece;
+                Trace.WriteLine("ClickService.PieceClick - Select New Piece");
             }
         }
+
+        public void Click(SquareViewModel square)
+        {
+            // Stops Click Square being called if a piece hasnt been selected 
+            if (_storedPiece == null)
+            {
+                return;
+            }
+            // Stops Click Square being called when Unselecting a Piece
+            if (square.ActivePiece == _storedPiece)
+            {
+                return;
+            }
+
+            // Stops Pieces from being shifted if the square is occupied
+            if (square.ActivePiece is not null)
+            {
+                return;
+            }
+
+            NormalShift(_storedPiece, square);
+
+        }
+
+        private void NormalShift(IPiece piece, SquareViewModel square)
+        {
+
+            _boardUpdateService.UnselectSquare(piece.position);
+            _boardUpdateService.ShiftPiece(piece, square.position);
+            _storedPiece = null;
+
+            Trace.WriteLine("ClickService.SquareClick - Move Piece");
+        }
+        private void DjedShift(DjedViewModel djed, IPiece piece)
+        {
+            if (piece is PyramidViewModel || piece is ObeliskViewModel)
+            {
+                _boardUpdateService.ShiftPieces(djed, piece);
+                _boardUpdateService.UnselectSquare(djed.position);
+
+                Trace.WriteLine("ClickService.SquareClick - Swapped Djed");
+            }
+        }
+
+
     }
 }

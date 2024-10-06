@@ -1,5 +1,6 @@
 ﻿using KhetV3.AbstractClasses;
 using KhetV3.Interfaces;
+using KhetV3.Services;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -23,13 +24,17 @@ namespace KhetV3.MVVM.ViewModels
         private (double width, double height) controlSize;
 
         public int player { get; set; }
-
-        public ObeliskViewModel(int player)
+        private ClickService _clickService;
+        public ObeliskViewModel(ClickService clickService, int player)
         {
+            _clickService = clickService;
             this.player = player;
             SetColor(player);
         }
-
+        public void ExecuteMouseDown()
+        {
+            _clickService.Click(this);
+        }
         public void OnLoaded()
         {
             if (this.View is FrameworkElement view)

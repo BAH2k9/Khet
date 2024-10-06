@@ -13,12 +13,15 @@ namespace KhetV3.MVVM.ViewModels
 {
     public class SquareViewModel : Screen
     {
-        public IPiece ActivePiece { get; set; }
+        private IPiece _ActivePiece;
+        public IPiece ActivePiece { get => _ActivePiece; set { SetAndNotify(ref _ActivePiece, value); } }
         private LaserViewModel _ActiveLaser;
         public LaserViewModel ActiveLaser { get => _ActiveLaser; set => SetAndNotify(ref _ActiveLaser, value); }
 
         private Brush _highlight = Brushes.Transparent;
         public Brush highlight { get => _highlight; set => SetAndNotify(ref _highlight, value); }
+
+        public (int row, int col) position { get; set; }
 
         private ClickService _clickService;
         public SquareViewModel(ClickService clickService)
@@ -44,10 +47,7 @@ namespace KhetV3.MVVM.ViewModels
 
         public void ExecuteMouseDown()
         {
-            if (this.ActivePiece == null)
-            {
-                _clickService.Click(this);
-            }
+            _clickService.Click(this);
         }
 
 

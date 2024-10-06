@@ -1,5 +1,6 @@
 ﻿using KhetV3.AbstractClasses;
 using KhetV3.Interfaces;
+using KhetV3.Services;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,18 @@ namespace KhetV3.MVVM.ViewModels
     public class PharaohViewModel : Piece
     {
         public int player { get; set; }
-        public PharaohViewModel(int player)
+        private ClickService _clickService;
+        public PharaohViewModel(ClickService clickService, int player)
         {
             this.player = player;
+            _clickService = clickService;
 
             SetColor(player);
+        }
+
+        public void ExecuteMouseDown()
+        {
+            _clickService.Click(this);
         }
 
     }
