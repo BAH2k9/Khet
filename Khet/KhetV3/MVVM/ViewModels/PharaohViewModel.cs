@@ -12,7 +12,6 @@ namespace KhetV3.MVVM.ViewModels
 {
     public class PharaohViewModel : Piece
     {
-
         public int player { get; set; }
         public PharaohViewModel(int player)
         {

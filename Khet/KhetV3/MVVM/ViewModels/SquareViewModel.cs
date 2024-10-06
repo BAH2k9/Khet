@@ -33,7 +33,7 @@ namespace KhetV3.MVVM.ViewModels
         {
             if (select)
             {
-                highlight = Brushes.Blue;
+                highlight = Brushes.LightSeaGreen;
             }
             else
             {

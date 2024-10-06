@@ -59,7 +59,7 @@ namespace KhetV3.Services
 
         public void SelectSquare((int, int) position)
         {
-            //_squareDictionary[position].highlight();
+            _squareDictionary[position].Select(true);
         }
 
     }

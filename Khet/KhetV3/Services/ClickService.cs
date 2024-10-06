@@ -25,7 +25,7 @@ namespace KhetV3.Services
             if (_storedPiece == null)
             {
                 _storedPiece = piece;
-                //_boardUpdateService.SelectSquare()
+                _boardUpdateService.SelectSquare(piece.position);
 
             }
         }

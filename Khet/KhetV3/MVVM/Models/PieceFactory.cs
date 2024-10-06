@@ -19,7 +19,7 @@ namespace KhetV3.MVVM.Models
         }
         public Dictionary<(int, int), IPiece> Classic()
         {
-            return new Dictionary<(int, int), IPiece>
+            var pieces = new Dictionary<(int, int), IPiece>
             {
                 {(3, 0), new PyramidViewModel(_clickService, Orientations.NE, 2) },
                 {(4, 0), new PyramidViewModel(_clickService, Orientations.SE, 2) },
@@ -55,6 +55,15 @@ namespace KhetV3.MVVM.Models
 
             };
 
+            foreach (var pieceEntry in pieces)
+            {
+                var piece = pieceEntry.Value;
+                var position = pieceEntry.Key;
+
+                piece.SetPosition(position);
+            }
+
+            return pieces;
         }
 
     }
