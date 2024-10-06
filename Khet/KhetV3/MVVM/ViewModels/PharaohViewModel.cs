@@ -1,4 +1,5 @@
-﻿using KhetV3.Interfaces;
+﻿using KhetV3.AbstractClasses;
+using KhetV3.Interfaces;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -9,29 +10,16 @@ using System.Windows.Media;
 
 namespace KhetV3.MVVM.ViewModels
 {
-    public class PharaohViewModel : Screen, IPiece
+    public class PharaohViewModel : Piece
     {
-        private Brush _playerColor;
-        public Brush playerColor { get => _playerColor; set => SetAndNotify(ref _playerColor, value); }
 
         public int player { get; set; }
         public PharaohViewModel(int player)
         {
             this.player = player;
 
-            SetColor();
+            SetColor(player);
         }
 
-        private void SetColor()
-        {
-            if (player == 1)
-            {
-                playerColor = Brushes.Silver;
-            }
-            else
-            {
-                playerColor = Brushes.Red;
-            }
-        }
     }
 }

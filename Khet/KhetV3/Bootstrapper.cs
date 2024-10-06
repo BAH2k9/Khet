@@ -1,4 +1,5 @@
-﻿using KhetV3.MVVM.ViewModels;
+﻿using KhetV3.MVVM.Models;
+using KhetV3.MVVM.ViewModels;
 using KhetV3.Pages;
 using KhetV3.Services;
 using Stylet;
@@ -12,8 +13,11 @@ namespace KhetV3
         {
             // Configure the IoC container in here
             builder.Bind<EventAggregator>().ToSelf().InSingletonScope();
-            builder.Bind<ShellViewModel>().ToSelf().InSingletonScope();
             builder.Bind<BoardUpdateService>().ToSelf().InSingletonScope();
+            builder.Bind<ClickService>().ToSelf().InSingletonScope();
+            builder.Bind<PieceFactory>().ToSelf();
+
+            builder.Bind<ShellViewModel>().ToSelf().InSingletonScope();
             builder.Bind<GameViewModel>().ToSelf();
             builder.Bind<HomeViewModel>().ToSelf();
             builder.Bind<BoardViewModel>().ToSelf();

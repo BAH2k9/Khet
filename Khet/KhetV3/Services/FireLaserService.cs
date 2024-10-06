@@ -15,23 +15,31 @@ namespace KhetV3.Services
     {
         private BoardUpdateService _boardUpdater;
         private Dictionary<(int row, int col), IPiece> pieceState;
+        private int rows;
+        private int cols;
 
         public FireLaserService(BoardUpdateService boardUpdater)
         {
             _boardUpdater = boardUpdater;
         }
 
+        public void SetBoardDimensions(int row, int col)
+        {
+            this.rows = row;
+            this.cols = col;
+        }
+
         public async void CalculateLaserPath((int row, int col) startingPosition, Direction firingDirection)
         {
             Trace.WriteLine("FireLaserService: CalculateLaserPath");
 
-            pieceState = _boardUpdater._pieceDictionary;
+            pieceState = _boardUpdater.GetPieceInfo();
 
             var position = startingPosition;
             var outDirection = firingDirection;
             LaserResponse laserResponse = null;
 
-            while (_boardUpdater.InBounds(position) && outDirection != Direction.Stop)
+            while (InBounds(position) && outDirection != Direction.Stop)
             {
                 if (!pieceState.ContainsKey(position))
                 {
@@ -52,6 +60,16 @@ namespace KhetV3.Services
 
             Trace.WriteLine("out of loop");
 
+        }
+
+        private bool InBounds((int row, int col) position)
+        {
+            if (position.row < this.rows && position.col < this.cols && position.row >= 0 && position.col >= 0)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private LaserResponse PieceLaser(Direction firingDirection, IPiece piece)

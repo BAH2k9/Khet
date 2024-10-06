@@ -41,11 +41,8 @@ namespace KhetV3.MVVM.ViewModels
         public LaserViewModel((LaserPosition, LaserPosition) laserPositions)
         {
             _laserPositions = laserPositions;
-
             FillLaser(_laserPositions.Item1);
             FillLaser(_laserPositions.Item2);
-
-
         }
 
         public void OnLoaded()

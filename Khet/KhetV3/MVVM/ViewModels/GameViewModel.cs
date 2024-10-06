@@ -14,14 +14,18 @@ namespace KhetV3.MVVM.ViewModels
     public class GameViewModel : Screen
     {
         public BoardViewModel BoardViewModel { get; set; }
-
         private FireLaserService _fireLaserService { get; set; }
 
-
+        private readonly int rows = 8;
+        private readonly int cols = 10;
         public GameViewModel(BoardViewModel boardViewModel, FireLaserService fireLaserService)
         {
-            BoardViewModel = boardViewModel;
+            this.BoardViewModel = boardViewModel;
+            this.BoardViewModel.SetDimensions(rows, cols);
+            this.BoardViewModel.Initialise();
+
             _fireLaserService = fireLaserService;
+            _fireLaserService.SetBoardDimensions(rows, cols);
 
         }
 

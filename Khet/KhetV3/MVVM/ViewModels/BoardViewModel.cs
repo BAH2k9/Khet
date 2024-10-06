@@ -1,4 +1,5 @@
-﻿using KhetV3.Services;
+﻿using KhetV3.MVVM.Models;
+using KhetV3.Services;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,31 @@ namespace KhetV3.MVVM.ViewModels
         private int _cols;
         public int cols { get => _cols; set => SetAndNotify(ref _cols, value); }
 
-        public BoardViewModel(BoardUpdateService boardUpdater)
+        private BoardUpdateService _updateService;
+        private SquareFactory _squareFactory;
+        private PieceFactory _pieceFactory;
+
+        public BoardViewModel(BoardUpdateService updateService, SquareFactory squareFactory, PieceFactory pieceFactory)
         {
-            this.rows = 8;
-            this.cols = 10;
-            boardUpdater.GiveReference(this.Squares);
-            boardUpdater.CreateSquares(this.rows, this.cols);
-            boardUpdater.SetPieces();
+            _updateService = updateService;
+            _squareFactory = squareFactory;
+            _pieceFactory = pieceFactory;
+        }
+
+        public void SetDimensions(int row, int col)
+        {
+            this.rows = row;
+            this.cols = col;
+        }
+
+        public void Initialise()
+        {
+            _squareFactory.CreateSquares(this.rows, this.cols);
+
+            this.Squares = _squareFactory.GetBindableSquares();
+
+            _updateService.SetSquares(_squareFactory.GetSquares());
+            _updateService.SetPieces(_pieceFactory.Classic());
         }
     }
 }

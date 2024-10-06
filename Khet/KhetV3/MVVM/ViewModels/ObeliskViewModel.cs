@@ -1,4 +1,5 @@
-﻿using KhetV3.Interfaces;
+﻿using KhetV3.AbstractClasses;
+using KhetV3.Interfaces;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,8 @@ using System.Windows.Media;
 
 namespace KhetV3.MVVM.ViewModels
 {
-    public class ObeliskViewModel : Screen, IPiece
+    public class ObeliskViewModel : Piece
     {
-        private Brush _playerColor;
-        public Brush playerColor { get => _playerColor; set => SetAndNotify(ref _playerColor, value); }
 
         private Brush _playerColor2;
         public Brush playerColor2 { get => _playerColor2; set => SetAndNotify(ref _playerColor2, value); }
@@ -28,7 +27,7 @@ namespace KhetV3.MVVM.ViewModels
         public ObeliskViewModel(int player)
         {
             this.player = player;
-            SetColor();
+            SetColor(player);
         }
 
         public void OnLoaded()
@@ -53,7 +52,7 @@ namespace KhetV3.MVVM.ViewModels
             Size = (controlSize.width + controlSize.height) / 10;
         }
 
-        private void SetColor()
+        protected override void SetColor(int player)
         {
             if (player == 1)
             {

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Khet.Wpf", "Khet.Wpf\Khet.W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Khet2.0", "Khet2.0\Khet2.0.csproj", "{E6E75C7B-B242-4462-8B8E-441DC7706011}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KhetV3", "KhetV3\KhetV3.csproj", "{C14892DD-D844-4971-A5CE-DCA159E9F14C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KhetV3", "KhetV3\KhetV3.csproj", "{C14892DD-D844-4971-A5CE-DCA159E9F14C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

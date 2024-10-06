@@ -1,4 +1,5 @@
 ﻿using Khet3.Enums;
+using KhetV3.AbstractClasses;
 using KhetV3.Interfaces;
 using Stylet;
 using System;
@@ -11,14 +12,11 @@ using System.Windows.Media;
 
 namespace KhetV3.MVVM.ViewModels
 {
-    public class DjedViewModel : Screen, IRotatable
+    public class DjedViewModel : Piece, IRotatable
     {
         public Orientations orientation { get; set; }
 
         private (double width, double height) controlSize;
-
-        private Brush _playerColor;
-        public Brush playerColor { get => _playerColor; set => SetAndNotify(ref _playerColor, value); }
 
         public BindableCollection<double> point1 { get; set; } = [0, 0];
         public BindableCollection<double> point2 { get; set; } = [0, 0];
@@ -29,8 +27,14 @@ namespace KhetV3.MVVM.ViewModels
             this.player = player;
             this.orientation = orientation;
 
-            SetColor();
+            SetColor(player);
         }
+
+        public void ExecuteMouseClick()
+        {
+
+        }
+
 
         public void OnLoaded()
         {
@@ -81,19 +85,5 @@ namespace KhetV3.MVVM.ViewModels
             }
 
         }
-
-        private void SetColor()
-        {
-            if (player == 1)
-            {
-                playerColor = Brushes.Silver;
-            }
-            else
-            {
-                playerColor = Brushes.Red;
-            }
-        }
-
-
     }
 }

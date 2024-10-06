@@ -1,44 +1,39 @@
 ﻿using Khet3.Enums;
+using KhetV3.AbstractClasses;
 using KhetV3.Interfaces;
+using KhetV3.Services;
 using Stylet;
 using Stylet.Xaml;
 using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace KhetV3.MVVM.ViewModels
 {
-    public class PyramidViewModel : Screen, IRotatable
+    public class PyramidViewModel : Piece, IRotatable
     {
+        private ClickService _clickService;
         public Orientations orientation { get; set; }
+        public int player { get; set; }
         private (double width, double height) controlSize { get; set; }
-
-        private Brush _playerColor;
-        public Brush playerColor { get => _playerColor; set => SetAndNotify(ref _playerColor, value); }
 
         private PointCollection _points;
         public PointCollection points { get => _points; set => SetAndNotify(ref _points, value); }
 
-        public int player { get; set; }
-        public PyramidViewModel(Orientations orientation, int player)
+        public PyramidViewModel(ClickService clickService, Orientations orientation, int player)
         {
+            _clickService = clickService;
             this.player = player;
             this.orientation = orientation;
 
-            SetColor();
+            SetColor(player);
+        }
+        public void ExecuteMouseDown(MouseEventArgs e)
+        {
+            _clickService.Click(this);
         }
 
-        private void SetColor()
-        {
-            if (player == 1)
-            {
-                playerColor = Brushes.Silver;
-            }
-            else
-            {
-                playerColor = Brushes.Red;
-            }
-        }
 
         public void OnLoaded()
         {

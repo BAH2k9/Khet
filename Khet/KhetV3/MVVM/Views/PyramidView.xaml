@@ -9,7 +9,9 @@
              d:DesignHeight="100" d:DesignWidth="100"
              d:DataContext="{d:DesignInstance vm:PyramidViewModel}"
              SizeChanged="{s:Action OnSizeChanged }"
-             Loaded="{s:Action OnLoaded}">
+             Loaded="{s:Action OnLoaded}"
+             MouseDown="{s:Action ExecuteMouseDown}"
+             Background="Transparent">
     <Grid>
         <Polygon Points="{Binding points}" 
                 Stroke="Black" 
