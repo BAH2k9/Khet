@@ -1,8 +1,10 @@
 ﻿using Khet3.Enums;
 using KhetV3.Enums;
+using KhetV3.Events;
 using KhetV3.Interfaces;
 using KhetV3.MVVM.Models;
 using KhetV3.MVVM.ViewModels;
+using Stylet;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,13 +15,15 @@ namespace KhetV3.Services
 {
     public class FireLaserService
     {
+        private EventAggregator _EventAggregator;
         private BoardUpdateService _boardUpdater;
         private Dictionary<(int row, int col), IPiece> pieceState;
         private int rows;
         private int cols;
 
-        public FireLaserService(BoardUpdateService boardUpdater)
+        public FireLaserService(EventAggregator eventAggregator, BoardUpdateService boardUpdater)
         {
+            _EventAggregator = eventAggregator;
             _boardUpdater = boardUpdater;
         }
 
@@ -33,14 +37,16 @@ namespace KhetV3.Services
         {
             Trace.WriteLine("FireLaserService: CalculateLaserPath");
 
-            pieceState = _boardUpdater.GetPieceInfo();
+            _EventAggregator.Publish(new LaserFiredEvent());
 
             var position = startingPosition;
             var outDirection = firingDirection;
             LaserResponse laserResponse = null;
 
-            while (InBounds(position) && outDirection != Direction.Stop)
+            while (InBounds(position))
             {
+                pieceState = _boardUpdater.GetPieceInfo();
+
                 if (!pieceState.ContainsKey(position))
                 {
                     laserResponse = DefaultLaser(outDirection);
@@ -52,6 +58,11 @@ namespace KhetV3.Services
 
                 outDirection = laserResponse.direction;
 
+                if (outDirection == Direction.Stop)
+                {
+                    _boardUpdater.PieceHit(position);
+                    break;
+                }
 
                 await _boardUpdater.DisplayLaser(position, laserResponse.LaserPositions);
 

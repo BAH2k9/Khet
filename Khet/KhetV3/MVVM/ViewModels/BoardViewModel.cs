@@ -48,17 +48,15 @@ namespace KhetV3.MVVM.ViewModels
             _updateService.SetPieces(_pieceFactory.Classic());
         }
 
-        public void ExecuteKeyDown()
+        public void OnKeyDown(object sender, KeyEventArgs e)
         {
-            //if (e.Key == Key.Left || e.Key == Key.Right)
-            //{
-            //    _updateService.RotateSelectedPiece(e.Key);
+            if (e.Key == Key.Left || e.Key == Key.Right)
+            {
+                Debug.WriteLine($"KeyDown received: {e.Key}");
+                e.Handled = true;
 
-            //    Trace.WriteLine($"{e.Key} key pressed");
-            //}
-
-
-            Trace.WriteLine($"key pressed");
+                _updateService.RotateSelectedPiece(e.Key);
+            }
         }
     }
 }

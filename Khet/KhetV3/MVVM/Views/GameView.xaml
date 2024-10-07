@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
 
         <!--================================================ Board ================================================-->
-        <ContentControl Grid.Row="1" Grid.Column="1" s:View.Model="{Binding BoardViewModel}"/>
+        <ContentControl Grid.Row="1" Grid.Column="1" s:View.Model="{Binding BoardViewModel}" Focusable="True"/>
 
         <!--================================================ Top Laser ================================================-->
         <Grid Grid.Row="0" Grid.Column="1">

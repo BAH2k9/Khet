@@ -1,5 +1,7 @@
-﻿using KhetV3.Interfaces;
+﻿using KhetV3.Events;
+using KhetV3.Interfaces;
 using KhetV3.MVVM.ViewModels;
+using Stylet;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,13 +11,14 @@ using System.Threading.Tasks;
 
 namespace KhetV3.Services
 {
-    public class ClickService
+    public class ClickService : IHandle<LaserFiredEvent>
     {
         private BoardUpdateService _boardUpdateService;
         private IPiece _storedPiece;
 
-        public ClickService(BoardUpdateService boardUpdateService)
+        public ClickService(EventAggregator eventAggregator, BoardUpdateService boardUpdateService)
         {
+            eventAggregator.Subscribe(this);
             _boardUpdateService = boardUpdateService;
         }
         public void Click(IPiece piece)
@@ -90,6 +93,16 @@ namespace KhetV3.Services
             }
         }
 
+        public void Handle(LaserFiredEvent message)
+        {
+            if (_storedPiece == null)
+            {
+                return;
+            }
 
+            _boardUpdateService.UnselectSquare(_storedPiece.position);
+            _storedPiece = null;
+
+        }
     }
 }

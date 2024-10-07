@@ -1,6 +1,7 @@
 ﻿using Khet3.Enums;
 using KhetV3.AbstractClasses;
 using KhetV3.Interfaces;
+using KhetV3.MVVM.Models;
 using KhetV3.Services;
 using Stylet;
 using Stylet.Xaml;
@@ -50,18 +51,9 @@ namespace KhetV3.MVVM.ViewModels
             RenderPiece();
         }
 
-        public void Rotate(RotationDirection direction)
+        public void Rotate(Key key)
         {
-            switch (direction)
-            {
-                case RotationDirection.CCW:
-                    orientation = (Orientations)(((int)orientation + 1) % 4);
-                    break;
-                case RotationDirection.CW:
-                    orientation = (Orientations)(((int)orientation + 3) % 4);
-                    break;
-            }
-
+            orientation = DirectionMappings.Rotate[(orientation, key)];
             RenderPiece();
         }
 

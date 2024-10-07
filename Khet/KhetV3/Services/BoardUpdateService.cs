@@ -70,10 +70,13 @@ namespace KhetV3.Services
             _selectedPiece = null;
         }
 
-        internal void ShiftPiece(IPiece piece, (int row, int col) position)
+
+        public void ShiftPiece(IPiece piece, (int, int) position)
         {
-            //_pieceDictionary.Remove(piece.position);
-            //_pieceDictionary[position] = piece;
+            _pieceDictionary[piece.position] = null;
+            _pieceDictionary.Remove(piece.position);
+            _pieceDictionary[position] = piece;
+            piece.position = position;
 
             _squareDictionary[piece.position].ActivePiece = null;
             _squareDictionary[position].ActivePiece = piece;
@@ -81,7 +84,7 @@ namespace KhetV3.Services
 
         }
 
-        internal void ShiftPieces(DjedViewModel djed, IPiece piece)
+        public void ShiftPieces(DjedViewModel djed, IPiece piece)
         {
             _squareDictionary[djed.position].ActivePiece = piece;
             _squareDictionary[piece.position].ActivePiece = djed;
@@ -97,6 +100,14 @@ namespace KhetV3.Services
             {
                 rotatablePiece.Rotate(key);
             }
+        }
+
+        internal void PieceHit((int row, int col) position)
+        {
+            _pieceDictionary[position] = null;
+            _pieceDictionary.Remove(position);
+
+            _squareDictionary[position].ActivePiece = null;
         }
     }
 }

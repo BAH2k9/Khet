@@ -9,14 +9,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance vm:BoardViewModel}"
-             KeyDown= "OnKeyDown"
+             KeyDown= "{s:Action OnKeyDown}"
              Focusable="True"
              Background="Transparent"
              GotFocus="OnGotFocus"
              LostFocus="OnLostFocus"
-             FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}">
+             MouseEnter="OnMouseEnter"
+             MouseLeave="OnMouseLeave">
 
-    <Grid Grid.Row="1" Grid.Column="1" Focusable="True">
+    <Grid Focusable="True">
         <ItemsControl ItemsSource="{Binding Squares}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

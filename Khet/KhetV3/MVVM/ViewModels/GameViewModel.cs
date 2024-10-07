@@ -33,6 +33,7 @@ namespace KhetV3.MVVM.ViewModels
         {
             Trace.WriteLine("Player 1 fire laser clicked!");
             _fireLaserService.CalculateLaserPath((7, 9), Direction.Up);
+
         }
 
         public void ExecuteFireLaserP2()

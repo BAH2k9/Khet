@@ -10,9 +10,6 @@ namespace KhetV3.Interfaces
     {
         public Orientations orientation { get; set; }
 
-        public void Rotate(Key key)
-        {
-            orientation = DirectionMappings.Rotate[(orientation, key)];
-        }
+        public void Rotate(Key key);
     }
 }
