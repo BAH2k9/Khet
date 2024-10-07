@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace KhetV3.Services
 {
@@ -17,6 +18,7 @@ namespace KhetV3.Services
     {
         private Dictionary<(int, int), SquareViewModel> _squareDictionary;
         private Dictionary<(int, int), IPiece> _pieceDictionary;
+        private IPiece _selectedPiece;
 
         public BoardUpdateService()
         {
@@ -60,16 +62,14 @@ namespace KhetV3.Services
         public void SelectSquare((int, int) position)
         {
             _squareDictionary[position].Select(true);
+            _selectedPiece = _squareDictionary[position].ActivePiece;
         }
         public void UnselectSquare((int, int) position)
         {
             _squareDictionary[position].Select(false);
+            _selectedPiece = null;
         }
 
-        public SquareViewModel GetSquare((int row, int col) squarePosition)
-        {
-            return _squareDictionary[squarePosition];
-        }
         internal void ShiftPiece(IPiece piece, (int row, int col) position)
         {
             //_pieceDictionary.Remove(piece.position);
@@ -89,6 +89,14 @@ namespace KhetV3.Services
             var temp = piece.position;
             piece.position = djed.position;
             djed.position = temp;
+        }
+
+        public void RotateSelectedPiece(Key key)
+        {
+            if (_selectedPiece is IRotatable rotatablePiece)
+            {
+                rotatablePiece.Rotate(key);
+            }
         }
     }
 }

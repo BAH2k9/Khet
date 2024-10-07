@@ -3,9 +3,11 @@ using KhetV3.Services;
 using Stylet;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace KhetV3.MVVM.ViewModels
 {
@@ -44,6 +46,19 @@ namespace KhetV3.MVVM.ViewModels
 
             _updateService.SetSquares(_squareFactory.GetSquares());
             _updateService.SetPieces(_pieceFactory.Classic());
+        }
+
+        public void ExecuteKeyDown()
+        {
+            //if (e.Key == Key.Left || e.Key == Key.Right)
+            //{
+            //    _updateService.RotateSelectedPiece(e.Key);
+
+            //    Trace.WriteLine($"{e.Key} key pressed");
+            //}
+
+
+            Trace.WriteLine($"key pressed");
         }
     }
 }

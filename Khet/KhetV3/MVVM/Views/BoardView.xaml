@@ -8,9 +8,15 @@
              xmlns:vm="clr-namespace:KhetV3.MVVM.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance vm:BoardViewModel}">
+             d:DataContext="{d:DesignInstance vm:BoardViewModel}"
+             KeyDown= "OnKeyDown"
+             Focusable="True"
+             Background="Transparent"
+             GotFocus="OnGotFocus"
+             LostFocus="OnLostFocus"
+             FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}">
 
-    <Grid Grid.Row="1" Grid.Column="1">
+    <Grid Grid.Row="1" Grid.Column="1" Focusable="True">
         <ItemsControl ItemsSource="{Binding Squares}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
