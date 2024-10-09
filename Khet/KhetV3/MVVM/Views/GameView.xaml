@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance vm:GameViewModel}"
-             Background="Black">
+             Background="#141414">
 
 
 
@@ -42,7 +42,8 @@
                    MouseDown="{s:Action ExecuteFireLaserP2}"
                    MouseEnter="{s:Action OnMouseEnterLaser2}"
                    MouseLeave="{s:Action OnMouseLeaveLaser2}"
-                   Opacity="{Binding opacity2}" >
+                   Opacity="{Binding opacity2}"
+                   IsEnabled="{Binding IsEnabled2}">
                 <Image.Source>
                     <BitmapImage  UriSource="../../Assets/laserCanonB.png" />
                 </Image.Source>
@@ -67,7 +68,8 @@
                    MouseDown="{s:Action ExecuteFireLaserP1}"
                    MouseEnter="{s:Action OnMouseEnterLaser1}"
                    MouseLeave="{s:Action OnMouseLeaveLaser1}"
-                   Opacity="{Binding opacity1}">
+                   Opacity="{Binding opacity1}"
+                   IsEnabled="{Binding IsEnabled1}">
                 <Image.Source>
                     <BitmapImage  UriSource="../../Assets/laserCanonB.png" />
                 </Image.Source>

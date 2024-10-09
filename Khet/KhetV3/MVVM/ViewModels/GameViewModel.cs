@@ -1,4 +1,5 @@
 ﻿using Khet3.Enums;
+using KhetV3.Events;
 using KhetV3.MVVM.Models;
 using KhetV3.Services;
 using Stylet;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace KhetV3.MVVM.ViewModels
 {
-    public class GameViewModel : Screen
+    public class GameViewModel : Screen, IHandle<PlayerChangedEvent>, IHandle<PieceMovedEvent>
     {
         public BoardViewModel BoardViewModel { get; set; }
         private FireLaserService _fireLaserService { get; set; }
@@ -25,8 +26,15 @@ namespace KhetV3.MVVM.ViewModels
 
         private float _opacity2;
         public float opacity2 { get => _opacity2; set => SetAndNotify(ref _opacity2, value); }
-        public GameViewModel(BoardViewModel boardViewModel, FireLaserService fireLaserService)
+
+        private bool _IsEnabled1;
+        public bool IsEnabled1 { get => _IsEnabled1; set => SetAndNotify(ref _IsEnabled1, value); }
+
+        private bool _IsEnabled2;
+        public bool IsEnabled2 { get => _IsEnabled2; set => SetAndNotify(ref _IsEnabled2, value); }
+        public GameViewModel(EventAggregator eventAggregator, BoardViewModel boardViewModel, FireLaserService fireLaserService)
         {
+            eventAggregator.Subscribe(this);
 
             this.BoardViewModel = boardViewModel;
             this.BoardViewModel.SetDimensions(rows, cols);
@@ -35,50 +43,133 @@ namespace KhetV3.MVVM.ViewModels
             _fireLaserService = fireLaserService;
             _fireLaserService.SetBoardDimensions(rows, cols);
 
+
             opacity1 = 0.5f;
             opacity2 = 0.5f;
-
+            IsEnabled1 = true;
+            IsEnabled2 = true;
         }
 
         public void SetPlayerRules()
         {
+            opacity1 = 0.5f;
+            opacity2 = 0.0f;
+            IsEnabled1 = false;
+            IsEnabled2 = false;
+
             this.BoardViewModel.SetPlayerRules();
+
         }
 
-        public void ExecuteFireLaserP1()
+        public async void ExecuteFireLaserP1()
         {
             Trace.WriteLine("Player 1 fire laser clicked!");
-            _fireLaserService.CalculateLaserPath((7, 9), Direction.Up);
+
+            await _fireLaserService.CalculateLaserPath((7, 9), Direction.Up);
 
         }
 
-        public void ExecuteFireLaserP2()
+        public async void ExecuteFireLaserP2()
         {
             Trace.WriteLine("Player 2 fire laser clicked!");
-            _fireLaserService.CalculateLaserPath((0, 0), Direction.Down);
+
+            await _fireLaserService.CalculateLaserPath((0, 0), Direction.Down);
         }
 
         public void OnMouseEnterLaser1()
         {
-            opacity1 = 1.0f;
+            HighlightLaserButton(1);
         }
 
         public void OnMouseLeaveLaser1()
         {
-            opacity1 = 0.5f;
+            DullLaserButton(1);
         }
 
         public void OnMouseEnterLaser2()
         {
-            opacity2 = 1.0f;
+            HighlightLaserButton(2);
         }
 
         public void OnMouseLeaveLaser2()
         {
-            opacity2 = 0.5f;
+            DullLaserButton(2);
+        }
+
+        public void HighlightLaserButton(int player)
+        {
+            if (player == 1)
+            {
+                if (IsEnabled1)
+                {
+                    opacity1 = 1.0f;
+                }
+
+            }
+            else if (player == 2)
+            {
+                if (IsEnabled2)
+                {
+                    opacity2 = 1.0f;
+                }
+            }
+        }
+
+        public void DullLaserButton(int player)
+        {
+            if (player == 1)
+            {
+                if (IsEnabled1)
+                {
+                    opacity1 = 0.5f;
+                }
+
+            }
+            else if (player == 2)
+            {
+                if (IsEnabled2)
+                {
+                    opacity2 = 0.5f;
+                }
+
+            }
         }
 
 
+        public void Handle(PlayerChangedEvent e)
+        {
+            if (e.newPlayerTurn == 1)
+            {
+                opacity1 = 0.5f;
+                opacity2 = 0.0f;
 
+                IsEnabled1 = false;
+                IsEnabled2 = false;
+
+            }
+            else if (e.newPlayerTurn == 2)
+            {
+                opacity1 = 0.0f;
+                opacity2 = 0.5f;
+
+                IsEnabled1 = false;
+                IsEnabled2 = false;
+
+            }
+
+        }
+
+        public void Handle(PieceMovedEvent e)
+        {
+            if (e.player == 1)
+            {
+                IsEnabled1 = true;
+            }
+            else if (e.player == 2)
+            {
+                IsEnabled2 = true;
+
+            }
+        }
     }
 }

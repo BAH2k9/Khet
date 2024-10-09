@@ -33,7 +33,7 @@ namespace KhetV3.Services
             this.cols = col;
         }
 
-        public async void CalculateLaserPath((int row, int col) startingPosition, Direction firingDirection)
+        public async Task CalculateLaserPath((int row, int col) startingPosition, Direction firingDirection)
         {
             Trace.WriteLine("FireLaserService: CalculateLaserPath");
 

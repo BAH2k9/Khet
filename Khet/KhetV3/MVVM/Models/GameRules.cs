@@ -13,15 +13,19 @@ namespace KhetV3.MVVM.Models
     public class GameRules : IHandle<LaserFiredEvent>
     {
         private bool InPlay = false;
+        private bool alreadyMoved = false;
         private int playerTurn = 1;
+        private EventAggregator _eventAggregator;
 
         public GameRules(EventAggregator eventAggregator)
         {
-            eventAggregator.Subscribe(this);
+            _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
         }
         public void TurnOn()
         {
             InPlay = true;
+
         }
 
         public bool CanSelect(SquareViewModel square)
@@ -54,6 +58,11 @@ namespace KhetV3.MVVM.Models
                 return false;
             }
 
+            if (alreadyMoved)
+            {
+                return false;
+            }
+
             var rowDiff = Math.Abs(piece.position.row - position.row);
             var colDiff = Math.Abs(piece.position.col - position.col);
 
@@ -61,22 +70,30 @@ namespace KhetV3.MVVM.Models
             {
                 return false;
             }
+            else
+            {
+                _eventAggregator.Publish(new PieceMovedEvent(piece.player));
+                alreadyMoved = true;
+                return true;
 
+            }
 
-            return true;
         }
 
-        public void Handle(LaserFiredEvent message)
+        public void Handle(LaserFiredEvent e)
         {
-            playerTurn = playerTurn switch
+            if (InPlay)
             {
-                1 => 2,
-                2 => 1,
-                _ => throw new InvalidOperationException()
-            };
+                playerTurn = playerTurn switch
+                {
+                    1 => 2,
+                    2 => 1,
+                    _ => throw new InvalidOperationException()
+                };
 
-
-
+                alreadyMoved = false;
+                _eventAggregator.Publish(new PlayerChangedEvent(playerTurn));
+            }
 
         }
     }

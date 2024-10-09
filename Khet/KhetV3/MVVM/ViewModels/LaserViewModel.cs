@@ -251,7 +251,7 @@ namespace KhetV3.MVVM.ViewModels
 
         public async void AnimateRemoveLaser()
         {
-
+            await Task.Delay(150);
             switch (_laserPositions.Item1)
             {
                 case LaserPosition.Top:
