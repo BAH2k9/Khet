@@ -11,6 +11,7 @@ namespace KhetV3.AbstractClasses
 {
     public abstract class Piece : Screen, IPiece
     {
+        public int player { get; set; }
         public (int row, int col) position { get; set; }
 
         private Brush _playerColor;

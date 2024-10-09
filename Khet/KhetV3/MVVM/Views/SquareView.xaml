@@ -6,24 +6,42 @@
              xmlns:s="https://github.com/canton7/Stylet"
              xmlns:vm="clr-namespace:KhetV3.MVVM.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="100" d:DesignWidth="100"
              d:DataContext="{d:DesignInstance vm:SquareViewModel}"
              ClipToBounds="True"
              MouseDown="{s:Action ExecuteMouseDown}"
-             Background="Transparent">
+             Background="Transparent"
+             IsEnabled="True">
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="2">
+        <Border BorderBrush="SandyBrown" BorderThickness="2">
+
             <Grid>
+                <Rectangle Width="auto" Height="auto"
+                             Panel.ZIndex="0"
+                             Stroke="{Binding squareColor}"
+                             StrokeThickness="5"
+                             Fill="Transparent"
+                             Opacity="0.75"/>
 
-                <ContentControl s:View.Model="{Binding ActiveLaser}" Panel.ZIndex="0"/>
+                <Grid>
+                    <Border BorderThickness="5" BorderBrush="Transparent">
+                        <Grid>
+                            <ContentControl s:View.Model="{Binding ActiveLaser}" Panel.ZIndex="1"/>
+                            <Border BorderBrush="{Binding highlight}" 
+                                    BorderThickness="2" 
+                                    Panel.ZIndex="2">
+                                <Grid>
+                                    <ContentControl s:View.Model="{Binding ActivePiece}" Opacity="1.0"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
 
-                <Border BorderBrush="{Binding highlight}" BorderThickness="2">
-                    <Grid>
-                        <ContentControl s:View.Model="{Binding ActivePiece}" Panel.ZIndex="1"/>
-                    </Grid>
-                </Border>
+                    </Border>
 
+                </Grid>
             </Grid>
+
+
         </Border>
     </Grid>
 </UserControl>

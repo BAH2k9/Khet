@@ -36,6 +36,32 @@ namespace KhetV3.MVVM.Models
                 }
             }
 
+            ColorSquares();
+
+        }
+
+        private void ColorSquares()
+        {
+            _squareDict[(0, 9)].SetSquareColor(1);
+            _squareDict[(1, 9)].SetSquareColor(1);
+            _squareDict[(2, 9)].SetSquareColor(1);
+            _squareDict[(3, 9)].SetSquareColor(1);
+            _squareDict[(4, 9)].SetSquareColor(1);
+            _squareDict[(5, 9)].SetSquareColor(1);
+            _squareDict[(6, 9)].SetSquareColor(1);
+            _squareDict[(7, 9)].SetSquareColor(1);
+
+
+            _squareDict[(0, 0)].SetSquareColor(2);
+            _squareDict[(1, 0)].SetSquareColor(2);
+            _squareDict[(2, 0)].SetSquareColor(2);
+            _squareDict[(3, 0)].SetSquareColor(2);
+            _squareDict[(4, 0)].SetSquareColor(2);
+            _squareDict[(5, 0)].SetSquareColor(2);
+            _squareDict[(6, 0)].SetSquareColor(2);
+            _squareDict[(7, 0)].SetSquareColor(2);
+
+
         }
 
         public BindableCollection<SquareViewModel> GetBindableSquares()

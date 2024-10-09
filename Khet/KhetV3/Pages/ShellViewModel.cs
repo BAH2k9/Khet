@@ -31,7 +31,11 @@ namespace KhetV3.Pages
                 case AppPages.Home:
                     ActivateItem(_homeViewModel);
                     break;
-                case AppPages.Game:
+                case AppPages.FreePlay:
+                    ActivateItem(_gameViewModel);
+                    break;
+                case AppPages.LocalGame:
+                    _gameViewModel.SetPlayerRules();
                     ActivateItem(_gameViewModel);
                     break;
 

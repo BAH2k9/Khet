@@ -21,6 +21,9 @@ namespace KhetV3.MVVM.ViewModels
         private Brush _highlight = Brushes.Transparent;
         public Brush highlight { get => _highlight; set => SetAndNotify(ref _highlight, value); }
 
+        private Brush _squareColor = Brushes.Transparent;
+        public Brush squareColor { get => _squareColor; set => SetAndNotify(ref _squareColor, value); }
+
         public (int row, int col) position { get; set; }
 
         private ClickService _clickService;
@@ -28,6 +31,18 @@ namespace KhetV3.MVVM.ViewModels
         {
             _clickService = clickService;
 
+        }
+
+        public void SetSquareColor(int player)
+        {
+            if (player == 1)
+            {
+                squareColor = Brushes.DarkGray;
+            }
+            else if (player == 2)
+            {
+                squareColor = Brushes.Red;
+            }
         }
 
         public void Select(bool select)

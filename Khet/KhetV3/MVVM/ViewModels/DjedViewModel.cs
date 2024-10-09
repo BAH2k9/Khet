@@ -23,7 +23,6 @@ namespace KhetV3.MVVM.ViewModels
 
         public BindableCollection<double> point1 { get; set; } = [0, 0];
         public BindableCollection<double> point2 { get; set; } = [0, 0];
-        public int player { get; set; }
         private ClickService _clickService;
         public DjedViewModel(ClickService clickService, Orientations orientation, int player)
         {

@@ -16,7 +16,6 @@ namespace KhetV3.MVVM.ViewModels
     {
         private ClickService _clickService;
         public Orientations orientation { get; set; }
-        public int player { get; set; }
         private (double width, double height) controlSize { get; set; }
 
         private PointCollection _points;

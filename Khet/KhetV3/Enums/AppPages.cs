@@ -3,6 +3,7 @@
     public enum AppPages
     {
         Home,
-        Game,
+        LocalGame,
+        FreePlay,
     }
 }

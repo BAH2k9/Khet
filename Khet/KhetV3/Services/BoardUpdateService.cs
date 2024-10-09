@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -19,10 +20,18 @@ namespace KhetV3.Services
         private Dictionary<(int, int), SquareViewModel> _squareDictionary;
         private Dictionary<(int, int), IPiece> _pieceDictionary;
         private IPiece _selectedPiece;
+        private GameRules _gameRules;
 
-        public BoardUpdateService()
+
+
+        public BoardUpdateService(GameRules gameRules)
         {
+            _gameRules = gameRules;
+        }
 
+        public void SetPlayerRules()
+        {
+            _gameRules.TurnOn();
         }
 
         public void SetSquares(Dictionary<(int, int), SquareViewModel> Squares)
@@ -54,15 +63,20 @@ namespace KhetV3.Services
         {
             Trace.WriteLine($"BoardUpdater.DisplayLaser at row: {squarePosition.row}, col: {squarePosition.col} with Laser: {laserPosition} ");
 
-            _squareDictionary[squarePosition].ActiveLaser = new LaserViewModel(laserPosition); ;
+            _squareDictionary[squarePosition].ActiveLaser = new LaserViewModel(laserPosition);
             await _squareDictionary[squarePosition].ActiveLaser.Animate();
             _squareDictionary[squarePosition].ActiveLaser.AnimateRemoveLaser();
+
         }
 
         public void SelectSquare((int, int) position)
         {
-            _squareDictionary[position].Select(true);
-            _selectedPiece = _squareDictionary[position].ActivePiece;
+            if (_gameRules.CanSelect(_squareDictionary[position]))
+            {
+                _squareDictionary[position].Select(true);
+                _selectedPiece = _squareDictionary[position].ActivePiece;
+            }
+
         }
         public void UnselectSquare((int, int) position)
         {
@@ -73,25 +87,34 @@ namespace KhetV3.Services
 
         public void ShiftPiece(IPiece piece, (int, int) position)
         {
-            _pieceDictionary[piece.position] = null;
-            _pieceDictionary.Remove(piece.position);
-            _pieceDictionary[position] = piece;
-            piece.position = position;
+            if (_gameRules.CanShift(piece, position))
+            {
+                _pieceDictionary[piece.position] = null;
+                _pieceDictionary.Remove(piece.position);
+                _pieceDictionary[position] = piece;
 
-            _squareDictionary[piece.position].ActivePiece = null;
-            _squareDictionary[position].ActivePiece = piece;
-            piece.position = position;
+
+                _squareDictionary[piece.position].ActivePiece = null;
+                _squareDictionary[position].ActivePiece = piece;
+
+                piece.position = position;
+            }
+
 
         }
 
         public void ShiftPieces(DjedViewModel djed, IPiece piece)
         {
-            _squareDictionary[djed.position].ActivePiece = piece;
-            _squareDictionary[piece.position].ActivePiece = djed;
+            if (_gameRules.CanShift(djed, piece.position))
+            {
+                _squareDictionary[djed.position].ActivePiece = piece;
+                _squareDictionary[piece.position].ActivePiece = djed;
 
-            var temp = piece.position;
-            piece.position = djed.position;
-            djed.position = temp;
+                var temp = piece.position;
+                piece.position = djed.position;
+                djed.position = temp;
+            }
+
         }
 
         public void RotateSelectedPiece(Key key)
@@ -102,12 +125,13 @@ namespace KhetV3.Services
             }
         }
 
-        internal void PieceHit((int row, int col) position)
+        public void PieceHit((int row, int col) position)
         {
             _pieceDictionary[position] = null;
             _pieceDictionary.Remove(position);
 
             _squareDictionary[position].ActivePiece = null;
         }
+
     }
 }

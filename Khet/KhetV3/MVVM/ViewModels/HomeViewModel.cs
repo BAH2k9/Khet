@@ -17,9 +17,14 @@ namespace KhetV3.MVVM.ViewModels
         {
             _eventAggregator = eventAggregator;
         }
-        public void NavigateToGameView()
+        public void NavigateToLocalGame()
         {
-            _eventAggregator.Publish(new NavigateEvent { page = AppPages.Game });
+            _eventAggregator.Publish(new NavigateEvent { page = AppPages.LocalGame });
+        }
+
+        public void NavigateToFreePlay()
+        {
+            _eventAggregator.Publish(new NavigateEvent { page = AppPages.FreePlay });
         }
     }
 }

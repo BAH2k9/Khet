@@ -13,7 +13,6 @@ namespace KhetV3.MVVM.ViewModels
 {
     public class PharaohViewModel : Piece
     {
-        public int player { get; set; }
         private ClickService _clickService;
         public PharaohViewModel(ClickService clickService, int player)
         {

@@ -32,15 +32,15 @@ namespace KhetV3.MVVM.Models
 
         public static readonly Dictionary<(Orientations, Key), Orientations> Rotate = new Dictionary<(Orientations, Key), Orientations>
         {
-            {(Orientations.NW, Key.Left), Orientations.SW},
-            {(Orientations.SW, Key.Left), Orientations.SE},
-            {(Orientations.SE, Key.Left), Orientations.NE},
-            {(Orientations.NE, Key.Left), Orientations.NW},
+            {(Orientations.NW, Key.A), Orientations.SW},
+            {(Orientations.SW, Key.A), Orientations.SE},
+            {(Orientations.SE, Key.A), Orientations.NE},
+            {(Orientations.NE, Key.A), Orientations.NW},
 
-            {(Orientations.NE, Key.Right), Orientations.SE},
-            {(Orientations.SE, Key.Right), Orientations.SW},
-            {(Orientations.SW, Key.Right), Orientations.NW},
-            {(Orientations.NW, Key.Right), Orientations.NE},
+            {(Orientations.NE, Key.D), Orientations.SE},
+            {(Orientations.SE, Key.D), Orientations.SW},
+            {(Orientations.SW, Key.D), Orientations.NW},
+            {(Orientations.NW, Key.D), Orientations.NE},
         };
 
 

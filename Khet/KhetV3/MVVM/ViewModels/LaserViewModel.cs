@@ -34,7 +34,7 @@ namespace KhetV3.MVVM.ViewModels
         private (LaserPosition, LaserPosition) _laserPositions;
         private (double width, double height) controlSize;
         private (double width, double height) center;
-        private int Delay = 50;
+        private int Delay = 20;
         private double moveSpeed;
         private TaskCompletionSource<bool> _loadedCompletionSource = new TaskCompletionSource<bool>();
 
@@ -103,7 +103,7 @@ namespace KhetV3.MVVM.ViewModels
 
         public void FillLaser(LaserPosition laserPosition)
         {
-            fill[(int)laserPosition] = Brushes.Red;
+            fill[(int)laserPosition] = Brushes.White;
         }
 
         public void ClearLaser()
@@ -329,6 +329,8 @@ namespace KhetV3.MVVM.ViewModels
 
             }
         }
+
+
 
 
 

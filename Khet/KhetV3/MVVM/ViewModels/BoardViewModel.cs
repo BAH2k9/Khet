@@ -32,6 +32,8 @@ namespace KhetV3.MVVM.ViewModels
             _pieceFactory = pieceFactory;
         }
 
+
+
         public void SetDimensions(int row, int col)
         {
             this.rows = row;
@@ -50,13 +52,18 @@ namespace KhetV3.MVVM.ViewModels
 
         public void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Left || e.Key == Key.Right)
+            if (e.Key == Key.A || e.Key == Key.D)
             {
                 Debug.WriteLine($"KeyDown received: {e.Key}");
                 e.Handled = true;
 
                 _updateService.RotateSelectedPiece(e.Key);
             }
+        }
+
+        public void SetPlayerRules()
+        {
+            _updateService.SetPlayerRules();
         }
     }
 }

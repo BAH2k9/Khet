@@ -7,7 +7,11 @@
              xmlns:vm="clr-namespace:KhetV3.MVVM.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance vm:GameViewModel}">
+             d:DataContext="{d:DesignInstance vm:GameViewModel}"
+             Background="Black">
+
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -22,7 +26,10 @@
         </Grid.ColumnDefinitions>
 
         <!--================================================ Board ================================================-->
-        <ContentControl Grid.Row="1" Grid.Column="1" s:View.Model="{Binding BoardViewModel}" Focusable="True"/>
+        <Border BorderBrush="SandyBrown" BorderThickness="2" Grid.Row="1" Grid.Column="1">
+            <ContentControl s:View.Model="{Binding BoardViewModel}" Focusable="True"/>
+        </Border>
+
 
         <!--================================================ Top Laser ================================================-->
         <Grid Grid.Row="0" Grid.Column="1">
@@ -31,21 +38,20 @@
                 <ColumnDefinition Width="18*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Background="Transparent" 
-            Click="{s:Action ExecuteFireLaserP2}"
-            BorderBrush="Transparent">
-                <Image Panel.ZIndex="1">
-                    <Image.Source>
-                        <BitmapImage  UriSource="../../Assets/laserCanonB.png" />
-                    </Image.Source>
-                    <Image.RenderTransform>
-                        <RotateTransform Angle="90" />
-                    </Image.RenderTransform>
-                    <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+            <Image Panel.ZIndex="1" 
+                   MouseDown="{s:Action ExecuteFireLaserP2}"
+                   MouseEnter="{s:Action OnMouseEnterLaser2}"
+                   MouseLeave="{s:Action OnMouseLeaveLaser2}"
+                   Opacity="{Binding opacity2}" >
+                <Image.Source>
+                    <BitmapImage  UriSource="../../Assets/laserCanonB.png" />
+                </Image.Source>
+                <Image.RenderTransform>
+                    <RotateTransform Angle="90" />
+                </Image.RenderTransform>
+                <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
 
-                </Image>
-            </Button>
-
+            </Image>
 
         </Grid>
 
@@ -57,21 +63,38 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Background="Transparent" 
-            Click="{s:Action ExecuteFireLaserP1}"
-            BorderBrush="Transparent">
-                <Image Panel.ZIndex="1">
-                    <Image.Source>
-                        <BitmapImage  UriSource="../../Assets/laserCanonB.png" />
-                    </Image.Source>
-                    <Image.RenderTransform>
-                        <RotateTransform Angle="270" />
-                    </Image.RenderTransform>
-                    <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+            <Image Panel.ZIndex="1" Grid.Column="1"
+                   MouseDown="{s:Action ExecuteFireLaserP1}"
+                   MouseEnter="{s:Action OnMouseEnterLaser1}"
+                   MouseLeave="{s:Action OnMouseLeaveLaser1}"
+                   Opacity="{Binding opacity1}">
+                <Image.Source>
+                    <BitmapImage  UriSource="../../Assets/laserCanonB.png" />
+                </Image.Source>
+                <Image.RenderTransform>
+                    <RotateTransform Angle="270" />
+                </Image.RenderTransform>
+                <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
 
-                </Image>
-            </Button>
+            </Image>
         </Grid>
     </Grid>
 
 </UserControl>
+
+
+
+<!--<Button Background="Transparent" 
+Click="{s:Action ExecuteFireLaserP2}"
+BorderBrush="Transparent">
+    <Image Panel.ZIndex="1" MouseDown="{s:Action ExecuteFireLaserP2}">
+        <Image.Source>
+            <BitmapImage  UriSource="../../Assets/laserCanonB.png" />
+        </Image.Source>
+        <Image.RenderTransform>
+            <RotateTransform Angle="90" />
+        </Image.RenderTransform>
+        <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+
+    </Image>
+</Button>-->

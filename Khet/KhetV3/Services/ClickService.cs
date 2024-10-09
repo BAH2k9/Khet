@@ -14,7 +14,7 @@ namespace KhetV3.Services
     public class ClickService : IHandle<LaserFiredEvent>
     {
         private BoardUpdateService _boardUpdateService;
-        private IPiece _storedPiece;
+        private IPiece _storedPiece = null;
 
         public ClickService(EventAggregator eventAggregator, BoardUpdateService boardUpdateService)
         {
@@ -52,19 +52,18 @@ namespace KhetV3.Services
 
         public void Click(SquareViewModel square)
         {
+            // Stops Click Square being called when Clicking a Piece
+            if (square.ActivePiece == _storedPiece)
+            {
+                return;
+            }
             // Stops Click Square being called if a piece hasnt been selected 
             if (_storedPiece == null)
             {
                 return;
             }
-            // Stops Click Square being called when Unselecting a Piece
-            if (square.ActivePiece == _storedPiece)
-            {
-                return;
-            }
-
             // Stops Pieces from being shifted if the square is occupied
-            if (square.ActivePiece is not null)
+            if (square.ActivePiece != null)
             {
                 return;
             }

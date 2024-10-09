@@ -23,7 +23,6 @@ namespace KhetV3.MVVM.ViewModels
 
         private (double width, double height) controlSize;
 
-        public int player { get; set; }
         private ClickService _clickService;
         public ObeliskViewModel(ClickService clickService, int player)
         {
