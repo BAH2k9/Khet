@@ -35,6 +35,11 @@ namespace KhetV3.MVVM.Models
                 return true;
             }
 
+            if (alreadyMoved)
+            {
+                return false;
+            }
+
             if (square.ActivePiece.player == playerTurn)
             {
                 return true;
@@ -95,6 +100,22 @@ namespace KhetV3.MVVM.Models
                 _eventAggregator.Publish(new PlayerChangedEvent(playerTurn));
             }
 
+        }
+
+        public bool CanRotate()
+        {
+            if (!InPlay)
+            {
+                return true;
+            }
+            if (alreadyMoved)
+            {
+                return false;
+            }
+
+            _eventAggregator.Publish(new PieceMovedEvent(playerTurn));
+            alreadyMoved = true;
+            return true;
         }
     }
 }

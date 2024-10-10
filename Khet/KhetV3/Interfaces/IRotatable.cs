@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace KhetV3.Interfaces
 {
-    public interface IRotatable : IPiece
+    public interface IRotatable
     {
         public Orientations orientation { get; set; }
 

@@ -163,10 +163,12 @@ namespace KhetV3.MVVM.ViewModels
         {
             if (e.player == 1)
             {
+                opacity1 = 0.5f;
                 IsEnabled1 = true;
             }
             else if (e.player == 2)
             {
+                opacity2 = 0.5f;
                 IsEnabled2 = true;
 
             }

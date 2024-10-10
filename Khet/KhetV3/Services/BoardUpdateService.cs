@@ -119,10 +119,17 @@ namespace KhetV3.Services
 
         public void RotateSelectedPiece(Key key)
         {
-            if (_selectedPiece is IRotatable rotatablePiece)
+            if (_gameRules.CanRotate())
             {
-                rotatablePiece.Rotate(key);
+                if (_selectedPiece is IRotatable rotatablePiece)
+                {
+                    rotatablePiece.Rotate(key);
+                }
+
+                UnselectSquare(_selectedPiece.position);
+                _selectedPiece = null;
             }
+
         }
 
         public void PieceHit((int row, int col) position)
