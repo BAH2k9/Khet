@@ -20,12 +20,14 @@ namespace KhetV3.Services
         private Dictionary<(int, int), SquareViewModel> _squareDictionary;
         private Dictionary<(int, int), IPiece> _pieceDictionary;
         private IPiece _selectedPiece;
+        private HistoryService _historyService;
         private GameRules _gameRules;
 
 
 
-        public BoardUpdateService(GameRules gameRules)
+        public BoardUpdateService(HistoryService historyService, GameRules gameRules)
         {
+            _historyService = historyService;
             _gameRules = gameRules;
         }
 
@@ -89,6 +91,8 @@ namespace KhetV3.Services
         {
             if (_gameRules.CanShift(piece, position))
             {
+                _historyService.AddShift(piece.position, position);
+
                 _pieceDictionary[piece.position] = null;
                 _pieceDictionary.Remove(piece.position);
                 _pieceDictionary[position] = piece;
@@ -98,6 +102,7 @@ namespace KhetV3.Services
                 _squareDictionary[position].ActivePiece = piece;
 
                 piece.position = position;
+
             }
 
 
@@ -107,12 +112,16 @@ namespace KhetV3.Services
         {
             if (_gameRules.CanShift(djed, piece.position))
             {
+                _historyService.AddShift(djed.position, piece.position);
+
                 _squareDictionary[djed.position].ActivePiece = piece;
                 _squareDictionary[piece.position].ActivePiece = djed;
 
                 var temp = piece.position;
                 piece.position = djed.position;
                 djed.position = temp;
+
+
             }
 
         }
@@ -138,6 +147,17 @@ namespace KhetV3.Services
             _pieceDictionary.Remove(position);
 
             _squareDictionary[position].ActivePiece = null;
+        }
+
+        public void UndoMove()
+        {
+            (var oldPos, var newPos) = _historyService.GetLastMove();
+
+            IPiece? oldPiece = _squareDictionary[oldPos].ActivePiece;
+            IPiece newPiece = _squareDictionary[newPos].ActivePiece;
+
+            _squareDictionary[oldPos].ActivePiece = newPiece;
+            _squareDictionary[newPos].ActivePiece = oldPiece;
         }
 
     }

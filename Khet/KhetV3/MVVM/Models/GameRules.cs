@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace KhetV3.MVVM.Models
 {
-    public class GameRules : IHandle<LaserFiredEvent>
+    public class GameRules : IHandle<LaserFiredEvent>, IHandle<UndoMoveEvent>
     {
         private bool InPlay = false;
         private bool alreadyMoved = false;
@@ -116,6 +116,11 @@ namespace KhetV3.MVVM.Models
             _eventAggregator.Publish(new PieceMovedEvent(playerTurn));
             alreadyMoved = true;
             return true;
+        }
+
+        public void Handle(UndoMoveEvent message)
+        {
+            alreadyMoved = false;
         }
     }
 }

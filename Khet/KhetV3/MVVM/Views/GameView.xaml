@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance vm:GameViewModel}"
-             Background="#141414">
+             Background="#292824">
 
 
 
@@ -42,8 +42,8 @@
                    MouseDown="{s:Action ExecuteFireLaserP2}"
                    MouseEnter="{s:Action OnMouseEnterLaser2}"
                    MouseLeave="{s:Action OnMouseLeaveLaser2}"
-                   Opacity="{Binding opacity2}"
-                   IsEnabled="{Binding IsEnabled2}">
+                   Opacity="{Binding Laser2Opacity}"
+                   IsEnabled="{Binding Laser2Enabled}">
                 <Image.Source>
                     <BitmapImage  UriSource="../../Assets/laserCanonB.png" />
                 </Image.Source>
@@ -57,19 +57,21 @@
         </Grid>
 
 
-        <!--================================================ Bottom Laser ================================================-->
+        <!--================================================ Bottom Row ================================================-->
         <Grid Grid.Row="2" Grid.Column="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="14*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-
-            <Image Panel.ZIndex="1" Grid.Column="1"
+            <!--========================================== Laser ====================================-->
+            <Image Grid.Column="3"
                    MouseDown="{s:Action ExecuteFireLaserP1}"
                    MouseEnter="{s:Action OnMouseEnterLaser1}"
                    MouseLeave="{s:Action OnMouseLeaveLaser1}"
-                   Opacity="{Binding opacity1}"
-                   IsEnabled="{Binding IsEnabled1}">
+                   Opacity="{Binding Laser1Opacity}"
+                   IsEnabled="{Binding Laser1Enabled}">
                 <Image.Source>
                     <BitmapImage  UriSource="../../Assets/laserCanonB.png" />
                 </Image.Source>
@@ -79,6 +81,37 @@
                 <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
 
             </Image>
+
+            <!--========================================== Back Arrow ====================================-->
+            <Image Grid.Column="0"
+                   MouseDown="{s:Action OnBackButton}"
+                   MouseEnter="{s:Action OnMouseEnterBackButton}"
+                   MouseLeave="{s:Action OnMouseLeaveBackButton}"
+                   Opacity="{Binding BackButtonOpacity}"
+                   IsEnabled="{Binding BackButtonEnabled}">
+                <Image.Source>
+                    <BitmapImage  UriSource="../../Assets/Arrow.png" />
+                </Image.Source>
+                <Image.RenderTransform>
+                    <RotateTransform Angle="180" />
+                </Image.RenderTransform>
+                <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+
+            </Image>
+
+            <!--========================================== Forward Arrow ====================================-->
+            <Image Grid.Column="1"
+                   MouseDown="{s:Action OnForwardButton}"
+                   MouseEnter="{s:Action OnMouseEnterForwardButton}"
+                   MouseLeave="{s:Action OnMouseLeaveForwardButton}"
+                   Opacity="{Binding ForwardButtonOpacity}"
+                   IsEnabled="{Binding BackButtonEnabled}">
+                <Image.Source>
+                    <BitmapImage  UriSource="../../Assets/Arrow.png" />
+                </Image.Source>
+
+            </Image>
+
         </Grid>
     </Grid>
 
