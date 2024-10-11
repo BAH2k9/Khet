@@ -75,7 +75,7 @@ namespace Khet2._0.MVVM.Models
                 _grid[row][col].ActiveLaser.FillLaser(inDirection);
                 _grid[row][col].ActiveLaser.FillLaser(outDirection);
 
-                await Task.Delay(200);
+                await Task.Delay(75);
                 _grid[row][col].ActiveLaser.ClearLaser(); // Example method; implement accordingly
 
                 switch (outDirection)

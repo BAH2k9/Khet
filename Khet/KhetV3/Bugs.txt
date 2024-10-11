@@ -1,0 +1,13 @@
+﻿Known bugs:
+
+In free play if the fire laser button is spammed it leads to an error in AnimateRemoveLaser.
+	- I think this is due to incorrect use of async await. as one thread is access .RightLaser another has cleared it.
+	- Think I should switch to a task completion token.
+	- Could maybe look into wrapping the call in a mutex.
+	- If Laser animation changes then this may not be an issue.	
+		E.g.:	- Have AnimateRemoveLaser await until laser loop is broken out of and then start
+				- Control 
+
+In game Logic when a Djed is switch with a pice the Laser reacts with the orientation of the old piece, it should 
+react to the orientation of the Djed
+																		

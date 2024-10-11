@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="KhetV3.MVVM.Views.SquareView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:vm="clr-namespace:KhetV3.MVVM.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100"
+             d:DataContext="{d:DesignInstance vm:SquareViewModel}"
+             ClipToBounds="True"
+             MouseDown="{s:Action ExecuteMouseDown}"
+             Background="Transparent"
+             IsEnabled="True">
+    <Grid>
+        <Border BorderBrush="SandyBrown" BorderThickness="2">
+
+            <Grid>
+                <Rectangle Width="auto" Height="auto"
+                             Panel.ZIndex="0"
+                             Stroke="{Binding squareColor}"
+                             StrokeThickness="5"
+                             Fill="Transparent"
+                             Opacity="0.75"/>
+
+                <Grid>
+                    <Border BorderThickness="5" BorderBrush="Transparent">
+                        <Grid>
+                            <ContentControl s:View.Model="{Binding ActiveLaser}" Panel.ZIndex="1"/>
+                            <Border BorderBrush="{Binding highlight}" 
+                                    BorderThickness="2" 
+                                    Panel.ZIndex="2">
+                                <Grid>
+                                    <ContentControl s:View.Model="{Binding ActivePiece}" Opacity="1.0"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+            </Grid>
+
+
+        </Border>
+    </Grid>
+</UserControl>

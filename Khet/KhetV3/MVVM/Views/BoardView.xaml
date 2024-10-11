@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="KhetV3.MVVM.Views.BoardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KhetV3.MVVM.Views"
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:vm="clr-namespace:KhetV3.MVVM.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance vm:BoardViewModel}"
+             KeyDown= "{s:Action OnKeyDown}"
+             Focusable="True"
+             Background="Transparent"
+             GotFocus="OnGotFocus"
+             LostFocus="OnLostFocus"
+             MouseEnter="OnMouseEnter"
+             MouseLeave="OnMouseLeave">
+
+    <Grid Focusable="True">
+        <ItemsControl ItemsSource="{Binding Squares}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="{Binding rows}" Columns="{Binding cols}"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:SquareViewModel}">
+                    <ContentControl s:View.Model="{Binding}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,51 @@
+﻿<Window x:Class="KhetV3.Pages.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="https://github.com/canton7/Stylet"
+        xmlns:local="clr-namespace:KhetV3.Pages"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance local:ShellViewModel}"
+        Title="Ket"
+        Height="450" Width="800"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
+        >
+
+    <!-- Create a custom title bar -->
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Custom title bar at the top -->
+        <Border Grid.Row ="0" 
+                Background="#141414" 
+                MouseDown="CustomTitleBar_MouseDown"
+                Height="40" 
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                >
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="auto">
+                    <Button Content="_" Width="20" Height="20" Click="Minimize_Click" Margin="10" Background="#141414" Foreground="White"/>
+                    <Button Content="O" Width="20" Height="20" Click="Maximize_Click" Margin="10" Background="#141414" Foreground="White" />
+                    <Button Content="X" Width="20" Height="20" Click="Close_Click" Margin="10" Background="#141414" Foreground="White" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <ContentControl s:View.Model="{Binding ActiveItem}"/>
+        </Grid>
+    </Grid>
+
+
+
+
+
+</Window>
