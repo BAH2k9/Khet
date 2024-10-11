@@ -114,6 +114,10 @@ namespace KhetV3.Services
             {
                 _historyService.AddShift(djed.position, piece.position);
 
+
+                _pieceDictionary[djed.position] = piece;
+                _pieceDictionary[piece.position] = djed;
+
                 _squareDictionary[djed.position].ActivePiece = piece;
                 _squareDictionary[piece.position].ActivePiece = djed;
 
@@ -156,6 +160,16 @@ namespace KhetV3.Services
             IPiece? oldPiece = _squareDictionary[oldPos].ActivePiece;
             IPiece newPiece = _squareDictionary[newPos].ActivePiece;
 
+
+            if (oldPiece != null)
+            {
+                oldPiece.position = newPos;
+                _pieceDictionary[newPos] = oldPiece;
+            }
+
+            newPiece.position = oldPos;
+            _pieceDictionary[oldPos] = newPiece;
+            _pieceDictionary[newPos] = null;
             _squareDictionary[oldPos].ActivePiece = newPiece;
             _squareDictionary[newPos].ActivePiece = oldPiece;
         }

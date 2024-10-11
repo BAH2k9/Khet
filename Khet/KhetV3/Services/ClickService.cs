@@ -11,9 +11,10 @@ using System.Threading.Tasks;
 
 namespace KhetV3.Services
 {
-    public class ClickService : IHandle<LaserFiredEvent>
+    public class ClickService : IHandle<LaserFiredEvent>, IHandle<UndoMoveEvent>
     {
         private BoardUpdateService _boardUpdateService;
+        private IPiece _previouslyClickedPiece = null;
         private IPiece _storedPiece = null;
 
         public ClickService(EventAggregator eventAggregator, BoardUpdateService boardUpdateService)
@@ -23,29 +24,29 @@ namespace KhetV3.Services
         }
         public void Click(IPiece piece)
         {
-            if (_storedPiece == null)
+            if (_previouslyClickedPiece == null)
             {
-                _storedPiece = piece;
+                _previouslyClickedPiece = piece;
                 _boardUpdateService.SelectSquare(piece.position);
                 Trace.WriteLine("ClickService.PieceClick - Select Piece");
             }
-            else if (_storedPiece == piece)
+            else if (_previouslyClickedPiece == piece)
             {
                 _boardUpdateService.UnselectSquare(piece.position);
-                _storedPiece = null;
+                _previouslyClickedPiece = null;
                 Trace.WriteLine("ClickService.PieceClick - Unselect Square");
             }
-            else if (_storedPiece is DjedViewModel djed)
+            else if (_previouslyClickedPiece is DjedViewModel djed)
             {
-                _boardUpdateService.UnselectSquare(_storedPiece.position);
-                _storedPiece = null;
+                _boardUpdateService.UnselectSquare(_previouslyClickedPiece.position);
+                _previouslyClickedPiece = null;
                 DjedShift(djed, piece);
             }
             else
             {
-                _boardUpdateService.UnselectSquare(_storedPiece.position);
+                _boardUpdateService.UnselectSquare(_previouslyClickedPiece.position);
                 _boardUpdateService.SelectSquare(piece.position);
-                _storedPiece = piece;
+                _previouslyClickedPiece = piece;
                 Trace.WriteLine("ClickService.PieceClick - Select New Piece");
             }
         }
@@ -53,12 +54,12 @@ namespace KhetV3.Services
         public void Click(SquareViewModel square)
         {
             // Stops Click Square being called when Clicking a Piece
-            if (square.ActivePiece == _storedPiece)
+            if (square.ActivePiece == _previouslyClickedPiece)
             {
                 return;
             }
             // Stops Click Square being called if a piece hasnt been selected 
-            if (_storedPiece == null)
+            if (_previouslyClickedPiece == null)
             {
                 return;
             }
@@ -68,7 +69,7 @@ namespace KhetV3.Services
                 return;
             }
 
-            NormalShift(_storedPiece, square);
+            NormalShift(_previouslyClickedPiece, square);
 
         }
 
@@ -77,7 +78,9 @@ namespace KhetV3.Services
 
             _boardUpdateService.UnselectSquare(piece.position);
             _boardUpdateService.ShiftPiece(piece, square.position);
-            _storedPiece = null;
+
+            _storedPiece = _previouslyClickedPiece;
+            _previouslyClickedPiece = null;
 
             Trace.WriteLine("ClickService.SquareClick - Move Piece");
         }
@@ -88,20 +91,29 @@ namespace KhetV3.Services
                 _boardUpdateService.ShiftPieces(djed, piece);
                 _boardUpdateService.UnselectSquare(djed.position);
 
+                _storedPiece = _previouslyClickedPiece;
+                _previouslyClickedPiece = null;
+
                 Trace.WriteLine("ClickService.SquareClick - Swapped Djed");
             }
         }
 
         public void Handle(LaserFiredEvent message)
         {
-            if (_storedPiece == null)
+            if (_previouslyClickedPiece == null)
             {
                 return;
             }
 
-            _boardUpdateService.UnselectSquare(_storedPiece.position);
-            _storedPiece = null;
+            _boardUpdateService.UnselectSquare(_previouslyClickedPiece.position);
 
+            _previouslyClickedPiece = null;
+
+        }
+
+        public void Handle(UndoMoveEvent message)
+        {
+            _previouslyClickedPiece = null;
         }
     }
 }

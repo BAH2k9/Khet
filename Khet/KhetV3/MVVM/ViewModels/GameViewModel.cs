@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace KhetV3.MVVM.ViewModels
 {
-    public class GameViewModel : Screen, IHandle<PlayerChangedEvent>, IHandle<PieceMovedEvent>
+    public class GameViewModel : Screen, IHandle<PlayerChangedEvent>, IHandle<PieceMovedEvent>, IHandle<UndoMoveEvent>
     {
         public BoardViewModel BoardViewModel { get; set; }
 
@@ -136,6 +136,19 @@ namespace KhetV3.MVVM.ViewModels
 
             }
 
+        }
+
+        public void Handle(UndoMoveEvent message)
+        {
+            if (Laser1Enabled)
+            {
+                Laser1Enabled = false;
+            }
+
+            if (Laser2Enabled)
+            {
+                Laser2Enabled = false;
+            }
         }
 
         public async void ExecuteFireLaserP1()
@@ -262,9 +275,6 @@ namespace KhetV3.MVVM.ViewModels
 
             }
         }
-
-
-
 
 
     }
