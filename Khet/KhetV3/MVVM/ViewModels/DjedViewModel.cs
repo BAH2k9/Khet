@@ -58,6 +58,7 @@ namespace KhetV3.MVVM.ViewModels
         public void Rotate(Key key)
         {
             orientation = DirectionMappings.Rotate[(orientation, key)];
+            _clickService.RotationOccured();
             RenderPiece();
         }
 

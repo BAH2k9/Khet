@@ -143,8 +143,13 @@ namespace KhetV3.Services
                     rotatablePiece.Rotate(key);
                 }
 
-                UnselectSquare(_selectedPiece.position);
-                _selectedPiece = null;
+                if (_selectedPiece != null)
+                {
+                    UnselectSquare(_selectedPiece.position);
+                    _selectedPiece = null;
+                }
+
+
             }
 
         }

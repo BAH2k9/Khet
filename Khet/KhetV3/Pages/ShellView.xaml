@@ -8,11 +8,13 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:ShellViewModel}"
         Title="Ket"
-        Height="450" Width="800"
+        Height="{Binding Height}" 
+        Width="{Binding Width}"
+        d:DesignHeight="800" d:DesignWidth="1250"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
-        >
+         WindowState="{Binding windowState}">
 
     <!-- Create a custom title bar -->
     <Grid>

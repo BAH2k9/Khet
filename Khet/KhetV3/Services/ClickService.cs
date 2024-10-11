@@ -15,7 +15,6 @@ namespace KhetV3.Services
     {
         private BoardUpdateService _boardUpdateService;
         private IPiece _previouslyClickedPiece = null;
-        private IPiece _storedPiece = null;
 
         public ClickService(EventAggregator eventAggregator, BoardUpdateService boardUpdateService)
         {
@@ -79,7 +78,6 @@ namespace KhetV3.Services
             _boardUpdateService.UnselectSquare(piece.position);
             _boardUpdateService.ShiftPiece(piece, square.position);
 
-            _storedPiece = _previouslyClickedPiece;
             _previouslyClickedPiece = null;
 
             Trace.WriteLine("ClickService.SquareClick - Move Piece");
@@ -91,7 +89,6 @@ namespace KhetV3.Services
                 _boardUpdateService.ShiftPieces(djed, piece);
                 _boardUpdateService.UnselectSquare(djed.position);
 
-                _storedPiece = _previouslyClickedPiece;
                 _previouslyClickedPiece = null;
 
                 Trace.WriteLine("ClickService.SquareClick - Swapped Djed");
@@ -112,6 +109,11 @@ namespace KhetV3.Services
         }
 
         public void Handle(UndoMoveEvent message)
+        {
+            _previouslyClickedPiece = null;
+        }
+
+        public void RotationOccured()
         {
             _previouslyClickedPiece = null;
         }
