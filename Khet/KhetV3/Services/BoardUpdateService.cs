@@ -136,18 +136,25 @@ namespace KhetV3.Services
 
         public void RotateSelectedPiece(Key key)
         {
+            if (_selectedPiece == null)
+            {
+                return;
+            }
+
             if (_gameRules.CanRotate())
             {
                 if (_selectedPiece is IRotatable rotatablePiece)
                 {
-                    rotatablePiece.Rotate(key);
+                    var oldOrientation = rotatablePiece.orientation;
+
+                    var newOrientation = rotatablePiece.Rotate(key);
+
+                    _historyService.AddRotate(rotatablePiece, oldOrientation, newOrientation);
                 }
 
-                if (_selectedPiece != null)
-                {
-                    UnselectSquare(_selectedPiece.position);
-                    _selectedPiece = null;
-                }
+                UnselectSquare(_selectedPiece.position);
+                _selectedPiece = null;
+
 
 
             }
@@ -161,27 +168,40 @@ namespace KhetV3.Services
 
         public void UndoMove()
         {
-            (var oldPos, var newPos) = _historyService.GetLastMove();
 
-            IPiece? oldPiece = _squareDictionary[oldPos].ActivePiece;
-            IPiece newPiece = _squareDictionary[newPos].ActivePiece;
-
-
-            if (oldPiece != null) //Djed Swap
+            if (_historyService.MostRecentMoveType == MoveType.Shift)
             {
-                oldPiece.position = newPos;
-                newPiece.position = oldPos;
+                (var oldPos, var newPos) = _historyService.GetLastShift();
 
-                _squareDictionary[oldPos].ActivePiece = newPiece;
-                _squareDictionary[newPos].ActivePiece = oldPiece;
+                IPiece? oldPiece = _squareDictionary[oldPos].ActivePiece;
+                IPiece newPiece = _squareDictionary[newPos].ActivePiece;
+
+
+                if (oldPiece != null) //Djed Swap
+                {
+                    oldPiece.position = newPos;
+                    newPiece.position = oldPos;
+
+                    _squareDictionary[oldPos].ActivePiece = newPiece;
+                    _squareDictionary[newPos].ActivePiece = oldPiece;
+                }
+                else
+                {
+                    newPiece.position = oldPos;
+
+                    _squareDictionary[oldPos].ActivePiece = newPiece;
+                    _squareDictionary[newPos].ActivePiece = null;
+                }
             }
-            else
+            else if (_historyService.MostRecentMoveType == MoveType.Rotate)
             {
-                newPiece.position = oldPos;
+                (var piece, var startOrientation, var endOrientation) = _historyService.GetLastRotation();
 
-                _squareDictionary[oldPos].ActivePiece = newPiece;
-                _squareDictionary[newPos].ActivePiece = null;
+                piece.SetOrientation(startOrientation);
+
             }
+
+
 
 
 

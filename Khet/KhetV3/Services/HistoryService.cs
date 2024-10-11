@@ -1,4 +1,6 @@
-﻿using KhetV3.AbstractClasses;
+﻿using Khet3.Enums;
+using KhetV3.AbstractClasses;
+using KhetV3.Enums;
 using KhetV3.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,21 +12,31 @@ namespace KhetV3.Services
 {
     public class HistoryService
     {
-        public Dictionary<int, ((int, int) startPosition, (int, int) endPosition)> history = [];
+        public List<((int, int) startPosition, (int, int) endPosition)> shiftHistory = [];
+        public List<(IRotatable, Orientations startOrientation, Orientations endOrientation)> rotateHistory = [];
+        public MoveType MostRecentMoveType { get; set; }
 
-
-        private int MoveNumber = 1;
 
         public void AddShift((int, int) start, (int, int) end)
         {
-            MoveNumber++;
-
-            history[MoveNumber] = (start, end);
+            MostRecentMoveType = MoveType.Shift;
+            shiftHistory.Add((start, end));
         }
 
-        public ((int, int), (int, int)) GetLastMove()
+        public void AddRotate(IRotatable rotatablePiece, Orientations startOrientation, Orientations endOrientation)
         {
-            return history[MoveNumber];
+            MostRecentMoveType = MoveType.Rotate;
+            rotateHistory.Add((rotatablePiece, startOrientation, endOrientation));
+        }
+
+        public ((int, int), (int, int)) GetLastShift()
+        {
+            return shiftHistory.Last();
+        }
+
+        public (IRotatable, Orientations, Orientations) GetLastRotation()
+        {
+            return rotateHistory.Last();
         }
     }
 }
