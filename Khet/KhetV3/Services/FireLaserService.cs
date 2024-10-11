@@ -52,10 +52,6 @@ namespace KhetV3.Services
 
             while (InBounds(position))
             {
-
-
-
-
                 if (!pieceState.ContainsKey(position))
                 {
                     laserResponse = DefaultLaser(outDirection);

@@ -58,6 +58,19 @@ namespace KhetV3.Services
 
         public Dictionary<(int, int), IPiece> GetPieceInfo()
         {
+
+            _pieceDictionary.Clear();
+
+            foreach (var entry in _squareDictionary)
+            {
+                var square = entry.Value;
+                var position = entry.Key;
+                if (square.ActivePiece != null)
+                {
+                    _pieceDictionary[position] = square.ActivePiece;
+                }
+            }
+
             return _pieceDictionary;
         }
 
@@ -93,11 +106,6 @@ namespace KhetV3.Services
             {
                 _historyService.AddShift(piece.position, position);
 
-                _pieceDictionary[piece.position] = null;
-                _pieceDictionary.Remove(piece.position);
-                _pieceDictionary[position] = piece;
-
-
                 _squareDictionary[piece.position].ActivePiece = null;
                 _squareDictionary[position].ActivePiece = piece;
 
@@ -113,10 +121,6 @@ namespace KhetV3.Services
             if (_gameRules.CanShift(djed, piece.position))
             {
                 _historyService.AddShift(djed.position, piece.position);
-
-
-                _pieceDictionary[djed.position] = piece;
-                _pieceDictionary[piece.position] = djed;
 
                 _squareDictionary[djed.position].ActivePiece = piece;
                 _squareDictionary[piece.position].ActivePiece = djed;
@@ -147,9 +151,6 @@ namespace KhetV3.Services
 
         public void PieceHit((int row, int col) position)
         {
-            _pieceDictionary[position] = null;
-            _pieceDictionary.Remove(position);
-
             _squareDictionary[position].ActivePiece = null;
         }
 
@@ -166,17 +167,12 @@ namespace KhetV3.Services
                 oldPiece.position = newPos;
                 newPiece.position = oldPos;
 
-                _pieceDictionary[newPos] = oldPiece;
-                _pieceDictionary[oldPos] = newPiece;
-
                 _squareDictionary[oldPos].ActivePiece = newPiece;
                 _squareDictionary[newPos].ActivePiece = oldPiece;
             }
             else
             {
                 newPiece.position = oldPos;
-                _pieceDictionary[oldPos] = newPiece;
-                _pieceDictionary.Remove(newPos);
 
                 _squareDictionary[oldPos].ActivePiece = newPiece;
                 _squareDictionary[newPos].ActivePiece = null;
