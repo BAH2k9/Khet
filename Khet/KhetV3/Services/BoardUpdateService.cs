@@ -161,17 +161,31 @@ namespace KhetV3.Services
             IPiece newPiece = _squareDictionary[newPos].ActivePiece;
 
 
-            if (oldPiece != null)
+            if (oldPiece != null) //Djed Swap
             {
                 oldPiece.position = newPos;
+                newPiece.position = oldPos;
+
                 _pieceDictionary[newPos] = oldPiece;
+                _pieceDictionary[oldPos] = newPiece;
+
+                _squareDictionary[oldPos].ActivePiece = newPiece;
+                _squareDictionary[newPos].ActivePiece = oldPiece;
+            }
+            else
+            {
+                newPiece.position = oldPos;
+                _pieceDictionary[oldPos] = newPiece;
+                _pieceDictionary.Remove(newPos);
+
+                _squareDictionary[oldPos].ActivePiece = newPiece;
+                _squareDictionary[newPos].ActivePiece = null;
             }
 
-            newPiece.position = oldPos;
-            _pieceDictionary[oldPos] = newPiece;
-            _pieceDictionary[newPos] = null;
-            _squareDictionary[oldPos].ActivePiece = newPiece;
-            _squareDictionary[newPos].ActivePiece = oldPiece;
+
+
+
+
         }
 
     }

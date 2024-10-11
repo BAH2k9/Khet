@@ -42,10 +42,19 @@ namespace KhetV3.Services
             var position = startingPosition;
             var outDirection = firingDirection;
             LaserResponse laserResponse = null;
+            pieceState = _boardUpdater.GetPieceInfo();
+
+
+            foreach (var piece in pieceState)
+            {
+                Trace.WriteLine($"{piece}");
+            }
 
             while (InBounds(position))
             {
-                pieceState = _boardUpdater.GetPieceInfo();
+
+
+
 
                 if (!pieceState.ContainsKey(position))
                 {
