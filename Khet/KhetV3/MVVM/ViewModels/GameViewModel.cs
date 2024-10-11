@@ -112,7 +112,7 @@ namespace KhetV3.MVVM.ViewModels
             }
 
             BackButtonEnabled = true;
-            BackButtonOpacity = 1.0f;
+            BackButtonOpacity = 0.5f;
         }
 
         public void Handle(PlayerChangedEvent e)
@@ -135,6 +135,9 @@ namespace KhetV3.MVVM.ViewModels
                 Laser2Enabled = false;
 
             }
+
+            BackButtonEnabled = false;
+            BackButtonOpacity = 0.0f;
 
         }
 
