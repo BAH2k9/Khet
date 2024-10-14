@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace KhetV3.MVVM.ViewModels
 {
-    public class GameViewModel : Screen, IHandle<PlayerChangedEvent>, IHandle<PieceMovedEvent>, IHandle<UndoMoveEvent>
+    public class GameViewModel : Screen, IHandle<PlayerChangedEvent>, IHandle<PieceMovedEvent>, IHandle<UndoMoveEvent>, IHandle<GameEndEvent>
     {
         public BoardViewModel BoardViewModel { get; set; }
 
@@ -66,11 +66,20 @@ namespace KhetV3.MVVM.ViewModels
         public CapturedPiecesViewModel capturedPieces2 { get => _capturedPieces2; set => SetAndNotify(ref _capturedPieces2, value); }
 
 
+        private GameEndViewModel _gameEndViewModel;
+
+
+        private WindowManager _windowManager;
+
         public GameViewModel(EventAggregator eventAggregator,
                              BoardViewModel boardViewModel,
+                             GameEndViewModel gameEndViewModel,
                              BoardUpdateService boardUpdateService,
-                             FireLaserService fireLaserService)
+                             FireLaserService fireLaserService,
+                             WindowManager windowManager)
         {
+
+            _windowManager = windowManager;
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
@@ -79,8 +88,9 @@ namespace KhetV3.MVVM.ViewModels
             this.BoardViewModel.Initialise();
 
             _boardUpdateService = boardUpdateService;
-
+            _gameEndViewModel = gameEndViewModel;
             _fireLaserService = fireLaserService;
+
             _fireLaserService.SetBoardDimensions(rows, cols);
 
 
@@ -99,6 +109,7 @@ namespace KhetV3.MVVM.ViewModels
 
             capturedPieces1 = new CapturedPiecesViewModel(eventAggregator, 2);
             capturedPieces2 = new CapturedPiecesViewModel(eventAggregator, 1);
+
 
         }
 
@@ -168,6 +179,11 @@ namespace KhetV3.MVVM.ViewModels
             {
                 Laser2Enabled = false;
             }
+        }
+
+        public void Handle(GameEndEvent e)
+        {
+            _windowManager.ShowDialog(_gameEndViewModel);
         }
 
         public async void ExecuteFireLaserP1()

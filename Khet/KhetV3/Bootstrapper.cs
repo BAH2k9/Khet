@@ -14,6 +14,7 @@ namespace KhetV3
             // Configure the IoC container in here
             builder.Bind<EventAggregator>().ToSelf().InSingletonScope();
             builder.Bind<BoardUpdateService>().ToSelf().InSingletonScope();
+            builder.Bind<WindowManager>().ToSelf().InSingletonScope();
             builder.Bind<ClickService>().ToSelf().InSingletonScope();
             builder.Bind<PieceFactory>().ToSelf();
 

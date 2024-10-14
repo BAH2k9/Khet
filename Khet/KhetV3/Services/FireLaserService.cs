@@ -65,8 +65,7 @@ namespace KhetV3.Services
 
                 if (outDirection == Direction.Stop)
                 {
-                    _boardUpdater.PieceHit(position);
-                    _EventAggregator.Publish(new PieceCapturedEvent(pieceState[position]));
+                    await DestroyPiece(position);
                     break;
                 }
 
@@ -133,6 +132,20 @@ namespace KhetV3.Services
 
 
             return new LaserResponse(laserPosition, firingDirection);
+        }
+
+        private async Task DestroyPiece((int, int) position)
+        {
+            await Task.Delay(300);
+            _boardUpdater.PieceHit(position);
+
+            if (pieceState[position] is PharaohViewModel pharaoh)
+            {
+                await Task.Delay(500);
+                _EventAggregator.Publish(new GameEndEvent(pharaoh));
+            }
+            _EventAggregator.Publish(new PieceCapturedEvent(pieceState[position]));
+
         }
 
         private (int row, int col) MoveToNextSquare((int row, int col) position, Direction outDirection)
