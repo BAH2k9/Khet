@@ -1,6 +1,7 @@
 ﻿using KhetV3.Events;
 using KhetV3.Interfaces;
 using KhetV3.MVVM.ViewModels;
+using KhetV3.Services;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace KhetV3.MVVM.Models
 {
-    public class GameRules : IHandle<LaserFiredEvent>, IHandle<UndoMoveEvent>
+    public class GameRules : IHandle<LaserFiredEvent>, IHandle<UndoMoveEvent>, IHandle<NewGameEvent>
     {
         private bool InPlay = false;
         private bool alreadyMoved = false;
@@ -121,6 +122,12 @@ namespace KhetV3.MVVM.Models
         public void Handle(UndoMoveEvent message)
         {
             alreadyMoved = false;
+        }
+
+        public void Handle(NewGameEvent message)
+        {
+            playerTurn = 1;
+            InPlay = false;
         }
     }
 }

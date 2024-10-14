@@ -23,7 +23,7 @@ namespace KhetV3.AbstractClasses
 
 
 
-        protected virtual void SetColor(int player)
+        public virtual void SetColor(int player)
         {
             if (player == 1)
             {

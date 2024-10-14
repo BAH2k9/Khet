@@ -84,7 +84,7 @@
         <StackPanel>
             <Image>
                 <Image.Source>
-                    <BitmapImage  UriSource="../../Assets/HomeViewBackground.png" />
+                    <BitmapImage  UriSource="../../Assets/HomeScreenEnlarged.png" />
                 </Image.Source>
             </Image>
         </StackPanel>

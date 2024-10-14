@@ -66,6 +66,7 @@ namespace KhetV3.Services
                 if (outDirection == Direction.Stop)
                 {
                     _boardUpdater.PieceHit(position);
+                    _EventAggregator.Publish(new PieceCapturedEvent(pieceState[position]));
                     break;
                 }
 

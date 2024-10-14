@@ -56,7 +56,7 @@ namespace KhetV3.MVVM.ViewModels
             Size = (controlSize.width + controlSize.height) / 10;
         }
 
-        protected override void SetColor(int player)
+        public override void SetColor(int player)
         {
             if (player == 1)
             {

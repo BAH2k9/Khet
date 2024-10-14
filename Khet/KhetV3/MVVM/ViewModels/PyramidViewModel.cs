@@ -29,6 +29,14 @@ namespace KhetV3.MVVM.ViewModels
 
             SetColor(player);
         }
+        public PyramidViewModel(int player, Orientations orientation)
+        {
+            this.player = player;
+            this.orientation = orientation;
+            SetColor(player);
+            SetOrientation(orientation);
+        }
+
         public void ExecuteMouseDown()
         {
             _clickService.Click(this);

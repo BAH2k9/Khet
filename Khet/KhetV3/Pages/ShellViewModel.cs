@@ -1,7 +1,9 @@
 ﻿using Khet3.Enums;
 using Khet3.Events;
 using KhetV3.MVVM.ViewModels;
+using KhetV3.Services;
 using Stylet;
+using StyletIoC;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -9,6 +11,7 @@ namespace KhetV3.Pages
 {
     public class ShellViewModel : Conductor<Screen>.Collection.OneActive, IHandle<NavigateEvent>
     {
+        private IContainer _container;
         private EventAggregator _eventAggregator;
         private HomeViewModel _homeViewModel;
         private GameViewModel _gameViewModel;
@@ -26,23 +29,20 @@ namespace KhetV3.Pages
 
         public WindowState windowState { get => _windowState; set => SetAndNotify(ref _windowState, value); }
 
-        public ShellViewModel(EventAggregator eventAggregator,
-                                HomeViewModel homeViewModel,
-                                GameViewModel gameViewModel)
+        public ShellViewModel(IContainer container)
         {
-            Height = 800;
-            Width = 1250;
+            _container = container;
+            Height = 600;
+            Width = 900;
 
 
-            _eventAggregator = eventAggregator;
-            _homeViewModel = homeViewModel;
-            _gameViewModel = gameViewModel;
+            _eventAggregator = _container.Get<EventAggregator>(); ;
 
             _eventAggregator.Subscribe(this);
 
             windowState = WindowState.Normal;
 
-            ActivateItem(_homeViewModel);
+            ActivateItem(_container.Get<HomeViewModel>());
 
         }
 
@@ -51,18 +51,22 @@ namespace KhetV3.Pages
             switch (e.page)
             {
                 case AppPages.Home:
-                    ActivateItem(_homeViewModel);
+                    ActivateItem(_container.Get<HomeViewModel>());
                     break;
                 case AppPages.FreePlay:
+                    _gameViewModel = _container.Get<GameViewModel>();
+                    _eventAggregator.Publish(new NewGameEvent());
 
                     ActivateItem(_gameViewModel);
-
                     await Task.Delay(500);
                     windowState = WindowState.Maximized;
                     break;
                 case AppPages.LocalGame:
 
+                    _gameViewModel = _container.Get<GameViewModel>();
+                    _eventAggregator.Publish(new NewGameEvent());
                     _gameViewModel.SetPlayerRules();
+
                     ActivateItem(_gameViewModel);
                     await Task.Delay(500);
                     windowState = WindowState.Maximized;

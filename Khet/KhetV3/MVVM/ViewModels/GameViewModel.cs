@@ -1,4 +1,5 @@
 ﻿using Khet3.Enums;
+using Khet3.Events;
 using KhetV3.Events;
 using KhetV3.MVVM.Models;
 using KhetV3.Services;
@@ -55,6 +56,16 @@ namespace KhetV3.MVVM.ViewModels
         public bool ForwardButtonEnabled { get => _ForwardButtonEnabled; set => SetAndNotify(ref _ForwardButtonEnabled, value); }
 
 
+        private float _HomeButtonOpacity;
+        public float HomeButtonOpacity { get => _HomeButtonOpacity; set => SetAndNotify(ref _HomeButtonOpacity, value); }
+
+        private CapturedPiecesViewModel _capturedPieces1;
+        public CapturedPiecesViewModel capturedPieces1 { get => _capturedPieces1; set => SetAndNotify(ref _capturedPieces1, value); }
+
+        private CapturedPiecesViewModel _capturedPieces2;
+        public CapturedPiecesViewModel capturedPieces2 { get => _capturedPieces2; set => SetAndNotify(ref _capturedPieces2, value); }
+
+
         public GameViewModel(EventAggregator eventAggregator,
                              BoardViewModel boardViewModel,
                              BoardUpdateService boardUpdateService,
@@ -83,6 +94,11 @@ namespace KhetV3.MVVM.ViewModels
             BackButtonEnabled = false;
             ForwardButtonEnabled = false;
 
+            HomeButtonOpacity = 0.5f;
+
+
+            capturedPieces1 = new CapturedPiecesViewModel(eventAggregator, 2);
+            capturedPieces2 = new CapturedPiecesViewModel(eventAggregator, 1);
 
         }
 
@@ -173,6 +189,10 @@ namespace KhetV3.MVVM.ViewModels
             await _fireLaserService.CalculateLaserPath((0, 0), Direction.Down);
         }
 
+        public void ExecuteHomeButton()
+        {
+            _eventAggregator.Publish(new NavigateEvent { page = AppPages.Home });
+        }
         public void OnBackButton()
         {
             _boardUpdateService.UndoMove();
@@ -238,6 +258,16 @@ namespace KhetV3.MVVM.ViewModels
                 ForwardButtonOpacity = 0.5f;
             }
 
+        }
+
+        public void OnMouseEnterHomeButton()
+        {
+            HomeButtonOpacity = 1.0f;
+        }
+
+        public void OnMouseLeaveHomeButton()
+        {
+            HomeButtonOpacity = 0.5f;
         }
 
         public void HighlightLaserButton(int player)

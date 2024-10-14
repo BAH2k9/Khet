@@ -25,6 +25,28 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
+        <!--================================================ Home Button ================================================-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Panel.ZIndex="1" Grid.Column="1" 
+                MouseDown="{s:Action ExecuteHomeButton}"
+                MouseEnter="{s:Action OnMouseEnterHomeButton}"
+                MouseLeave="{s:Action OnMouseLeaveHomeButton}"
+                Opacity="{Binding HomeButtonOpacity}">
+                <Image.Source>
+                    <BitmapImage  UriSource="../../Assets/HomeButton.png" />
+                </Image.Source>
+
+
+            </Image>
+        </Grid>
+
+
         <!--================================================ Board ================================================-->
         <Border BorderBrush="SandyBrown" BorderThickness="2" Grid.Row="1" Grid.Column="1">
             <ContentControl s:View.Model="{Binding BoardViewModel}" Focusable="True"/>
@@ -35,7 +57,9 @@
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="14*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
             <Image Panel.ZIndex="1" 
@@ -54,6 +78,9 @@
 
             </Image>
 
+            <ContentControl Grid.Column="2"
+                          s:View.Model="{Binding capturedPieces2}"/>
+
         </Grid>
 
 
@@ -66,7 +93,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <!--========================================== Laser ====================================-->
-            <Image Grid.Column="3"
+            <Image Grid.Column="5"
                    MouseDown="{s:Action ExecuteFireLaserP1}"
                    MouseEnter="{s:Action OnMouseEnterLaser1}"
                    MouseLeave="{s:Action OnMouseLeaveLaser1}"
@@ -111,6 +138,10 @@
                 </Image.Source>
 
             </Image>
+
+
+            <ContentControl Grid.Column="2"
+                s:View.Model="{Binding capturedPieces1}"/>
 
         </Grid>
     </Grid>

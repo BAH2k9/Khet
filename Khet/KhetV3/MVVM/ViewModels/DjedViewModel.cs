@@ -33,6 +33,14 @@ namespace KhetV3.MVVM.ViewModels
             SetColor(player);
         }
 
+        public DjedViewModel(int player, Orientations orientation)
+        {
+            this.orientation = orientation;
+            this.player = player;
+            SetColor(player);
+            SetOrientation(orientation);
+        }
+
         public void ExecuteMouseDown()
         {
             _clickService.Click(this);

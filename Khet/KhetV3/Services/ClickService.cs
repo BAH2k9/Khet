@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace KhetV3.Services
 {
-    public class ClickService : IHandle<LaserFiredEvent>, IHandle<UndoMoveEvent>
+    public class ClickService : IHandle<LaserFiredEvent>, IHandle<UndoMoveEvent>, IHandle<NewGameEvent>
     {
         private BoardUpdateService _boardUpdateService;
         private IPiece _previouslyClickedPiece = null;
@@ -114,6 +114,11 @@ namespace KhetV3.Services
         }
 
         public void RotationOccured()
+        {
+            _previouslyClickedPiece = null;
+        }
+
+        public void Handle(NewGameEvent message)
         {
             _previouslyClickedPiece = null;
         }

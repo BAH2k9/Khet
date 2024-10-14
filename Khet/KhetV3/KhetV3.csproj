@@ -11,6 +11,8 @@
   <ItemGroup>
     <None Remove="Assets\Arrow.png" />
     <None Remove="Assets\BackButton.png" />
+    <None Remove="Assets\HomeButton.png" />
+    <None Remove="Assets\HomeScreenEnlarged.png" />
     <None Remove="Assets\HomeViewBackground.png" />
     <None Remove="Assets\Khet_Logo.png" />
     <None Remove="Assets\Khet_SplashScreen.png" />
@@ -35,6 +37,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\BackButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\HomeButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\HomeScreenEnlarged.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\HomeViewBackground.png">
