@@ -51,7 +51,8 @@ namespace KhetV3.Pages
             switch (e.page)
             {
                 case AppPages.Home:
-                    ActivateItem(_container.Get<HomeViewModel>());
+                    _homeViewModel = _container.Get<HomeViewModel>();
+                    ActivateItem(_homeViewModel);
                     break;
                 case AppPages.FreePlay:
                     _gameViewModel = _container.Get<GameViewModel>();

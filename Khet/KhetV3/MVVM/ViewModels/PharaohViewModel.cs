@@ -22,6 +22,12 @@ namespace KhetV3.MVVM.ViewModels
             SetColor(player);
         }
 
+        public PharaohViewModel(int player)
+        {
+            this.player = player;
+            SetColor(player);
+        }
+
         public void ExecuteMouseDown()
         {
             _clickService.Click(this);

@@ -4,10 +4,23 @@
              xmlns:s="https://github.com/canton7/Stylet"
              xmlns:local="clr-namespace:KhetV3">
     <Application.Resources>
-        <s:ApplicationLoader>
-            <s:ApplicationLoader.Bootstrapper>
-                <local:Bootstrapper/>
-            </s:ApplicationLoader.Bootstrapper>
-        </s:ApplicationLoader>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!-- ApplicationLoader for Stylet Bootstrapper -->
+                <s:ApplicationLoader>
+                    <s:ApplicationLoader.Bootstrapper>
+                        <local:Bootstrapper/>
+                    </s:ApplicationLoader.Bootstrapper>
+                </s:ApplicationLoader>
+
+                <ResourceDictionary Source="pack://application:,,,/KhetV3;component/Styles/ButtonStyle.xaml"/>
+
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
+
+
+
 </Application>

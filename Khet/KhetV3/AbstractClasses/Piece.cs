@@ -11,6 +11,9 @@ namespace KhetV3.AbstractClasses
 {
     public abstract class Piece : Screen, IPiece
     {
+        private Brush Color1 = Brushes.Silver;
+        private Brush Color2 = Brushes.Red;
+
         public int player { get; set; }
         public (int row, int col) position { get; set; }
 
@@ -27,12 +30,17 @@ namespace KhetV3.AbstractClasses
         {
             if (player == 1)
             {
-                playerColor = Brushes.Silver;
+                playerColor = Color1;
             }
             else
             {
-                playerColor = Brushes.Red;
+                playerColor = Color2;
             }
+        }
+
+        public virtual Brush GetColor()
+        {
+            return playerColor;
         }
     }
 }

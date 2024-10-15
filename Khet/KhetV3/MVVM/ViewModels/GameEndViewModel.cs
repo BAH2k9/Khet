@@ -1,28 +1,65 @@
 ﻿using Khet3.Enums;
 using Khet3.Events;
+using KhetV3.Events;
 using Stylet;
+using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace KhetV3.MVVM.ViewModels
 {
     public class GameEndViewModel : Screen
     {
         EventAggregator _EventAggregator;
-        public GameEndViewModel(EventAggregator eventAggregator)
+        private HomeButtonViewModel _HomeButton;
+        public HomeButtonViewModel HomeButton { get => _HomeButton; set => SetAndNotify(ref _HomeButton, value); }
+
+        private PharaohViewModel _WinnersPharaoh;
+        public PharaohViewModel WinnersPharaoh { get => _WinnersPharaoh; set => SetAndNotify(ref _WinnersPharaoh, value); }
+
+        private Brush _WinnersColor;
+        public Brush WinnersColor { get => _WinnersColor; set => SetAndNotify(ref _WinnersColor, value); }
+
+        private GameViewModel _Creator;
+
+
+        public GameEndViewModel(EventAggregator eventAggregator, HomeButtonViewModel homeButtonViewModel, GameViewModel gameViewModel)
         {
             _EventAggregator = eventAggregator;
-        }
-
-        public void ClosePopup()
-        {
-            this.RequestClose(true);
+            _Creator = gameViewModel;
+            HomeButton = homeButtonViewModel;
 
         }
 
-
-        public void ExecuteHomeButton()
+        public void Close()
         {
-            this.RequestClose(true);
-            _EventAggregator.Publish(new NavigateEvent { page = AppPages.Home });
+            _Creator.GameEndViewModel = null;
+        }
+
+
+
+        public void SetWinner(PharaohViewModel pharaoh)
+        {
+            var Loser = pharaoh.player;
+
+            if (Loser == 1)
+            {
+                WinnersPharaoh = new PharaohViewModel(2);
+            }
+            else if (Loser == 2)
+            {
+                WinnersPharaoh = new PharaohViewModel(1);
+            }
+
+            WinnersColor = WinnersPharaoh.GetColor();
+
+
+        }
+
+        internal void GiveReference(GameViewModel gameViewModel)
+        {
+            _Creator = gameViewModel;
         }
     }
 }

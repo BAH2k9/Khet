@@ -55,9 +55,8 @@ namespace KhetV3.MVVM.ViewModels
         private bool _ForwardButtonEnabled;
         public bool ForwardButtonEnabled { get => _ForwardButtonEnabled; set => SetAndNotify(ref _ForwardButtonEnabled, value); }
 
-
-        private float _HomeButtonOpacity;
-        public float HomeButtonOpacity { get => _HomeButtonOpacity; set => SetAndNotify(ref _HomeButtonOpacity, value); }
+        private HomeButtonViewModel _HomeButtonViewModel;
+        public HomeButtonViewModel HomeButtonViewModel { get => _HomeButtonViewModel; set => SetAndNotify(ref _HomeButtonViewModel, value); }
 
         private CapturedPiecesViewModel _capturedPieces1;
         public CapturedPiecesViewModel capturedPieces1 { get => _capturedPieces1; set => SetAndNotify(ref _capturedPieces1, value); }
@@ -66,14 +65,16 @@ namespace KhetV3.MVVM.ViewModels
         public CapturedPiecesViewModel capturedPieces2 { get => _capturedPieces2; set => SetAndNotify(ref _capturedPieces2, value); }
 
 
-        private GameEndViewModel _gameEndViewModel;
+        private GameEndViewModel _GameEndViewModel;
+        public GameEndViewModel GameEndViewModel { get => _GameEndViewModel; set => SetAndNotify(ref _GameEndViewModel, value); }
+
 
 
         private WindowManager _windowManager;
 
         public GameViewModel(EventAggregator eventAggregator,
                              BoardViewModel boardViewModel,
-                             GameEndViewModel gameEndViewModel,
+                             HomeButtonViewModel homeButtonViewModel,
                              BoardUpdateService boardUpdateService,
                              FireLaserService fireLaserService,
                              WindowManager windowManager)
@@ -87,8 +88,10 @@ namespace KhetV3.MVVM.ViewModels
             this.BoardViewModel.SetDimensions(rows, cols);
             this.BoardViewModel.Initialise();
 
+            this.HomeButtonViewModel = homeButtonViewModel;
+
             _boardUpdateService = boardUpdateService;
-            _gameEndViewModel = gameEndViewModel;
+
             _fireLaserService = fireLaserService;
 
             _fireLaserService.SetBoardDimensions(rows, cols);
@@ -104,11 +107,9 @@ namespace KhetV3.MVVM.ViewModels
             BackButtonEnabled = false;
             ForwardButtonEnabled = false;
 
-            HomeButtonOpacity = 0.5f;
-
-
             capturedPieces1 = new CapturedPiecesViewModel(eventAggregator, 2);
             capturedPieces2 = new CapturedPiecesViewModel(eventAggregator, 1);
+
 
 
         }
@@ -183,7 +184,10 @@ namespace KhetV3.MVVM.ViewModels
 
         public void Handle(GameEndEvent e)
         {
-            _windowManager.ShowDialog(_gameEndViewModel);
+            GameEndViewModel = new GameEndViewModel(_eventAggregator, HomeButtonViewModel, this);
+            GameEndViewModel.SetWinner(e.PharaohViewModel);
+
+
         }
 
         public async void ExecuteFireLaserP1()
@@ -205,10 +209,7 @@ namespace KhetV3.MVVM.ViewModels
             await _fireLaserService.CalculateLaserPath((0, 0), Direction.Down);
         }
 
-        public void ExecuteHomeButton()
-        {
-            _eventAggregator.Publish(new NavigateEvent { page = AppPages.Home });
-        }
+
         public void OnBackButton()
         {
             _boardUpdateService.UndoMove();
@@ -274,16 +275,6 @@ namespace KhetV3.MVVM.ViewModels
                 ForwardButtonOpacity = 0.5f;
             }
 
-        }
-
-        public void OnMouseEnterHomeButton()
-        {
-            HomeButtonOpacity = 1.0f;
-        }
-
-        public void OnMouseLeaveHomeButton()
-        {
-            HomeButtonOpacity = 0.5f;
         }
 
         public void HighlightLaserButton(int player)

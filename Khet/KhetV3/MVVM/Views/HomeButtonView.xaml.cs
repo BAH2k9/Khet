@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace KhetV3.MVVM.Views
 {
     /// <summary>
-    /// Interaction logic for GameEndView.xaml
+    /// Interaction logic for HomeButtonView.xaml
     /// </summary>
-    public partial class GameEndView : UserControl
+    public partial class HomeButtonView : UserControl
     {
-        public GameEndView()
+        public HomeButtonView()
         {
             InitializeComponent();
         }
-
     }
 }

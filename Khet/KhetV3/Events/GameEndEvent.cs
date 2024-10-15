@@ -7,9 +7,12 @@ namespace KhetV3.Events
     {
         public int player { get; set; }
 
+        public PharaohViewModel PharaohViewModel { get; set; }
+
         public GameEndEvent(PharaohViewModel pharaohViewModel)
         {
-            player = pharaohViewModel.player;
+            this.PharaohViewModel = pharaohViewModel;
+            this.player = pharaohViewModel.player;
         }
     }
 }
