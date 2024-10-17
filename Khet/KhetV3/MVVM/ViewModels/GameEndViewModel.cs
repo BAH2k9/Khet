@@ -37,6 +37,10 @@ namespace KhetV3.MVVM.ViewModels
             _Creator.GameEndViewModel = null;
         }
 
+        public void RestartGame()
+        {
+
+        }
 
 
         public void SetWinner(PharaohViewModel pharaoh)

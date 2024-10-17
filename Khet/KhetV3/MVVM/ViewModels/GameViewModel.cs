@@ -184,7 +184,8 @@ namespace KhetV3.MVVM.ViewModels
 
         public void Handle(GameEndEvent e)
         {
-            GameEndViewModel = new GameEndViewModel(_eventAggregator, HomeButtonViewModel, this);
+            var HomeButton = new HomeButtonViewModel(_eventAggregator);
+            GameEndViewModel = new GameEndViewModel(_eventAggregator, HomeButton, this);
             GameEndViewModel.SetWinner(e.PharaohViewModel);
 
 
