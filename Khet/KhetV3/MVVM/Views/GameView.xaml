@@ -78,7 +78,8 @@
             </Image>
 
             <ContentControl Grid.Column="2"
-                          s:View.Model="{Binding capturedPieces2}"/>
+                          s:View.Model="{Binding capturedPieces2}"
+                            IsEnabled="False"/>
 
         </Grid>
 
@@ -140,7 +141,8 @@
 
 
             <ContentControl Grid.Column="2"
-                s:View.Model="{Binding capturedPieces1}"/>
+                s:View.Model="{Binding capturedPieces1}"
+                            IsEnabled="False"/>
 
         </Grid>
     </Grid>

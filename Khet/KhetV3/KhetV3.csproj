@@ -19,6 +19,9 @@
     <None Remove="Assets\laserCanon.png" />
     <None Remove="Assets\laserCanonB.png" />
     <None Remove="Assets\Pharaoh.png" />
+    <None Remove="Assets\Shield-Broken-old.png" />
+    <None Remove="Assets\Shield-Broken.png" />
+    <None Remove="Assets\Shield-Unbroken.png" />
     <None Remove="Assets\Shield.png" />
   </ItemGroup>
 
@@ -60,7 +63,13 @@
     <Resource Include="Assets\Pharaoh.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Assets\Shield.png">
+    <Resource Include="Assets\Shield-Broken-old.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Shield-Broken.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Shield-Unbroken.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

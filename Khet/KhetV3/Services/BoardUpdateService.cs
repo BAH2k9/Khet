@@ -102,7 +102,9 @@ namespace KhetV3.Services
 
         public void ShiftPiece(IPiece piece, (int, int) position)
         {
-            if (_gameRules.CanShift(piece, position))
+            var squarePlayer = _squareDictionary[position].player;
+
+            if (_gameRules.CanShift(piece, position, squarePlayer))
             {
                 _historyService.AddShift(piece.position, position);
 
@@ -118,7 +120,9 @@ namespace KhetV3.Services
 
         public void ShiftPieces(DjedViewModel djed, IPiece piece)
         {
-            if (_gameRules.CanShift(djed, piece.position))
+            var squarePlayer = _squareDictionary[piece.position].player;
+
+            if (_gameRules.CanShift(djed, piece.position, squarePlayer))
             {
                 _historyService.AddShift(djed.position, piece.position);
 

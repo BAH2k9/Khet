@@ -24,11 +24,20 @@ namespace KhetV3.MVVM.ViewModels
         private (double width, double height) controlSize;
 
         private ClickService _clickService;
+
+        public int Lives = 2;
+
+        private string _imagePath;
+        public string imagePath { get => _imagePath; set => SetAndNotify(ref _imagePath, value); }
+
         public ObeliskViewModel(ClickService clickService, int player)
         {
             _clickService = clickService;
             this.player = player;
             SetColor(player);
+
+            imagePath = "pack://application:,,,/Assets/Shield-Unbroken.png";
+
         }
         public void ExecuteMouseDown()
         {
@@ -36,6 +45,8 @@ namespace KhetV3.MVVM.ViewModels
         }
         public void OnLoaded()
         {
+
+
             if (this.View is FrameworkElement view)
             {
                 controlSize = (view.ActualWidth, view.ActualHeight);
@@ -54,6 +65,12 @@ namespace KhetV3.MVVM.ViewModels
         private void RenderPiece()
         {
             Size = (controlSize.width + controlSize.height) / 10;
+        }
+
+        public void Hit()
+        {
+            Lives--;
+            imagePath = "pack://application:,,,/Assets/Shield-Broken.png";
         }
 
         public override void SetColor(int player)

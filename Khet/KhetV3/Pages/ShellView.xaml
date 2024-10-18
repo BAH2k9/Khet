@@ -51,7 +51,7 @@
                         Margin="0"/>
 
                 <Button Grid.Column="2" 
-                    Content="O" Click="Maximize_Click" 
+                    Content="🗖" Click="Maximize_Click" 
                         Background="#141414"
                         Foreground="Wheat"
                         Height="auto"

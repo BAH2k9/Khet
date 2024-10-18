@@ -61,6 +61,12 @@ namespace KhetV3.MVVM.Models
             _squareDict[(6, 0)].SetSquareColor(2);
             _squareDict[(7, 0)].SetSquareColor(2);
 
+            _squareDict[(0, 1)].SetSquareColor(1);
+            _squareDict[(7, 1)].SetSquareColor(1);
+
+            _squareDict[(0, 8)].SetSquareColor(2);
+            _squareDict[(7, 8)].SetSquareColor(2);
+
 
         }
 

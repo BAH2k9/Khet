@@ -26,6 +26,8 @@ namespace KhetV3.MVVM.ViewModels
 
         public (int row, int col) position { get; set; }
 
+        public int player { get; set; } = 3;
+
         private ClickService _clickService;
         public SquareViewModel(ClickService clickService)
         {
@@ -35,6 +37,8 @@ namespace KhetV3.MVVM.ViewModels
 
         public void SetSquareColor(int player)
         {
+            this.player = player;
+
             if (player == 1)
             {
                 squareColor = Brushes.DarkGray;

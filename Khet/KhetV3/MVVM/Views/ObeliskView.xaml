@@ -12,10 +12,11 @@
              Loaded="{s:Action OnLoaded}" 
              MouseDown="{s:Action ExecuteMouseDown}">
     <Grid>
-        <Image Panel.ZIndex="1" Stretch="Uniform">
-            <Image.Source>
-                <BitmapImage  UriSource="../../Assets/Shield-Unbroken.png" />
-            </Image.Source>
+        <Image Panel.ZIndex="1" Stretch="Uniform"
+               Source="{Binding imagePath}">
+            <!--<Image.Source>
+                <BitmapImage UriSource="{Binding imagePath, Mode=TwoWay}" />
+            </Image.Source>-->
 
         </Image>
         <Rectangle  Panel.ZIndex="0" Fill="{Binding playerColor}" Height="auto" Width="auto"/>

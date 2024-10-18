@@ -137,6 +137,16 @@ namespace KhetV3.Services
         private async Task DestroyPiece((int, int) position)
         {
             await Task.Delay(300);
+
+            if (pieceState[position] is ObeliskViewModel obelisk)
+            {
+                if (obelisk.Lives == 2)
+                {
+                    obelisk.Hit();
+                    return;
+                }
+            }
+
             _boardUpdater.PieceHit(position);
 
             if (pieceState[position] is PharaohViewModel pharaoh)
@@ -144,6 +154,8 @@ namespace KhetV3.Services
                 await Task.Delay(500);
                 _EventAggregator.Publish(new GameEndEvent(pharaoh));
             }
+
+
             _EventAggregator.Publish(new PieceCapturedEvent(pieceState[position]));
 
         }

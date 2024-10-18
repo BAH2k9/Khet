@@ -52,7 +52,7 @@ namespace KhetV3.MVVM.Models
 
         }
 
-        public bool CanShift(IPiece piece, (int row, int col) position)
+        public bool CanShift(IPiece piece, (int row, int col) position, int squarePlayer)
         {
             if (!InPlay)
             {
@@ -65,6 +65,11 @@ namespace KhetV3.MVVM.Models
             }
 
             if (alreadyMoved)
+            {
+                return false;
+            }
+
+            if (piece.player != squarePlayer && squarePlayer != 3)
             {
                 return false;
             }

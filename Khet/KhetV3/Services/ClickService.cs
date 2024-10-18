@@ -74,7 +74,6 @@ namespace KhetV3.Services
 
         private void NormalShift(IPiece piece, SquareViewModel square)
         {
-
             _boardUpdateService.UnselectSquare(piece.position);
             _boardUpdateService.ShiftPiece(piece, square.position);
 
