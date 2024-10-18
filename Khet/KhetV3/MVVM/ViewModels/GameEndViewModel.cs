@@ -39,7 +39,8 @@ namespace KhetV3.MVVM.ViewModels
 
         public void RestartGame()
         {
-
+            Close();
+            _EventAggregator.Publish(new RestartGameEvent());
         }
 
 

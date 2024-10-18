@@ -13,6 +13,8 @@ namespace KhetV3.MVVM.ViewModels
     {
         private EventAggregator _eventAggregator;
 
+        public AppPages currentPage;
+
         public HomeViewModel(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
@@ -20,11 +22,13 @@ namespace KhetV3.MVVM.ViewModels
         public void NavigateToLocalGame()
         {
             _eventAggregator.Publish(new NavigateEvent { page = AppPages.LocalGame });
+            currentPage = AppPages.LocalGame;
         }
 
         public void NavigateToFreePlay()
         {
             _eventAggregator.Publish(new NavigateEvent { page = AppPages.FreePlay });
+            currentPage = AppPages.FreePlay;
         }
     }
 }

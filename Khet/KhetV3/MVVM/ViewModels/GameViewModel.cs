@@ -122,6 +122,7 @@ namespace KhetV3.MVVM.ViewModels
 
         }
 
+
         public void Handle(PieceMovedEvent e)
         {
             if (e.player == 1)

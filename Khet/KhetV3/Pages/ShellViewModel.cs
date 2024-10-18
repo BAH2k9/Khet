@@ -1,5 +1,6 @@
 ﻿using Khet3.Enums;
 using Khet3.Events;
+using KhetV3.Events;
 using KhetV3.MVVM.ViewModels;
 using KhetV3.Services;
 using Stylet;
@@ -9,7 +10,7 @@ using System.Windows;
 
 namespace KhetV3.Pages
 {
-    public class ShellViewModel : Conductor<Screen>.Collection.OneActive, IHandle<NavigateEvent>
+    public class ShellViewModel : Conductor<Screen>.Collection.OneActive, IHandle<NavigateEvent>, IHandle<RestartGameEvent>
     {
         private IContainer _container;
         private EventAggregator _eventAggregator;
@@ -42,7 +43,8 @@ namespace KhetV3.Pages
 
             windowState = WindowState.Normal;
 
-            ActivateItem(_container.Get<HomeViewModel>());
+            _homeViewModel = _container.Get<HomeViewModel>();
+            ActivateItem(_homeViewModel);
 
         }
 
@@ -51,7 +53,7 @@ namespace KhetV3.Pages
             switch (e.page)
             {
                 case AppPages.Home:
-                    _homeViewModel = _container.Get<HomeViewModel>();
+                    //_homeViewModel = _container.Get<HomeViewModel>();
                     ActivateItem(_homeViewModel);
                     break;
                 case AppPages.FreePlay:
@@ -74,6 +76,12 @@ namespace KhetV3.Pages
                     break;
 
             }
+        }
+
+        void IHandle<RestartGameEvent>.Handle(RestartGameEvent message)
+        {
+            Handle(new NavigateEvent() { page = AppPages.Home });
+            Handle(new NavigateEvent() { page = _homeViewModel.currentPage });
         }
     }
 }

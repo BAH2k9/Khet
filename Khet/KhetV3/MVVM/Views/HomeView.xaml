@@ -39,67 +39,26 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row ="0" Grid.Column="2"
+            <Button Grid.Row ="2" Grid.Column="3"
                      Content="Play Game"
                      Click="{s:Action NavigateToLocalGame}" 
                      Background="#292824"
                      Foreground="SandyBrown"/>
 
 
-            <Button Grid.Row ="0" Grid.Column="3"
+            <!--<Button Grid.Row ="0" Grid.Column="3"
                     Content="LAN Game"
                     Background="#292824"
-                    Foreground="SandyBrown"/>
+                    Foreground="SandyBrown"
+                    IsEnabled="False"/>-->
 
 
-            <Button Grid.Row ="0" Grid.Column="1"
+            <Button Grid.Row ="2" Grid.Column="1"
                      Content="Free Play"
                      Click="{s:Action NavigateToFreePlay}" 
                      Background="#292824"
                      Foreground="SandyBrown"/>
 
-            <!--<Grid Grid.Row="1">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    
-
-                   
-
-                    
-
-                   
-
-
-                </Grid>
-            </Grid>
-
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="17*"/>
-
-                </Grid.ColumnDefinitions>
-
-                
-
-
-            </Grid>-->
 
         </Grid>
     </Grid>
