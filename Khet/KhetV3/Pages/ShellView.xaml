@@ -33,11 +33,38 @@
                 VerticalAlignment="Top"
                 >
             <Grid>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="auto">
-                    <Button Content="_" Width="20" Height="20" Click="Minimize_Click" Margin="10" Background="#141414" Foreground="White"/>
-                    <Button Content="O" Width="20" Height="20" Click="Maximize_Click" Margin="10" Background="#141414" Foreground="White" />
-                    <Button Content="X" Width="20" Height="20" Click="Close_Click" Margin="10" Background="#141414" Foreground="White" />
-                </StackPanel>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="17*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="1" 
+                        Content="-" 
+                        Click="Minimize_Click"
+                        FontWeight="Bold"
+                        Background="#141414"
+                        Foreground="Wheat"
+                        Height="auto"
+                        FontSize="30"
+                        Margin="0"/>
+
+                <Button Grid.Column="2" 
+                    Content="O" Click="Maximize_Click" 
+                        Background="#141414"
+                        Foreground="Wheat"
+                        Height="auto"
+                        FontSize="20"
+                        Margin="0"/>
+
+                <Button Grid.Column="3"
+                    Content="X" Click="Close_Click"
+                        Background="#141414"
+                        Foreground="Wheat"
+                        Height="auto"
+                        FontSize="20"
+                        Margin="0"/>
             </Grid>
         </Border>
 

@@ -89,11 +89,8 @@ namespace KhetV3.MVVM.ViewModels
             this.BoardViewModel.Initialise();
 
             this.HomeButtonViewModel = homeButtonViewModel;
-
             _boardUpdateService = boardUpdateService;
-
             _fireLaserService = fireLaserService;
-
             _fireLaserService.SetBoardDimensions(rows, cols);
 
 
