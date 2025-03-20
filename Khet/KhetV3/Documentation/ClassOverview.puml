@@ -1,0 +1,184 @@
+@startuml
+
+skinparam linetype ortho
+class Bootstrapper
+{
+    # void ConfigureIoC(IStyletIoCBuilder builder)
+    # Configure()
+}
+class ShellViewModel 
+{
+    + double Height
+    + double Width
+    + WindowState WindowState
+    - IContainer _container
+    - EventAggregator _eventAggregator
+    - HomeViewModel _homeViewModel
+    - GameViewModel _gameViewModel
+
+    + async void Handle(NavigateEvent event)
+    - void Handle(RestartGameEvent event)
+}
+
+class HomeViewModel
+{
+    - EventAggregator _eventAggregator
+    + AppPages currentPage
+    + void NavigateToLocalGame()
+    + void NavigateToFreePlay()
+}
+
+class GameViewModel
+{
+    + BoardViewModel BoardVM
+    + HomeButtonViewModel HomeButtonVM
+    + CapturedPiecesViewModel CapturedPiecesVM
+    + GameEndViewModel GameEndVM
+    - BoardUpdateService _boardUpdateService
+    - FireLaserService _fireLaserService
+    - EventAggregator _eventAggregator
+    - int rows
+    - int cols
+    + void SetPlayerRules()
+    + async void ExecuteFireLaserP1()
+    + async void ExecuteFireLaserP2()
+    + void OnBackButton()
+    + OnMouseEnterLaser1()
+    + OnMouseLeaveLaser1()
+    + OnMouseEnterLaser2()
+    + OnMouseLeaveLaser2()
+    + OnMouseEnterBackButton()
+    + OnMouseLeaveBackButton()
+    + OnMouseEnterForwardButton()
+    + OnMouseLeaveForwardButton()
+    + void Handle(PieceMovedEvent event)
+    + void Handle(PlayerChangedEvent event)
+    + void Handle(UndoMoveEvent event)
+    + void Handle(GameEndEvent event)
+    - HighlightLaserButton()
+    - DullLaserButton()
+}
+
+class HomeButtonViewModel
+{
+    - EventAggregator _eventAggregator
+    + float HomeButtonOpacity
+    + bool IsEnabled
+    + async Task ExecuteHomeButton()
+    + void OnMouseEnterHomeButton()
+    + void OnMouseLeaveHomeButton()
+    
+}
+
+class CapturedPiecesViewModel
+{
+    - int player
+    - EventAggregator _eventAggregator
+    + BindableCollection<IPiece> Pieces
+    + Handle(PieceCapturedEvent event)
+
+}
+
+class GameEndViewModel
+{
+    - EventAggregator _eventAggregator
+    - GameViewModel _creator
+    + HomeButtonViewModel HomeButtonVM
+    + PharaohViewModel WinnersPharaoh
+    + Brush WinnersColor
+    + void Close()
+    + void RestartGame()
+    + void SetWinner()
+    + void GiveReference(GameViewModel gameViewModel)
+
+}
+
+class BoardUpdateService
+{
+    - Dictionary<(int, int), SquareViewModel> _squareDict
+    - Dictionary<(int, int), IPiece> _pieceDict
+    - IPiece _selectedPiece
+    - HistoryService _historyService
+    - GameRules _gameRules
+    + void SetPlayerRules()
+    + void SetSquares(Dictionary<(int,int), SquareViewModel> squares)
+    + void SetPieces(Dictionary<(int,int), IPiece> pieces)
+    + Dictionary<(int,int),IPiece> GetPieceInfo()
+    + async Task DisplayLaser((int row, int col)squarePosition, (LaserPosition, LaserPosition) laserPos)
+    + void SelectSquare((int,int), pos)
+    + void UnselectSquare((int,int), pos)
+    + void ShiftPiece(IPiece piece, (int,int) pos)
+    + void ShiftPieces(DjedViewModel djed, IPiece piece)
+    + void RotateSelectedPiece(Key key)
+    + void PieceHit((int row, int col) pos)
+    + void UndoMove()
+}
+
+class FireLaserService
+{
+    - EventAggregator _eventAggregator
+    - BoardUpdateService _boardUpdateService
+    - Dictionary<(int row, int col), IPiece> pieceState
+    - int rows
+    - int cols
+    + void SetBoardDimensions(int row, int col)
+    + async Task CalculateLaserPath((int row, int col) startingPos, Direction firingDirection)
+    - bool InBounds((int row, int col) pos)
+    - LaserRepsonse PieceLaser(Direction firingDirection, IPiece piece)
+    - LaserRepsonse DefaultLaser(Direction firingDirection)
+    - async Task DestroyPiece((int,int) pos)
+    - (int row, int col) MoveToNextSquare((int row, int col) pos, Direction outDirection)
+}
+
+class BoardViewModel
+{
+    + BindableCollection<SquareViewModel> Squares
+    + int rows
+    + int cols
+    - BoardUpdateService _boardUpdateService
+    - SquareFactory _squareFactory
+    - PieceFactory _pieceFactory
+    + void SetDimensions
+    + void Initialise()
+    + OnKeyDown(object sender, KeyEventArgs e)
+    + void SetPlayerRules()
+}
+
+class SquareViewModel
+{
+    + IPiece ActivePiece
+    + LaserViewModel ActiveLaser
+    + Brush highlight
+    + Brush SquareColor
+    + (int row, int col) position
+    - ClickService _clickService
+    + void SetSquareColor(int player)
+    + void Select(bool select)
+    + void ExecuteMouseDown()
+}
+
+Interface IPiece
+{
+    + int Player
+    + (int x, int y) Position
+    + SetPosition((int x, int y) pos)
+}
+
+
+Bootstrapper -- ShellViewModel
+ShellViewModel "1" *-- "1" HomeViewModel
+ShellViewModel "1" *-- "1" GameViewModel
+GameViewModel "1" *-- "1" BoardViewModel
+GameViewModel "1" *-- "1" HomeButtonViewModel
+GameViewModel "1" *-- "1" CapturedPiecesViewModel
+GameViewModel "1" *-- "*" GameEndViewModel
+GameViewModel "1" *-- "*" BoardUpdateService
+GameViewModel "1" *-- "*" FireLaserService
+FireLaserService "1" o-- "1" BoardUpdateService
+BoardUpdateService "1" o-- "*" SquareViewModel
+BoardUpdateService "1" o-- "*" IPiece
+GameEndViewModel "1" *-- "1" HomeButtonViewModel
+BoardViewModel "1" *-- "*" SquareViewModel
+BoardViewModel "1" o-- "*" BoardUpdateService
+SquareViewModel "1" *-- "1" IPiece
+@enduml

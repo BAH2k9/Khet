@@ -1,0 +1,81 @@
+@startuml
+
+skinparam linetype ortho
+
+class Bootstrapper
+{
+
+}
+
+class ShellViewModel
+{
+
+}
+
+Class ToolBarViewModel
+{
+
+}
+
+Class HomeViewModel
+{
+
+}
+
+Class BoardViewModel
+{
+    + Dict<Position, SquareViewModel> Board
+    - LaserService _laserService
+    - LeftClickHandler _leftClickHandler
+    + void HandleLeftClick()
+}
+
+Class SquareViewModel
+{
+
+}
+
+Class PieceViewModel
+{
+
+}
+
+Class LaserViewModel
+{
+
+}
+
+
+Class LaserService
+{
+    + void Start(object order, Dict<Position, SquareViewModel> board )
+}
+
+Class LeftClickHandler
+{
+    + object Handle()
+    
+}
+
+Class BoardConfiguration <<static>>
+{
+    - int _rows = 8
+    - int _cols = 10
+    + Dict<Position, SquareViewModel> CreateBoard()
+    - Dict<Position, SquareViewModel> CreateSquares()
+    - void AddPieces(Dict<Position, SquareViewModel> board)
+}
+
+
+Bootstrapper -- ShellViewModel
+ShellViewModel *-- HomeViewModel
+ShellViewModel *-- ToolBarViewModel
+HomeViewModel *-- BoardViewModel
+BoardViewModel *-- LaserService
+BoardViewModel *-- LeftClickHandler
+BoardViewModel o-- BoardConfiguration
+BoardViewModel "1" *-- "*" SquareViewModel
+SquareViewModel *-- PieceViewModel
+SquareViewModel *-- LaserViewModel
+
+@enduml

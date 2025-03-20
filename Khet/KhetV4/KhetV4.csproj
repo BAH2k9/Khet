@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+
+		<RootNamespace>KhetV4</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Assets\CloseIcon.png" />
+	  <None Remove="Assets\MaximiseIcon.png" />
+	  <None Remove="Assets\MinimiseIcon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Serilog" Version="4.2.0" />
+		<PackageReference Include="Serilog.Enrichers.CallerInfo" Version="1.0.5" />
+		<PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+		<PackageReference Include="Stylet" Version="1.3.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="logs\" />
+		<Folder Include="MVVM\Models\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Archive\CloseIcon.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Archive\MaximiseIcon.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Archive\MinimiseIcon.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\CloseIcon.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\HomeScreenBackground.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\MaximiseIcon.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\MinimiseIcon.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+	</ItemGroup>
+</Project>
