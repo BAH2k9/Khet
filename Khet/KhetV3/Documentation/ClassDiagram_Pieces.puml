@@ -1,0 +1,48 @@
+@startuml PieceDiagram
+
+Interface IPiece
+{
+    + int Player
+    + (int x, int y) Position
+    + SetPosition((int x, int y) pos)
+}
+
+Interface IRotatable
+{
+    + Orientations orientation
+    + void SetOrientation(Orientations newOrientation)
+    + Orientations Rotate(Key key)
+}
+
+abstract class Piece
+{
+    - Brush Color1
+    - Brush Color2
+    + int Player
+    + (int row, int col) Position
+    + Brush PlayerColor
+    + void SetPosition((int,int) position)
+    + void SetColor(int player)
+    + Brush GetColor()
+}
+
+class DjedViewModel
+{
+    - (double width, doulbe height) controlSize
+    - ClickService _clickService
+    + Orientations
+    + BindableCollection<double> point1
+    + BindableCollection<double> point2
+    + void ExecuteMouseDown()
+    + void OnLoaded()
+    + void OnSizeChanged()
+    + void Rotate(Key key)
+    + void SetOrientation(Orientations newOrientation)
+    + void RenderPiece()
+}
+
+Piece --|> IPiece
+DjedViewModel --|> Piece
+DjedViewModel --|> IRotatable
+
+@enduml

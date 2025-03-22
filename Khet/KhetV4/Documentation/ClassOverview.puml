@@ -37,7 +37,8 @@ Class SquareViewModel
 
 Class PieceViewModel
 {
-
+    + string ImagePath
+    + Orientation Orientation
 }
 
 Class LaserViewModel

@@ -15,7 +15,7 @@
                     </s:ApplicationLoader.Bootstrapper>
                 </s:ApplicationLoader>
 
-                <ResourceDictionary Source="pack://application:,,,/KhetV4;component/Styles/ButtonStyle.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/KhetV4;component/Assets/Styles/ButtonStyle.xaml" />
 
 
             </ResourceDictionary.MergedDictionaries>

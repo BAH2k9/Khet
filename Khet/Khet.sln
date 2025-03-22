@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KhetV3", "KhetV3\KhetV3.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KhetV4", "KhetV4\KhetV4.csproj", "{5DA0CE5A-7399-4FF9-9A90-6FD3E0397838}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KhetV4.Tests", "TestProject1KhetV4.Tests\KhetV4.Tests.csproj", "{0729FF46-4366-491A-A88A-C8ACD6C3CAEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5DA0CE5A-7399-4FF9-9A90-6FD3E0397838}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DA0CE5A-7399-4FF9-9A90-6FD3E0397838}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DA0CE5A-7399-4FF9-9A90-6FD3E0397838}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0729FF46-4366-491A-A88A-C8ACD6C3CAEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0729FF46-4366-491A-A88A-C8ACD6C3CAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0729FF46-4366-491A-A88A-C8ACD6C3CAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0729FF46-4366-491A-A88A-C8ACD6C3CAEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

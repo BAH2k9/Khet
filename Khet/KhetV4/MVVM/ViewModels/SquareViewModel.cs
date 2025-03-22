@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stylet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace KhetV4.MVVM.ViewModels
 {
-    public class SquareViewModel
+    public class SquareViewModel : Screen
     {
-        public PieceViewModel PieceViewModel;
+        PieceViewModel _pieceViewModel;
+        public PieceViewModel PieceViewModel { get => _pieceViewModel; set => SetAndNotify(ref _pieceViewModel, value); }
+
+        public SquareViewModel()
+        {
+
+        }
     }
 }

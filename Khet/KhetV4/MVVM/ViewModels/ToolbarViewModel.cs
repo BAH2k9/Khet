@@ -1,4 +1,5 @@
 ﻿using KhetV4.Core.ExtensionMethods;
+using KhetV4.Core.StaticClasses;
 using Serilog;
 using Stylet;
 using System.Windows;
@@ -21,13 +22,11 @@ namespace KhetV4.MVVM.ViewModels
         readonly ILogger _logger;
         Window _window => Application.Current.MainWindow;
 
-        readonly (double high, double low) _opacityLevel;
         public ToolbarViewModel(ILogger logger)
         {
             _logger = logger;
             _logger.InformationWithCaller("ToolbarViewModel created");
-            _opacityLevel = (1, 0.7);
-            closeOpacity = minimiseOpacity = maximiseOpacity = _opacityLevel.low;
+            closeOpacity = minimiseOpacity = maximiseOpacity = Mappings.OpacityLevel.Normal;
         }
 
         public void MouseDown(object sender, MouseButtonEventArgs e)
@@ -78,17 +77,17 @@ namespace KhetV4.MVVM.ViewModels
             e.Handled = true;
             if (sender is Image image)
             {
-                _logger.InformationWithCaller($"Mouse Entered {image.Name} setting opacity to {_opacityLevel.high}");
+                _logger.InformationWithCaller($"Mouse Entered {image.Name} setting opacity to {Mappings.OpacityLevel.Highlighted}");
                 switch (image.Name)
                 {
                     case "CloseIcon":
-                        closeOpacity = _opacityLevel.high;
+                        closeOpacity = Mappings.OpacityLevel.Highlighted;
                         break;
                     case "MinimiseIcon":
-                        minimiseOpacity = _opacityLevel.high;
+                        minimiseOpacity = Mappings.OpacityLevel.Highlighted;
                         break;
                     case "MaximiseIcon":
-                        maximiseOpacity = _opacityLevel.high;
+                        maximiseOpacity = Mappings.OpacityLevel.Highlighted;
                         break;
                 }
             }
@@ -98,17 +97,17 @@ namespace KhetV4.MVVM.ViewModels
         {
             if (sender is Image image)
             {
-                _logger.InformationWithCaller($"Mouse Left {image.Name} setting opacity to {_opacityLevel.low}");
+                _logger.InformationWithCaller($"Mouse Left {image.Name} setting opacity to {Mappings.OpacityLevel.Normal}");
                 switch (image.Name)
                 {
                     case "CloseIcon":
-                        closeOpacity = _opacityLevel.low;
+                        closeOpacity = Mappings.OpacityLevel.Normal;
                         break;
                     case "MinimiseIcon":
-                        minimiseOpacity = _opacityLevel.low;
+                        minimiseOpacity = Mappings.OpacityLevel.Normal;
                         break;
                     case "MaximiseIcon":
-                        maximiseOpacity = _opacityLevel.low;
+                        maximiseOpacity = Mappings.OpacityLevel.Normal;
                         break;
                 }
             }
