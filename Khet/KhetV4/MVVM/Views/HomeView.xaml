@@ -9,15 +9,69 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid>
-        <StackPanel>
-            <Image>
-                <Image.Source>
-                    <BitmapImage UriSource="../../Assets/HomeScreenBackground.png" />
-                </Image.Source>
-            </Image>
-        </StackPanel>
+    <Grid Background="#292824">
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Grid.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetName="LaserRotation"
+                            Storyboard.TargetProperty="Angle"
+                            From="0"
+                            To="360"
+                            Duration="0:0:4"
+                            RepeatBehavior="Forever" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
 
+        <Canvas
+            Width="400"
+            Height="400"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+            <Image
+                Canvas.Left="176"
+                Canvas.Top="10"
+                Width="48"
+                Height="48"
+                Source="../../Assets/Pieces/DjedSilver.png" />
+
+            <Image
+                Canvas.Left="342"
+                Canvas.Top="176"
+                Width="48"
+                Height="48"
+                Source="../../Assets/Pieces/DjedSilver.png" />
+
+            <Image
+                Canvas.Left="176"
+                Canvas.Top="342"
+                Width="48"
+                Height="48"
+                Source="../../Assets/Pieces/DjedSilver.png" />
+
+            <Image
+                Canvas.Left="10"
+                Canvas.Top="176"
+                Width="48"
+                Height="48"
+                Source="../../Assets/Pieces/DjedSilver.png" />
+
+            <Line
+                X1="200"
+                Y1="200"
+                X2="200"
+                Y2="30"
+                Stroke="Red"
+                StrokeThickness="3">
+                <Line.RenderTransform>
+                    <RotateTransform x:Name="LaserRotation" CenterX="200" CenterY="200" />
+                </Line.RenderTransform>
+            </Line>
+        </Canvas>
 
         <Grid>
             <Grid.RowDefinitions>
